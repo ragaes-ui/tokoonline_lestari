@@ -250,6 +250,149 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
   html{scroll-behavior:auto}
   .reveal,.reveal-scale,.hero-anim-left,.hero-anim-right,.card,.modal-backdrop,.modal-box,.cart-item,.page-loader,.toast-item{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
 }
+/* Default sembunyikan bottom bar di desktop */
+.mobile-bottom-bar {
+  display: none;
+}
+
+@media (max-width: 768px) {
+  /* Sembunyikan tombol Keranjang, WA di header, dan WA melayang agar tidak dobel */
+  header .header-actions,
+  .float-wa {
+    display: none !important;
+  }
+
+  /* Beri ruang di bawah halaman agar footer tidak tertutup floating dock */
+  body {
+    padding-bottom: calc(92px + env(safe-area-inset-bottom));
+  }
+
+  /* Liquid Glass Floating Dock */
+  .mobile-bottom-bar {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+    position: fixed;
+    left: 14px;
+    right: 14px;
+    bottom: calc(12px + env(safe-area-inset-bottom));
+    z-index: 45;
+    padding: 8px;
+    border-radius: 26px;
+    overflow: hidden;
+
+    /* Efek kaca transparan + refraksi saturasi */
+    background: linear-gradient(
+      145deg,
+      rgba(35, 26, 18, 0.68) 0%,
+      rgba(35, 26, 18, 0.48) 100%
+    );
+    backdrop-filter: blur(22px) saturate(185%);
+    -webkit-backdrop-filter: blur(22px) saturate(185%);
+
+    /* Bingkai kaca & pantulan cahaya dalam (specular highlight) */
+    border: 1px solid rgba(255, 255, 255, 0.30);
+    box-shadow:
+      0 14px 34px rgba(23, 17, 11, 0.34),
+      inset 0 1.5px 1px rgba(255, 255, 255, 0.48),
+      inset 0 -1px 1px rgba(212, 164, 108, 0.25);
+  }
+
+  /* Kilau cahaya halus di bagian atas kaca */
+  .mobile-bottom-bar::before {
+    content: "";
+    position: absolute;
+    inset: 0;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      180deg,
+      rgba(255, 255, 255, 0.22) 0%,
+      rgba(255, 255, 255, 0.04) 42%,
+      rgba(255, 255, 255, 0) 100%
+    );
+  }
+
+  .mbar-btn {
+    position: relative;
+    z-index: 1;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+    min-height: 48px;
+    padding: 8px 14px;
+    border-radius: 20px;
+    font-weight: 800;
+    font-size: 14px;
+    text-decoration: none;
+    cursor: pointer;
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.22s cubic-bezier(0.34, 1.56, 0.64, 1), filter 0.15s ease;
+  }
+
+  .mbar-btn:active {
+    transform: scale(0.95);
+  }
+
+  /* Tombol Keranjang — Kaca Kraft Hangat */
+  .mbar-cart {
+    background: linear-gradient(
+      135deg,
+      rgba(246, 235, 218, 0.90) 0%,
+      rgba(212, 164, 108, 0.82) 100%
+    );
+    color: var(--ink);
+    border: 1px solid rgba(255, 255, 255, 0.68);
+    box-shadow:
+      0 4px 14px rgba(23, 17, 11, 0.18),
+      inset 0 1px 1px rgba(255, 255, 255, 0.75);
+  }
+
+  /* Tombol Chat WhatsApp — Kaca Hijau Glossy */
+  .mbar-wa {
+    background: linear-gradient(
+      135deg,
+      rgba(39, 178, 97, 0.90) 0%,
+      rgba(31, 143, 78, 0.84) 100%
+    );
+    color: #fff;
+    border: 1px solid rgba(255, 255, 255, 0.45);
+    box-shadow:
+      0 4px 16px rgba(31, 143, 78, 0.36),
+      inset 0 1px 1px rgba(255, 255, 255, 0.55);
+  }
+
+  .mbar-wa:hover {
+    color: #fff;
+  }
+
+  .mbar-icon-wrap {
+    position: relative;
+    display: inline-flex;
+    align-items: center;
+  }
+
+  .mbar-badge {
+    position: absolute;
+    top: -7px;
+    right: -9px;
+    min-width: 19px;
+    height: 19px;
+    padding: 0 5px;
+    border-radius: 999px;
+    background: var(--ink);
+    color: var(--cream);
+    font-size: 11px;
+    font-weight: 900;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border: 1.5px solid rgba(255, 255, 255, 0.75);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+  }
+}
 </style>
 </head>
 <body>
@@ -407,7 +550,27 @@ Keranjang (<span id="cart-count">0</span>)
 <a class="float-wa wa-umum" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg>
 </a>
+<!-- Bottom Tab Bar Khusus Mobile -->
+<nav class="mobile-bottom-bar" aria-label="Menu Cepat Mobile">
+  <button type="button" class="mbar-btn mbar-cart" onclick="openCartModal()">
+    <span class="mbar-icon-wrap">
+      <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+        <circle cx="9" cy="21" r="1"></circle>
+        <circle cx="20" cy="21" r="1"></circle>
+        <path d="M1 1h4l2.68 13.39a2 2 0 0 0 2 1.61h9.72a2 2 0 0 0 2-1.61L23 6H6"></path>
+      </svg>
+      <span id="mobile-cart-badge" class="mbar-badge">0</span>
+    </span>
+    <span>Keranjang</span>
+  </button>
 
+  <a href="#" target="_blank" rel="noopener" class="mbar-btn mbar-wa wa-umum">
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+      <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.01-2.42.27-.29.58-.36.77-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2.01.89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.3-.13.58.17.29.75 1.23 1.6 1.99 1.1.98 2.02 1.28 2.31 1.43.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.39-.24.65-.14.27.1 1.69.8 1.98.94.29.14.48.22.55.34.07.12.07.69-.17 1.37z"/>
+    </svg>
+    <span>Chat WhatsApp</span>
+  </a>
+</nav>
 <!-- ==================== POPUP PILIHAN AKSI (KERANJANG / LANGSUNG BELI) ==================== -->
 <div id="action-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="action-title" onclick="if(event.target===this)closeActionModal()">
 <div class="modal-box">
@@ -1699,7 +1862,11 @@ function setCartQty(idx, rawVal) {
 }
 
 function updateCartUI() {
-  document.getElementById('cart-count').textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+  const totalQty = cart.reduce((sum, i) => sum + i.qty, 0);
+  document.getElementById('cart-count').textContent = totalQty;
+  const mobileBadge = document.getElementById('mobile-cart-badge');
+  if (mobileBadge) mobileBadge.textContent = totalQty;
+
   const itemsEl = document.getElementById('cart-items');
   let total = 0;
 
