@@ -1,0 +1,1969 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Lestari Corrugated — Jual Kardus Corrugated</title>
+<meta name="description" content="Lestari Corrugated menjual kardus corrugated: kardus polos, ukuran custom, cetak logo, mailer box, kardus pindahan, dan lembaran. Pesan mudah via WhatsApp.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+/* Lestari Corrugated — kraft brown, dark ink, green WhatsApp accent */
+:root{--kraft:#D4A46C;--paper:#F6EBDA;--ink:#231A12;--soft:#5A4A3A;--accent:#1F8F4E;--cream:#F3E3CB;--muted:#CDBBA2}
+*{box-sizing:border-box;min-width:0}
+html{scroll-behavior:smooth;scroll-padding-top:80px}
+body{margin:0;font:17px/1.55 Archivo,system-ui,sans-serif;color:var(--ink);background:#fff;overflow-x:clip}
+a{color:var(--ink)}a:hover{color:#8A5A28}
+input,select,textarea,button{font:inherit;font-size:16px}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.wrap{max-width:1180px;margin:0 auto}
+.band{padding:clamp(48px,6vw,80px) max(4vw,16px)}
+h1,h2,h3{margin:0;font-weight:900;font-stretch:108%;line-height:1.06}
+h2{font-size:clamp(30px,3.6vw,42px);margin-bottom:10px}
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:8px;min-height:48px;padding:12px 22px;border-radius:6px;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:filter .15s,opacity .15s,transform .15s}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{opacity:.65;cursor:not-allowed}
+.btn-wa{background:var(--accent);color:#fff}.btn-wa:hover:not(:disabled){color:#fff;filter:brightness(1.08)}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover:not(:disabled){color:#fff;filter:brightness(1.15)}
+.btn-kraft{background:var(--kraft);color:var(--ink)}.btn-kraft:hover:not(:disabled){filter:brightness(1.05)}
+.btn-line{border:2px solid var(--ink);color:var(--ink);background:transparent}.btn-line:hover{background:rgba(35,26,18,.06);color:var(--ink)}
+
+/* ==================== LOADING SPINNER & PRELOADER ==================== */
+.spinner{width:18px;height:18px;border:2.5px solid rgba(255,255,255,.3);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
+.spinner.dark{border-color:rgba(35,26,18,.2);border-top-color:var(--ink)}
+.spinner.sm{width:15px;height:15px;border-width:2px}
+.spinner.lg{width:42px;height:42px;border-width:4px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.page-loader{position:fixed;inset:0;background:var(--ink);color:var(--cream);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .4s ease,visibility .4s ease}
+.page-loader.exit{opacity:0;visibility:hidden;pointer-events:none}
+.page-loader-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:22px;letter-spacing:.02em}
+.page-loader p{margin:0;font-size:14px;color:var(--muted)}
+
+/* Processing Overlay saat Checkout */
+.proc-overlay{position:fixed;inset:0;background:rgba(23,17,11,.82);color:#fff;z-index:90;display:none;flex-direction:column;align-items:center;justify-content:center;gap:14px;text-align:center;padding:20px;animation:backdropIn .2s ease}
+.proc-overlay.open{display:flex}
+.proc-overlay.closing{animation:backdropOut .22s ease forwards}
+
+/* Skeleton Loader Kartu Produk */
+.skel-card{background:#fff;border-radius:10px;overflow:hidden;border:1px solid rgba(35,26,18,.08);display:flex;flex-direction:column}
+.skel-box{background:linear-gradient(90deg,#EAD5B5 25%,#F5E6CE 50%,#EAD5B5 75%);background-size:200% 100%;animation:shimmer 1.3s infinite linear;border-radius:6px}
+.skel-pic{height:185px;border-radius:0}
+.skel-body{padding:18px 20px 22px;display:grid;gap:10px}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ==================== ANIMASI SCROLL & KELUAR ==================== */
+.reveal{opacity:0;transform:translateY(26px);transition:opacity .6s cubic-bezier(.22,1,.36,1),transform .6s cubic-bezier(.22,1,.36,1)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.reveal-scale{opacity:0;transform:scale(.95) translateY(18px);transition:opacity .55s cubic-bezier(.22,1,.36,1),transform .55s cubic-bezier(.22,1,.36,1)}
+.reveal-scale.in-view{opacity:1;transform:scale(1) translateY(0)}
+
+.hero-anim-left{animation:slideUpFade .7s cubic-bezier(.22,1,.36,1) both}
+.hero-anim-right{animation:slideUpFade .85s cubic-bezier(.22,1,.36,1) .12s both}
+@keyframes slideUpFade{from{opacity:0;transform:translateY(28px)}to{opacity:1;transform:translateY(0)}}
+
+/* Header */
+header{background:var(--ink);color:var(--cream);padding:12px max(4vw,16px);position:sticky;top:0;z-index:20;box-shadow:0 2px 12px rgba(0,0,0,.15)}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px 24px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--cream);text-decoration:none;font-weight:900;font-size:21px;font-stretch:112%}
+nav{display:flex;flex-wrap:wrap;gap:0 22px;font-size:16px}
+nav a{color:var(--cream);text-decoration:none;padding:10px 0;transition:color .15s}
+nav a:hover{color:var(--kraft)}
+.header-actions{display:flex;align-items:center;gap:10px}
+
+/* Hero */
+.hero{background:var(--kraft);padding-bottom:0}
+.hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px 48px}
+.hero-text{flex:1 1 420px;padding-bottom:clamp(40px,6vw,80px)}
+.hero h1{font-size:clamp(36px,5vw,60px);margin-bottom:18px;text-wrap:balance}
+.hero p{font-size:19px;max-width:32em;margin:0 0 26px}
+.hero-pic{flex:1 1 360px;max-width:560px}
+.hero-pic svg{display:block;width:100%;height:auto}
+.row{display:flex;flex-wrap:wrap;gap:12px}
+
+/* Product Grid & Cards */
+.grid{display:grid;gap:20px;grid-template-columns:repeat(auto-fill,minmax(min(100%,275px),1fr))}
+.card{background:#fff;border-radius:10px;overflow:hidden;display:flex;flex-direction:column;border:1px solid rgba(35,26,18,.08);transition:transform .25s ease,box-shadow .25s ease,opacity .6s cubic-bezier(.22,1,.36,1)}
+.card:hover{transform:translateY(-4px);box-shadow:0 12px 26px rgba(35,26,18,.1)}
+.card .pic{background:#EAD5B5;height:185px;display:flex;align-items:center;justify-content:center;overflow:hidden;position:relative}
+.card .pic img{width:100%;height:100%;object-fit:cover;display:block;transition:transform .35s ease}
+.card:hover .pic img{transform:scale(1.04)}
+.card .pic svg{display:block;width:100%;height:145px;padding:10px 20px}
+.card .cat-badge{position:absolute;top:10px;left:10px;background:var(--ink);color:var(--cream);font-size:11px;font-weight:800;letter-spacing:.04em;text-transform:uppercase;padding:4px 9px;border-radius:4px;z-index:1}
+.card .body{padding:18px 20px 22px;display:flex;flex-direction:column;gap:8px;flex:1}
+.card h3{font-size:21px;font-weight:800}
+.card p.desc{margin:0;font-size:15px;color:var(--soft);flex:1}
+
+/* Variant Pills & Meta Info */
+.var-label{font-size:12px;font-weight:700;color:var(--soft);margin-top:4px}
+.var-list{display:flex;flex-wrap:wrap;gap:6px}
+.var-btn{padding:6px 11px;font-size:13px;font-weight:700;border-radius:5px;border:1.5px solid var(--kraft);background:var(--paper);color:var(--ink);cursor:pointer;min-height:32px;transition:all .15s}
+.var-btn:hover{border-color:var(--ink)}
+.var-btn.active{background:var(--ink);color:var(--cream);border-color:var(--ink)}
+.meta-badges{display:flex;flex-wrap:wrap;gap:6px;align-items:center}
+.stock-info{font-size:12.5px;font-weight:800;color:var(--soft)}
+.stock-info.out{color:#B91C1C}
+.min-order-badge{font-size:12px;font-weight:800;background:var(--paper);border:1px solid var(--kraft);color:var(--ink);padding:2px 8px;border-radius:4px}
+
+/* Input Pcs di Kartu Produk */
+.qty-card-row{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-top:6px;padding-top:10px;border-top:1px dashed var(--kraft)}
+.qty-card-row label{font-size:13px;font-weight:800;color:var(--ink);margin:0}
+.qty-input-box{display:inline-flex;align-items:center;border:2px solid var(--kraft);border-radius:6px;background:var(--paper);overflow:hidden}
+.qty-input-box button{width:32px;height:34px;border:0;background:transparent;font-weight:900;font-size:16px;cursor:pointer;color:var(--ink)}
+.qty-input-box button:hover:not(:disabled){background:rgba(35,26,18,.08)}
+.qty-input-box input{width:64px;height:34px;min-height:34px;border:0;border-left:1.5px solid var(--kraft);border-right:1.5px solid var(--kraft);border-radius:0;padding:4px 6px;text-align:center;font-weight:800;font-size:14px;background:#fff}
+.qty-input-box .pcs-unit{padding:0 9px;font-size:12.5px;font-weight:800;color:var(--soft)}
+
+.card-actions{display:flex;gap:8px;margin-top:8px}
+.card-actions .btn{flex:1;min-height:44px;padding:10px 14px;font-size:14.5px}
+
+/* Sections */
+.dark{background:var(--ink);color:var(--cream)}.dark h2{color:#fff}
+.whys{display:grid;gap:24px 32px;grid-template-columns:repeat(auto-fit,minmax(min(100%,240px),1fr));margin-top:24px}
+.whys b{display:block;font-size:19px;color:#F1DDB6;margin-bottom:4px}.whys span{color:var(--muted);font-size:16px}
+.steps{list-style:none;padding:0;margin:24px 0 0;display:grid;gap:16px;grid-template-columns:repeat(auto-fit,minmax(min(100%,220px),1fr))}
+.steps li{background:#fff;border-radius:10px;padding:22px}
+.steps .n{display:flex;width:44px;height:44px;border-radius:50%;background:var(--ink);color:#fff;font-weight:900;font-size:20px;align-items:center;justify-content:center;margin-bottom:14px}
+.steps b{display:block;font-size:18px;margin-bottom:4px}.steps span{font-size:15px;color:var(--soft)}
+.faq{max-width:820px}
+.faq details{border-bottom:2px solid var(--kraft)}
+.faq summary{list-style:none;cursor:pointer;padding:18px 0;min-height:56px;display:flex;justify-content:space-between;align-items:center;gap:16px;font-weight:800;font-size:18px}
+.faq summary::-webkit-details-marker{display:none}
+.faq summary::after{content:"+";font-size:26px;color:#8A5A28;transition:transform .2s}.faq details[open] summary::after{content:"−"}
+.faq p{margin:0 0 20px;color:#4A3A2A}
+.contact .wrap{display:flex;flex-wrap:wrap;gap:36px 56px}
+.contact-info{flex:1 1 320px}
+.contact-info h2{font-size:clamp(30px,3.8vw,46px)}
+.phone{color:#F1DDB6;font-size:22px;font-weight:800;white-space:nowrap}
+form.order-form{flex:1 1 440px;background:#fff;color:var(--ink);border-radius:12px;padding:clamp(22px,3vw,34px);display:grid;gap:16px}
+label{display:grid;gap:6px;font-weight:700;font-size:15px}
+.opt-tag{font-weight:600;color:var(--soft);font-size:13px}
+input,select,textarea{padding:11px 13px;border:2px solid var(--kraft);border-radius:6px;min-height:46px;background:#fff;color:var(--ink);width:100%}
+textarea{resize:vertical}
+.two{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:12px}
+footer{background:#17110B;color:var(--muted);padding:24px max(4vw,16px);font-size:14px}
+footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 24px}
+
+/* ==================== WIDGET ALAMAT OTOMATIS (API) ==================== */
+.addr-widget{background:var(--paper);border:1.5px solid var(--kraft);border-radius:8px;padding:12px;display:grid;gap:9px}
+.addr-widget-head{display:flex;justify-content:space-between;align-items:center;gap:8px}
+.addr-widget-head span{font-size:14px;font-weight:800;color:var(--ink)}
+.addr-api-pill{font-size:11px;font-weight:800;background:#fff;border:1px solid var(--kraft);color:var(--soft);padding:2px 7px;border-radius:4px}
+.addr-search-wrap{position:relative}
+.addr-search-wrap input{padding-right:36px;font-size:14.5px;min-height:42px;background:#fff}
+.addr-search-spin{position:absolute;right:11px;top:50%;transform:translateY(-50%);display:none}
+.addr-search-spin.show{display:inline-flex}
+.addr-suggest-list{position:absolute;left:0;right:0;top:calc(100% + 4px);background:#fff;border:2px solid var(--ink);border-radius:8px;box-shadow:0 12px 28px rgba(0,0,0,.22);z-index:60;max-height:210px;overflow-y:auto;display:none}
+.addr-suggest-list.open{display:block;animation:fadeIn .15s ease}
+.addr-suggest-item{width:100%;text-align:left;background:none;border:0;border-bottom:1px solid var(--cream);padding:9px 12px;cursor:pointer;display:grid;gap:2px}
+.addr-suggest-item:last-child{border-bottom:0}
+.addr-suggest-item:hover{background:var(--paper)}
+.addr-suggest-item strong{font-size:13.5px;color:var(--ink)}
+.addr-suggest-item small{font-size:12px;color:var(--soft);line-height:1.3}
+.addr-region-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
+.addr-region-grid select{min-height:40px;padding:7px 10px;font-size:13.5px;background:#fff}
+.addr-region-grid select:disabled{background:#EFE5D6;color:var(--soft);cursor:not-allowed}
+.addr-widget textarea{min-height:58px;padding:9px 11px;font-size:14px;background:#fff}
+.addr-toggle-btn{background:#fff;border:1.5px solid var(--ink);color:var(--ink);font-size:12px;font-weight:800;padding:4px 10px;border-radius:5px;cursor:pointer;min-height:30px;transition:background .15s,color .15s}
+.addr-toggle-btn:hover{background:var(--ink);color:#fff}
+.addr-region-panel{display:none;gap:8px;padding-top:4px;border-top:1px dashed var(--kraft)}
+.addr-region-panel.open{display:grid;animation:fadeIn .2s ease}
+.addr-auto-preview{background:#fff;border:1.5px solid var(--accent);border-radius:6px;padding:8px 10px;font-size:12.5px;color:var(--ink);display:none}
+.addr-auto-preview.show{display:block}
+.addr-auto-preview strong{color:var(--accent);display:block;font-size:11.5px;text-transform:uppercase;letter-spacing:.03em;margin-bottom:2px}
+.addr-notfound-box{padding:10px 12px;display:grid;gap:8px;font-size:13px;color:var(--soft)}
+.addr-notfound-btn{background:var(--ink);color:#fff;border:0;border-radius:6px;padding:8px 12px;font-size:13px;font-weight:800;cursor:pointer;text-align:center}
+.addr-notfound-btn:hover{filter:brightness(1.15)}
+
+/* Floating WA */
+.float-wa{position:fixed;right:18px;bottom:18px;width:58px;height:58px;border-radius:50%;background:var(--accent);color:#fff;display:flex;align-items:center;justify-content:center;box-shadow:0 6px 18px rgba(0,0,0,.25);z-index:20;transition:transform .2s}
+.float-wa:hover{color:#fff;filter:brightness(1.08);transform:scale(1.06)}
+
+/* ==================== MODAL & ANIMASI MASUK / KELUAR ==================== */
+.modal-backdrop{position:fixed;inset:0;background:rgba(23,17,11,.74);display:none;align-items:center;justify-content:center;z-index:50;padding:16px;overflow-y:auto}
+.modal-backdrop.open{display:flex;animation:backdropIn .22s ease forwards}
+.modal-backdrop.closing{animation:backdropOut .22s ease forwards;pointer-events:none}
+.modal-box{background:#fff;color:var(--ink);border-radius:12px;max-width:540px;width:100%;padding:24px;box-shadow:0 20px 45px rgba(0,0,0,.35);margin:auto;border:2px solid var(--ink)}
+.modal-backdrop.open .modal-box{animation:modalPopIn .25s cubic-bezier(.22,1,.36,1) forwards}
+.modal-backdrop.closing .modal-box{animation:modalPopOut .22s cubic-bezier(.4,0,1,1) forwards}
+
+@keyframes backdropIn{from{opacity:0}to{opacity:1}}
+@keyframes backdropOut{from{opacity:1}to{opacity:0}}
+@keyframes modalPopIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes modalPopOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(14px) scale(.95)}}
+
+.modal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--cream);padding-bottom:12px;margin-bottom:16px}
+.modal-close{background:none;border:0;font-size:22px;font-weight:900;cursor:pointer;color:var(--soft);padding:4px 8px;border-radius:6px;transition:background .15s}
+.modal-close:hover{background:var(--paper);color:var(--ink)}
+
+/* Popup Pilihan Beli / Keranjang */
+.selected-prod-box{background:var(--paper);border:1.5px solid var(--kraft);border-radius:8px;padding:14px;margin-bottom:14px}
+.selected-prod-box h4{margin:0 0 4px;font-size:18px;font-weight:900}
+.choice-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:14px}
+.direct-buy-panel{display:none;margin-top:16px;padding-top:16px;border-top:2px dashed var(--kraft);animation:fadeIn .2s ease}
+.direct-buy-panel.open{display:grid;gap:12px}
+@keyframes fadeIn{from{opacity:0;transform:translateY(-6px)}to{opacity:1;transform:none}}
+
+/* List Keranjang + Animasi Hapus Item */
+.cart-list{display:grid;gap:10px;max-height:210px;overflow-y:auto;margin-bottom:14px}
+.cart-item{display:flex;justify-content:space-between;align-items:center;gap:10px;background:var(--paper);padding:10px 12px;border-radius:8px;border:1px solid var(--kraft);transition:opacity .25s ease,transform .25s ease}
+.cart-item.item-exit{opacity:0;transform:translateX(28px) scale(.96)}
+.cart-item-note{display:block;font-size:12px;color:var(--ink);background:#fff;border:1px dashed var(--kraft);padding:3px 7px;border-radius:4px;margin-top:4px}
+.qty-ctrl{display:flex;align-items:center;gap:4px;flex-shrink:0}
+.qty-btn{width:28px;height:30px;border-radius:5px;border:1.5px solid var(--ink);background:#fff;font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.cart-qty-input{width:54px;height:30px;min-height:30px;padding:2px 4px;text-align:center;font-weight:800;font-size:13.5px;border:1.5px solid var(--ink);border-radius:5px}
+.total-bar{display:flex;justify-content:space-between;align-items:center;border-top:2px solid var(--cream);border-bottom:2px solid var(--cream);padding:12px 0;margin-bottom:14px;font-weight:900;font-size:18px}
+.buyer-note-warning{background:#FEF3C7;border:2px solid #D97706;border-radius:8px;padding:12px 14px;margin:6px 0;font-size:13.5px;color:#78350F}
+.buyer-note-warning strong{display:block;margin-bottom:4px;font-size:14px}
+.buyer-note-warning ul{margin:0;padding-left:18px;display:grid;gap:3px}
+
+/* ==================== CUSTOM TOAST & CONFIRM POPUP ==================== */
+.toast-container{position:fixed;top:20px;right:20px;z-index:120;display:grid;gap:10px;width:min(380px,calc(100vw - 32px));pointer-events:none}
+.toast-item{pointer-events:auto;background:#fff;color:var(--ink);border:2px solid var(--ink);border-left-width:6px;border-radius:10px;padding:13px 14px;box-shadow:0 14px 32px rgba(23,17,11,.24);display:flex;align-items:flex-start;gap:11px;position:relative;overflow:hidden;animation:toastIn .28s cubic-bezier(.22,1,.36,1) forwards}
+.toast-item.toast-exit{animation:toastOut .24s ease forwards}
+.toast-item.success{border-left-color:var(--accent)}
+.toast-item.warning{border-left-color:#D97706}
+.toast-item.error{border-left-color:#B91C1C}
+.toast-item.info{border-left-color:var(--ink)}
+.toast-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;margin-top:1px}
+.toast-item.success .toast-icon{background:#DCFCE7;color:#15803D}
+.toast-item.warning .toast-icon{background:#FEF3C7;color:#B45309}
+.toast-item.error .toast-icon{background:#FEE2E2;color:#B91C1C}
+.toast-item.info .toast-icon{background:var(--paper);color:var(--ink)}
+.toast-body{flex:1;font-size:14px;line-height:1.45}
+.toast-body strong{display:block;font-size:14.5px;font-weight:800;margin-bottom:2px}
+.toast-close{background:none;border:0;color:var(--soft);font-size:18px;font-weight:900;line-height:1;cursor:pointer;padding:2px 4px;border-radius:4px}
+.toast-close:hover{background:var(--paper);color:var(--ink)}
+.toast-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:currentColor;opacity:.22;transform-origin:left;animation:toastProgress linear forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(24px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(24px) scale(.96)}}
+@keyframes toastProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+#custom-confirm-modal{z-index:110}
+.confirm-box{max-width:420px;text-align:left}
+.confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+
+@media(max-width:720px){nav{display:none}.two,.choice-grid,.addr-region-grid{grid-template-columns:minmax(0,1fr)}.toast-container{top:14px;right:14px;left:14px;width:auto}}
+@media(prefers-reduced-motion:reduce){
+  html{scroll-behavior:auto}
+  .reveal,.reveal-scale,.hero-anim-left,.hero-anim-right,.card,.modal-backdrop,.modal-box,.cart-item,.page-loader,.toast-item{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
+}
+</style>
+</head>
+<body>
+
+<!-- ==================== PRELOADER AWAL HALAMAN ==================== -->
+<div id="page-loader" class="page-loader" role="status" aria-live="polite">
+  <div class="page-loader-brand">
+    <svg width="36" height="36" viewBox="0 0 36 36" aria-hidden="true">
+      <polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/>
+      <polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/>
+      <polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/>
+    </svg>
+    Lestari Corrugated
+  </div>
+  <span class="spinner lg"></span>
+  <p>Menyiapkan katalog kardus...</p>
+</div>
+
+<!-- ==================== TOAST NOTIFICATION & CUSTOM CONFIRM ==================== -->
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<div id="custom-confirm-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" onclick="if(event.target===this)resolveConfirmModal(false)">
+  <div class="modal-box confirm-box">
+    <div class="modal-head" style="margin-bottom:12px">
+      <h3 id="confirm-modal-title" style="font-size:19px">Konfirmasi</h3>
+      <button type="button" class="modal-close" onclick="resolveConfirmModal(false)" aria-label="Tutup">✕</button>
+    </div>
+    <p id="confirm-modal-msg" style="margin:0;font-size:15px;color:var(--soft);line-height:1.5"></p>
+    <div class="confirm-actions">
+      <button type="button" id="confirm-btn-cancel" class="btn btn-line" style="min-height:44px" onclick="resolveConfirmModal(false)">Batal</button>
+      <button type="button" id="confirm-btn-ok" class="btn btn-dark" style="min-height:44px" onclick="resolveConfirmModal(true)">Ya, Lanjutkan</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== OVERLAY LOADING CHECKOUT ==================== -->
+<div id="proc-overlay" class="proc-overlay" role="status" aria-live="assertive">
+  <span class="spinner lg"></span>
+  <strong style="font-size:19px">Mengunci Stok &amp; Menyiapkan WhatsApp...</strong>
+  <span style="font-size:14px;color:var(--muted)">Mohon tunggu sebentar, halaman akan segera dialihkan.</span>
+</div>
+
+<header>
+<div class="wrap">
+<a class="logo" href="#beranda">
+<svg width="34" height="34" viewBox="0 0 36 36" aria-hidden="true"><polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/><polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/><polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/></svg>
+Lestari Corrugated</a>
+<nav aria-label="Menu utama">
+<a href="#produk">Produk</a><a href="#cara-pesan">Cara pesan</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a>
+</nav>
+<div class="header-actions">
+<button type="button" onclick="openCartModal()" class="btn btn-kraft" style="min-height:42px;padding:8px 16px;font-size:15px">
+Keranjang (<span id="cart-count">0</span>)
+</button>
+<a class="btn btn-wa wa-umum" href="#" target="_blank" rel="noopener" style="min-height:42px;padding:8px 16px;font-size:15px">Chat WhatsApp</a>
+</div>
+</div>
+</header>
+
+<section id="beranda" class="band hero">
+<div class="wrap">
+<div class="hero-text hero-anim-left">
+<h1>Kardus packing polos, mulai Rp300 per pcs.</h1>
+<p>Kardus corrugated ukuran kecil untuk packing online shop, aksesori, kosmetik, dan barang kecil lainnya. Pilih ukurannya, pesan lewat WhatsApp.</p>
+<div class="row">
+<a class="btn btn-dark wa-umum" href="#" target="_blank" rel="noopener">Pesan via WhatsApp</a>
+<a class="btn btn-line" href="#produk">Lihat produk</a>
+</div>
+</div>
+<div class="hero-pic hero-anim-right"><svg id="hero" viewBox="0 -20 560 480" role="img" aria-label="Tumpukan kardus cokelat"></svg></div>
+</div>
+</section>
+
+<section id="produk" class="band" style="background:var(--paper)">
+<div class="wrap">
+<div class="reveal">
+<h2>Daftar ukuran &amp; harga</h2>
+<p style="margin:0 0 28px">Pilih varian ukuran dan masukkan jumlah <b>pcs</b> sesuai minimal pembelian, lalu pilih masukkan ke keranjang atau langsung beli via WhatsApp.</p>
+</div>
+<div class="grid" id="products"></div>
+</div>
+</section>
+
+<section class="band dark">
+<div class="wrap">
+<h2 class="reveal">Kenapa belanja di Lestari Corrugated</h2>
+<div class="whys">
+<div class="reveal" style="transition-delay:.05s"><b>Harga terjangkau</b><span>Mulai Rp300 per pcs, cocok untuk usaha kecil yang baru mulai.</span></div>
+<div class="reveal" style="transition-delay:.12s"><b>Pilihan ukuran lengkap</b><span>Berbagai ukuran kardus dan varian untuk barang-barang kecil maupun sedang.</span></div>
+<div class="reveal" style="transition-delay:.19s"><b>Dibantu pilih yang pas</b><span>Sebutkan barang Anda, kami sarankan ukuran yang paling cocok.</span></div>
+<div class="reveal" style="transition-delay:.26s"><b>Pesan mudah</b><span>Bisa langsung beli 1 produk atau kumpulkan banyak ukuran di keranjang.</span></div>
+</div>
+</div>
+</section>
+
+<section id="cara-pesan" class="band" style="background:var(--kraft)">
+<div class="wrap">
+<h2 class="reveal">Cara pesan</h2>
+<ol class="steps">
+<li class="reveal-scale" style="transition-delay:.05s"><span class="n">1</span><b>Pilih ukuran &amp; pcs</b><span>Tentukan varian ukuran dan jumlah pcs sesuai minimal pembelian.</span></li>
+<li class="reveal-scale" style="transition-delay:.12s"><span class="n">2</span><b>Isi nama &amp; alamat otomatis</b><span>Ketik nama jalan atau pilih wilayah otomatis untuk pengiriman.</span></li>
+<li class="reveal-scale" style="transition-delay:.19s"><span class="n">3</span><b>Klik Bayar &amp; WhatsApp</b><span>Stok otomatis dikunci sistem dan rincian pesanan terkirim ke WhatsApp kami.</span></li>
+<li class="reveal-scale" style="transition-delay:.26s"><span class="n">4</span><b>Transfer &amp; kirim</b><span>Setelah konfirmasi pembayaran, pesanan langsung diproses dan dikirim.</span></li>
+</ol>
+</div>
+</section>
+
+<section id="faq" class="band" style="background:var(--paper)">
+<div class="wrap faq">
+<h2 class="reveal" style="margin-bottom:20px">Pertanyaan umum</h2>
+<details class="reveal" open><summary>Berapa minimal pembelian kardus?</summary><p>Setiap ukuran/varian memiliki ketentuan minimal pembelian (pcs) yang tertera langsung di kartu produk.</p></details>
+<details class="reveal"><summary>Bagaimana cara tahu harganya?</summary><p>Pilih varian ukuran pada katalog di atas, harga per pcs, minimal beli, dan sisa stok akan langsung muncul otomatis.</p></details>
+<details class="reveal"><summary>Saya belum tahu ukurannya, bisa dibantu?</summary><p>Bisa. Ceritakan barang apa yang mau dikemas lewat WhatsApp, kami bantu sarankan ukuran yang cocok.</p></details>
+<details class="reveal"><summary>Ukuran yang saya cari tidak ada di daftar?</summary><p>Tanyakan saja lewat WhatsApp, kami cek apakah ukuran tersebut bisa disediakan.</p></details>
+<details class="reveal"><summary>Bagaimana pengirimannya?</summary><p>Pesanan dikirim ke alamat Anda. Ongkos kirim dihitung sesuai lokasi dan berat pesanan.</p></details>
+</div>
+</section>
+
+<section id="kontak" class="band dark contact">
+<div class="wrap">
+<div class="contact-info reveal">
+<h2>Pesan cepat atau tanya harga</h2>
+<p style="margin:0 0 24px;font-size:18px">Isi formulir ini untuk memesan langsung satu ukuran atau menanyakan ukuran khusus ke WhatsApp kami.</p>
+<p style="margin:0 0 6px;font-weight:800;color:#fff">WhatsApp</p>
+<a class="phone wa-umum" href="#" target="_blank" rel="noopener">0895-3361-45836</a>
+</div>
+<form id="order" class="order-form reveal-scale">
+<label>Nama<input id="f-nama" type="text" placeholder="Nama Anda / nama usaha" autocomplete="name" required></label>
+<div class="two">
+<label>Pilih Produk &amp; Varian<select id="f-jenis"></select></label>
+<label>Jumlah (pcs)<input id="f-jumlah" type="number" min="1" placeholder="100 pcs" inputmode="numeric" required></label>
+</div>
+<p id="f-total" style="margin:0;background:var(--paper);border-radius:6px;padding:12px 14px;font-size:15px">Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.</p>
+
+<!-- Widget Alamat Otomatis (Form Kontak) -->
+<div id="quick-addr-container"></div>
+
+<label><span>Catatan / Note Pemesanan <span class="opt-tag">(opsional)</span></span><textarea id="f-catatan" rows="2" placeholder="Contoh: Request packing, kirim sore hari, atau catatan khusus lainnya..."></textarea></label>
+<div class="buyer-note-warning" style="margin:0">
+<strong>⚠️ Catatan Sebelum Bayar:</strong>
+<span>Jika memilih produk dari daftar, stok akan otomatis dikurangi saat tombol ditekan sebelum menuju WhatsApp.</span>
+</div>
+<button type="submit" id="f-submit" class="btn btn-wa" style="min-height:52px">Bayar &amp; Kirim ke WhatsApp</button>
+</form>
+</div>
+</section>
+
+<footer>
+<div class="wrap">
+<span><strong style="color:var(--cream)">Lestari Corrugated</strong> · Jual kardus corrugated</span>
+<span>© 2026 Lestari Corrugated</span>
+</div>
+</footer>
+
+<a class="float-wa wa-umum" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
+<svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg>
+</a>
+
+<!-- ==================== POPUP PILIHAN AKSI (KERANJANG / LANGSUNG BELI) ==================== -->
+<div id="action-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="action-title" onclick="if(event.target===this)closeActionModal()">
+<div class="modal-box">
+<div class="modal-head">
+<h3 id="action-title" style="font-size:21px">Konfirmasi Pilihan Produk</h3>
+<button type="button" class="modal-close" onclick="closeActionModal()" aria-label="Tutup">✕</button>
+</div>
+
+<div class="selected-prod-box">
+<h4 id="modal-prod-name">Nama Produk</h4>
+<p id="modal-prod-variant" style="margin:0 0 8px;font-size:14px;color:var(--soft);font-weight:700">Varian: -</p>
+<div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-top:8px;border-top:1px solid var(--kraft)">
+<div>
+<span style="font-size:12px;color:var(--soft);display:block">Jumlah Pesanan (<span id="modal-min-label">Min. 1 pcs</span>):</span>
+<div class="qty-input-box" style="margin-top:4px;background:#fff">
+<button type="button" onclick="stepModalQty(-1)">-</button>
+<input type="number" id="modal-qty" min="1" value="1" oninput="updateModalSubtotal()">
+<button type="button" onclick="stepModalQty(1)">+</button>
+<span class="pcs-unit">pcs</span>
+</div>
+</div>
+<div style="text-align:right">
+<span style="font-size:12px;color:var(--soft);display:block">Total Harga:</span>
+<strong id="modal-subtotal" style="font-size:22px;font-weight:900;color:var(--ink)">Rp0</strong>
+</div>
+</div>
+</div>
+
+<!-- Note Opsional Pemesanan -->
+<label style="margin-bottom:4px">
+  <span>Catatan / Note Pemesanan <span class="opt-tag">(opsional)</span></span>
+  <textarea id="modal-order-note" rows="2" placeholder="Contoh: Request warna lakban, kirim sore hari, atau catatan khusus untuk pesanan ini..."></textarea>
+</label>
+
+<!-- 2 Opsi Utama -->
+<div class="choice-grid">
+<button type="button" onclick="confirmAddToCartFromModal()" class="btn btn-dark" style="min-height:48px">
++ Masukkan ke Keranjang
+</button>
+<button type="button" onclick="openDirectBuyForm()" class="btn btn-wa" style="min-height:48px">
+⚡ Langsung Beli
+</button>
+</div>
+
+<!-- Form Langsung Beli + Alamat Otomatis API -->
+<div id="direct-buy-section" class="direct-buy-panel">
+<label>Nama Pembeli / Usaha <span style="color:#B91C1C">*</span>
+<input type="text" id="direct-buyer-name" placeholder="Masukkan nama lengkap Anda">
+</label>
+
+<div id="direct-addr-container"></div>
+
+<div class="buyer-note-warning">
+<strong>⚠️ Catatan Penting Sebelum Bayar:</strong>
+<ul>
+<li>Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
+<li>Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikurangi</b> dari sistem.</li>
+<li>Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian &amp; alamat pesanan.</li>
+</ul>
+</div>
+
+<button type="button" id="btn-direct-checkout" onclick="processDirectCheckout()" class="btn btn-wa" style="width:100%;min-height:50px">
+Bayar &amp; Lanjut ke WhatsApp
+</button>
+</div>
+</div>
+</div>
+
+<!-- ==================== MODAL KERANJANG BELANJA ==================== -->
+<div id="cart-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="cart-title" onclick="if(event.target===this)closeCartModal()">
+<div class="modal-box">
+<div class="modal-head">
+<h3 id="cart-title" style="font-size:22px">Ringkasan Keranjang</h3>
+<button type="button" class="modal-close" onclick="closeCartModal()" aria-label="Tutup">✕</button>
+</div>
+
+<div id="cart-items" class="cart-list"></div>
+
+<div class="total-bar">
+<span>Total Pembayaran</span>
+<span id="cart-total">Rp0</span>
+</div>
+
+<div style="display:grid;gap:12px">
+<label>Nama Pembeli / Usaha <span style="color:#B91C1C">*</span>
+<input type="text" id="buyer-name" placeholder="Masukkan nama lengkap Anda">
+</label>
+
+<div id="cart-addr-container"></div>
+
+<label><span>Catatan Tambahan <span class="opt-tag">(opsional)</span></span>
+<textarea id="buyer-note" rows="2" placeholder="Contoh: Kirim sore hari, titip satpam, dll."></textarea>
+</label>
+</div>
+
+<div class="buyer-note-warning">
+<strong>⚠️ Catatan Penting Sebelum Bayar:</strong>
+<ul>
+<li>Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
+<li>Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikunci/dikurangi</b> dari sistem.</li>
+<li>Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian pesanan untuk konfirmasi pembayaran.</li>
+</ul>
+</div>
+
+<button type="button" id="btn-checkout" onclick="processCheckout()" class="btn btn-wa" style="width:100%;min-height:52px">
+Bayar &amp; Pesan via WhatsApp
+</button>
+</div>
+</div>
+
+<script>
+// ====== KONFIGURASI TOKO & HELPER KEAMANAN (ANTI-XSS) ======
+const WA = '62895336145836';
+const SHOP = 'Lestari Corrugated';
+
+const waLink = (t) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
+const rp = (n) => 'Rp' + Number(n).toLocaleString('id-ID');
+const escHtml = (str) => String(str || '').replace(/[&<>"']/g, (m) => ({
+  '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+}[m]));
+const safeId = (id) => String(id || '').replace(/[^a-zA-Z0-9_-]/g, '');
+const safeUrl = (url) => {
+  const raw = String(url || '').trim();
+  return /^(https?:\/\/|\/)/i.test(raw) ? escHtml(raw) : '';
+};
+
+document.querySelectorAll('.wa-umum').forEach((a) => {
+  a.href = waLink('Halo ' + SHOP + ', saya mau tanya soal produk kardus.');
+});
+
+// ====== CUSTOM TOAST & CONFIRM MODAL ======
+const TOAST_META = {
+  success: { title: 'Berhasil', icon: '✓' },
+  warning: { title: 'Perhatian', icon: '!' },
+  error: { title: 'Gagal', icon: '✕' },
+  info: { title: 'Info', icon: 'i' }
+};
+
+function showToast(message, type = 'warning', duration = 3600) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const meta = TOAST_META[type] || TOAST_META.info;
+  const toast = document.createElement('div');
+  toast.className = `toast-item ${type}`;
+  toast.setAttribute('role', 'status');
+  toast.innerHTML = `
+    <span class="toast-icon" aria-hidden="true">${meta.icon}</span>
+    <div class="toast-body">
+      <strong>${meta.title}</strong>
+      <span>${escHtml(message)}</span>
+    </div>
+    <button type="button" class="toast-close" aria-label="Tutup notifikasi">✕</button>
+    <div class="toast-bar" style="animation-duration:${duration}ms"></div>
+  `;
+
+  const dismiss = () => {
+    if (toast.classList.contains('toast-exit')) return;
+    toast.classList.add('toast-exit');
+    setTimeout(() => toast.remove(), 240);
+  };
+
+  toast.querySelector('.toast-close').addEventListener('click', dismiss);
+  container.appendChild(toast);
+
+  while (container.children.length > 4) {
+    container.firstElementChild.remove();
+  }
+
+  setTimeout(dismiss, duration);
+}
+
+let confirmModalResolver = null;
+
+function showConfirmModal({ title = 'Konfirmasi', message = '', confirmText = 'Ya, Hapus', cancelText = 'Batal' }) {
+  return new Promise((resolve) => {
+    confirmModalResolver = resolve;
+    document.getElementById('confirm-modal-title').textContent = title;
+    document.getElementById('confirm-modal-msg').textContent = message;
+    document.getElementById('confirm-btn-ok').textContent = confirmText;
+    document.getElementById('confirm-btn-cancel').textContent = cancelText;
+    openModalAnimated('custom-confirm-modal');
+  });
+}
+
+function resolveConfirmModal(result) {
+  closeModalAnimated('custom-confirm-modal', () => {
+    if (typeof confirmModalResolver === 'function') {
+      const fn = confirmModalResolver;
+      confirmModalResolver = null;
+      fn(result);
+    }
+  });
+}
+
+// ====== WIDGET ALAMAT OTOMATIS (AUTOCOMPLETE API + API WILAYAH INDONESIA) ======
+const wilayahCache = {};
+const addrSearchTimers = {};
+const addrSearchControllers = {};
+const addrSuggestionsStore = {};
+
+const FALLBACK_PROVINCES = [
+  { id: '11', name: 'ACEH' }, { id: '12', name: 'SUMATERA UTARA' },
+  { id: '13', name: 'SUMATERA BARAT' }, { id: '14', name: 'RIAU' },
+  { id: '15', name: 'JAMBI' }, { id: '16', name: 'SUMATERA SELATAN' },
+  { id: '17', name: 'BENGKULU' }, { id: '18', name: 'LAMPUNG' },
+  { id: '19', name: 'KEPULAUAN BANGKA BELITUNG' }, { id: '21', name: 'KEPULAUAN RIAU' },
+  { id: '31', name: 'DKI JAKARTA' }, { id: '32', name: 'JAWA BARAT' },
+  { id: '33', name: 'JAWA TENGAH' }, { id: '34', name: 'DI YOGYAKARTA' },
+  { id: '35', name: 'JAWA TIMUR' }, { id: '36', name: 'BANTEN' },
+  { id: '51', name: 'BALI' }, { id: '52', name: 'NUSA TENGGARA BARAT' },
+  { id: '53', name: 'NUSA TENGGARA TIMUR' }, { id: '61', name: 'KALIMANTAN BARAT' },
+  { id: '62', name: 'KALIMANTAN TENGAH' }, { id: '63', name: 'KALIMANTAN SELATAN' },
+  { id: '64', name: 'KALIMANTAN TIMUR' }, { id: '65', name: 'KALIMANTAN UTARA' },
+  { id: '71', name: 'SULAWESI UTARA' }, { id: '72', name: 'SULAWESI TENGAH' },
+  { id: '73', name: 'SULAWESI SELATAN' }, { id: '74', name: 'SULAWESI TENGGARA' },
+  { id: '75', name: 'GORONTALO' }, { id: '76', name: 'SULAWESI BARAT' },
+  { id: '81', name: 'MALUKU' }, { id: '82', name: 'MALUKU UTARA' },
+  { id: '91', name: 'PAPUA' }, { id: '92', name: 'PAPUA BARAT' },
+  { id: '93', name: 'PAPUA SELATAN' }, { id: '94', name: 'PAPUA TENGAH' },
+  { id: '95', name: 'PAPUA PEGUNUNGAN' }, { id: '96', name: 'PAPUA BARAT DAYA' }
+];
+
+async function fetchWilayah(path) {
+  if (wilayahCache[path]) return wilayahCache[path];
+  const ibnuxPath = path
+    .replace(/^provinces\.json$/, 'provinsi.json')
+    .replace(/^regencies\//, 'kabupaten/')
+    .replace(/^districts\//, 'kecamatan/')
+    .replace(/^villages\//, 'kelurahan/');
+
+  const endpoints = [
+    `/api/wilayah/${path}`,
+    `https://cdn.jsdelivr.net/gh/emsifa/api-wilayah-indonesia@gh-pages/api/${path}`,
+    `https://raw.githubusercontent.com/emsifa/api-wilayah-indonesia/gh-pages/api/${path}`,
+    `https://cdn.jsdelivr.net/gh/ibnux/data-indonesia@master/${ibnuxPath}`,
+    `https://emsifa.github.io/api-wilayah-indonesia/api/${path}`
+  ];
+  for (const url of endpoints) {
+    try {
+      const res = await fetch(url);
+      if (res.ok) {
+        const raw = await res.json();
+        if (Array.isArray(raw) && raw.length) {
+          const data = raw.map((item) => ({
+            id: String(item.id),
+            name: String(item.name || item.nama || '').toUpperCase()
+          }));
+          wilayahCache[path] = data;
+          return data;
+        }
+      }
+    } catch (_) {}
+  }
+  return [];
+}
+
+function renderAddressWidget(prefix, required = true) {
+  return `
+    <div class="addr-widget">
+      <div class="addr-widget-head">
+        <span>Alamat Pengiriman ${required ? '<span style="color:#B91C1C">*</span>' : ''}</span>
+        <button type="button" id="${prefix}-toggle-region" class="addr-toggle-btn" onclick="toggleRegionPanel('${prefix}')">
+          + Pilih Provinsi / Wilayah
+        </button>
+      </div>
+
+      <div class="addr-search-wrap">
+        <input type="text" id="${prefix}-addr-search" autocomplete="off"
+          placeholder="Ketik nama jalan / perumahan / desa..."
+          oninput="onAddrSearchInput('${prefix}')"
+          onfocus="if(document.getElementById('${prefix}-addr-suggest').children.length) document.getElementById('${prefix}-addr-suggest').classList.add('open')">
+        <span id="${prefix}-addr-spin" class="addr-search-spin"><span class="spinner dark sm"></span></span>
+        <div id="${prefix}-addr-suggest" class="addr-suggest-list"></div>
+      </div>
+
+      <div id="${prefix}-region-panel" class="addr-region-panel">
+        <div class="addr-region-grid">
+          <select id="${prefix}-prov" onchange="onProvChange('${prefix}')" aria-label="Provinsi">
+            <option value="">Memuat Provinsi...</option>
+          </select>
+          <select id="${prefix}-city" onchange="onCityChange('${prefix}')" disabled aria-label="Kota / Kabupaten">
+            <option value="">Pilih Kota / Kab.</option>
+          </select>
+          <select id="${prefix}-dist" onchange="onDistChange('${prefix}')" disabled aria-label="Kecamatan">
+            <option value="">Pilih Kecamatan</option>
+          </select>
+          <select id="${prefix}-vill" onchange="updateRegionPreview('${prefix}')" disabled aria-label="Kelurahan / Desa">
+            <option value="">Pilih Kelurahan / Desa</option>
+          </select>
+        </div>
+      </div>
+
+      <div id="${prefix}-auto-preview" class="addr-auto-preview">
+        <strong>✓ Wilayah Otomatis Terisi:</strong>
+        <span id="${prefix}-auto-text">-</span>
+      </div>
+
+      <textarea id="${prefix}-addr-detail" rows="2"
+        placeholder="Detail alamat: Nama Jalan / Gang, No. Rumah, RT/RW, Patokan..."></textarea>
+    </div>
+  `;
+}
+
+function toggleRegionPanel(prefix, forceOpen = null) {
+  const panel = document.getElementById(`${prefix}-region-panel`);
+  const btn = document.getElementById(`${prefix}-toggle-region`);
+  if (!panel || !btn) return;
+
+  const shouldOpen = forceOpen !== null ? forceOpen : !panel.classList.contains('open');
+  panel.classList.toggle('open', shouldOpen);
+  btn.textContent = shouldOpen ? '− Tutup Pilihan Wilayah' : '+ Pilih Provinsi / Wilayah';
+}
+
+function openManualRegionFromSearch(prefix) {
+  const suggestEl = document.getElementById(`${prefix}-addr-suggest`);
+  if (suggestEl) suggestEl.classList.remove('open');
+  toggleRegionPanel(prefix, true);
+  const provSel = document.getElementById(`${prefix}-prov`);
+  if (provSel) provSel.focus();
+}
+
+function getFieldText(el) {
+  if (!el || !el.value) return '';
+  return el.options[el.selectedIndex]?.dataset?.name || '';
+}
+
+function getSelectedRegionText(prefix) {
+  const provName = getFieldText(document.getElementById(`${prefix}-prov`));
+  const cityName = getFieldText(document.getElementById(`${prefix}-city`));
+  const distName = getFieldText(document.getElementById(`${prefix}-dist`));
+  const villName = getFieldText(document.getElementById(`${prefix}-vill`));
+
+  const parts = [
+    villName ? `Kel/Desa ${villName}` : '',
+    distName ? `Kec. ${distName}` : '',
+    cityName,
+    provName
+  ].filter(Boolean);
+
+  return { provName, cityName, distName, villName, joined: parts.join(', ') };
+}
+
+function updateRegionPreview(prefix) {
+  const previewBox = document.getElementById(`${prefix}-auto-preview`);
+  const previewText = document.getElementById(`${prefix}-auto-text`);
+  const detailEl = document.getElementById(`${prefix}-addr-detail`);
+  if (!previewBox || !previewText) return;
+
+  const { joined } = getSelectedRegionText(prefix);
+  if (joined) {
+    previewText.textContent = joined;
+    previewBox.classList.add('show');
+    if (detailEl) {
+      detailEl.placeholder = 'Tinggal tambahin nama jalan / gang, no. rumah, RT/RW, patokan...';
+    }
+  } else {
+    previewBox.classList.remove('show');
+    if (detailEl) {
+      detailEl.placeholder = 'Detail alamat: Nama Jalan / Gang, No. Rumah, RT/RW, Patokan...';
+    }
+  }
+}
+
+async function initAddressWidget(containerId, prefix, required = true) {
+  const container = document.getElementById(containerId);
+  if (!container) return;
+  container.innerHTML = renderAddressWidget(prefix, required);
+
+  const provSelect = document.getElementById(`${prefix}-prov`);
+  const fetched = await fetchWilayah('provinces.json');
+  const provinces = fetched.length ? fetched : FALLBACK_PROVINCES;
+
+  provSelect.innerHTML = '<option value="">Pilih Provinsi</option>' +
+    provinces.map((p) => `<option value="${escHtml(p.id)}" data-name="${escHtml(p.name)}">${escHtml(p.name)}</option>`).join('');
+}
+
+async function onProvChange(prefix) {
+  const provSel = document.getElementById(`${prefix}-prov`);
+  const citySel = document.getElementById(`${prefix}-city`);
+  const distSel = document.getElementById(`${prefix}-dist`);
+  const villSel = document.getElementById(`${prefix}-vill`);
+
+  distSel.innerHTML = '<option value="">Pilih Kecamatan</option>';
+  distSel.disabled = true;
+  villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+  villSel.disabled = true;
+
+  const provId = provSel.value;
+  if (!provId) {
+    citySel.innerHTML = '<option value="">Pilih Kota / Kab.</option>';
+    citySel.disabled = true;
+    updateRegionPreview(prefix);
+    return;
+  }
+
+  citySel.disabled = true;
+  citySel.innerHTML = '<option value="">Memuat Kota/Kab...</option>';
+  updateRegionPreview(prefix);
+
+  const regencies = await fetchWilayah(`regencies/${provId}.json`);
+  if (regencies.length) {
+    citySel.innerHTML = '<option value="">Pilih Kota / Kab.</option>' +
+      regencies.map((r) => `<option value="${escHtml(r.id)}" data-name="${escHtml(r.name)}">${escHtml(r.name)}</option>`).join('');
+    citySel.disabled = false;
+  } else {
+    citySel.innerHTML = '<option value="">Gagal memuat Kota/Kab (cek koneksi)</option>';
+  }
+}
+
+async function onCityChange(prefix) {
+  const citySel = document.getElementById(`${prefix}-city`);
+  const distSel = document.getElementById(`${prefix}-dist`);
+  const villSel = document.getElementById(`${prefix}-vill`);
+
+  villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+  villSel.disabled = true;
+
+  const cityId = citySel.value;
+  if (!cityId) {
+    distSel.innerHTML = '<option value="">Pilih Kecamatan</option>';
+    distSel.disabled = true;
+    updateRegionPreview(prefix);
+    return;
+  }
+
+  distSel.disabled = true;
+  distSel.innerHTML = '<option value="">Memuat Kecamatan...</option>';
+  updateRegionPreview(prefix);
+
+  const districts = await fetchWilayah(`districts/${cityId}.json`);
+  if (districts.length) {
+    distSel.innerHTML = '<option value="">Pilih Kecamatan</option>' +
+      districts.map((d) => `<option value="${escHtml(d.id)}" data-name="${escHtml(d.name)}">${escHtml(d.name)}</option>`).join('');
+    distSel.disabled = false;
+  } else {
+    distSel.innerHTML = '<option value="">Gagal memuat Kecamatan</option>';
+  }
+}
+
+async function onDistChange(prefix) {
+  const distSel = document.getElementById(`${prefix}-dist`);
+  const villSel = document.getElementById(`${prefix}-vill`);
+
+  const distId = distSel.value;
+  if (!distId) {
+    villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+    villSel.disabled = true;
+    updateRegionPreview(prefix);
+    return;
+  }
+
+  villSel.disabled = true;
+  villSel.innerHTML = '<option value="">Memuat Kelurahan...</option>';
+  updateRegionPreview(prefix);
+
+  const villages = await fetchWilayah(`villages/${distId}.json`);
+  if (villages.length) {
+    villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>' +
+      villages.map((v) => `<option value="${escHtml(v.id)}" data-name="${escHtml(v.name)}">${escHtml(v.name)}</option>`).join('');
+    villSel.disabled = false;
+  } else {
+    villSel.innerHTML = '<option value="">Gagal memuat Kelurahan</option>';
+  }
+}
+
+const PROV_ALIAS = {
+  'SPECIAL CAPITAL REGION OF JAKARTA': 'DKI JAKARTA',
+  'DAERAH KHUSUS IBUKOTA JAKARTA': 'DKI JAKARTA',
+  'JAKARTA': 'DKI JAKARTA',
+  'WEST JAVA': 'JAWA BARAT',
+  'CENTRAL JAVA': 'JAWA TENGAH',
+  'EAST JAVA': 'JAWA TIMUR',
+  'SPECIAL REGION OF YOGYAKARTA': 'DI YOGYAKARTA',
+  'DAERAH ISTIMEWA YOGYAKARTA': 'DI YOGYAKARTA',
+  'YOGYAKARTA': 'DI YOGYAKARTA',
+  'NORTH SUMATRA': 'SUMATERA UTARA',
+  'WEST SUMATRA': 'SUMATERA BARAT',
+  'SOUTH SUMATRA': 'SUMATERA SELATAN',
+  'BANGKA BELITUNG ISLANDS': 'KEPULAUAN BANGKA BELITUNG',
+  'RIAU ISLANDS': 'KEPULAUAN RIAU',
+  'WEST KALIMANTAN': 'KALIMANTAN BARAT',
+  'CENTRAL KALIMANTAN': 'KALIMANTAN TENGAH',
+  'SOUTH KALIMANTAN': 'KALIMANTAN SELATAN',
+  'EAST KALIMANTAN': 'KALIMANTAN TIMUR',
+  'NORTH KALIMANTAN': 'KALIMANTAN UTARA',
+  'NORTH SULAWESI': 'SULAWESI UTARA',
+  'CENTRAL SULAWESI': 'SULAWESI TENGAH',
+  'SOUTH SULAWESI': 'SULAWESI SELATAN',
+  'SOUTHEAST SULAWESI': 'SULAWESI TENGGARA',
+  'WEST SULAWESI': 'SULAWESI BARAT',
+  'WEST NUSA TENGGARA': 'NUSA TENGGARA BARAT',
+  'EAST NUSA TENGGARA': 'NUSA TENGGARA TIMUR',
+  'NORTH MALUKU': 'MALUKU UTARA',
+  'WEST PAPUA': 'PAPUA BARAT',
+  'SOUTHWEST PAPUA': 'PAPUA BARAT DAYA',
+  'SOUTH PAPUA': 'PAPUA SELATAN',
+  'CENTRAL PAPUA': 'PAPUA TENGAH',
+  'HIGHLAND PAPUA': 'PAPUA PEGUNUNGAN'
+};
+
+function onAddrSearchInput(prefix) {
+  const inputEl = document.getElementById(`${prefix}-addr-search`);
+  const suggestEl = document.getElementById(`${prefix}-addr-suggest`);
+  const spinEl = document.getElementById(`${prefix}-addr-spin`);
+  const rawQuery = inputEl.value.trim();
+  const query = rawQuery
+    .replace(/\bjl\.?\s*/gi, 'jalan ')
+    .replace(/\bgg\.?\s*/gi, 'gang ')
+    .replace(/\s+/g, ' ')
+    .trim();
+
+  clearTimeout(addrSearchTimers[prefix]);
+  if (addrSearchControllers[prefix]) {
+    addrSearchControllers[prefix].abort();
+  }
+
+  if (query.length < 3) {
+    spinEl.classList.remove('show');
+    suggestEl.classList.remove('open');
+    suggestEl.innerHTML = '';
+    return;
+  }
+
+  spinEl.classList.add('show');
+  addrSearchTimers[prefix] = setTimeout(async () => {
+    const controller = new AbortController();
+    addrSearchControllers[prefix] = controller;
+    let items = [];
+
+    try {
+      try {
+        const photonUrl = `https://photon.komoot.io/api/?q=${encodeURIComponent(query)}&limit=10&bbox=95.0,-11.0,141.0,6.1`;
+        const res = await fetch(photonUrl, { signal: controller.signal });
+        if (res.ok) {
+          const data = await res.json();
+          items = (data.features || [])
+            .filter((f) => {
+              const p = f.properties || {};
+              return !p.countrycode || p.countrycode.toUpperCase() === 'ID';
+            })
+            .map((f) => {
+              const p = f.properties || {};
+              const village = p.locality || p.suburb || '';
+              const district = p.district || '';
+              const city = p.city || p.county || '';
+              const state = p.state || '';
+              const title = p.name || p.street || village || district || city || query;
+              const parts = [p.street, village, district, city, state, p.postcode]
+                .filter(Boolean)
+                .filter((v, i, arr) => arr.indexOf(v) === i);
+              return {
+                title,
+                subtitle: parts.join(', '),
+                streetOnly: [p.name, p.street].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', '),
+                state,
+                city,
+                district,
+                village
+              };
+            });
+        }
+      } catch (e) {
+        if (e.name === 'AbortError') throw e;
+      }
+
+      if (items.length < 3) {
+        const nomUrl = `https://nominatim.openstreetmap.org/search?format=jsonv2&addressdetails=1&countrycodes=id&accept-language=id&limit=8&q=${encodeURIComponent(query)}`;
+        const nomRes = await fetch(nomUrl, { signal: controller.signal });
+        if (nomRes.ok) {
+          const nomData = await nomRes.json();
+          const nomItems = nomData.map((n) => {
+            const a = n.address || {};
+            const village = a.village || a.hamlet || a.suburb || a.quarter || a.neighbourhood || '';
+            const district = a.city_district || a.district || a.subdistrict || a.municipality || a.town || '';
+            const city = a.city || a.county || a.state_district || '';
+            const state = a.state || '';
+            const title = n.name || a.road || village || district || city || query;
+            const parts = [a.road, village, district, city, state, a.postcode]
+              .filter(Boolean)
+              .filter((v, i, arr) => arr.indexOf(v) === i);
+            return {
+              title,
+              subtitle: parts.join(', '),
+              streetOnly: [n.name, a.road].filter(Boolean).filter((v, i, arr) => arr.indexOf(v) === i).join(', '),
+              state,
+              city,
+              district,
+              village
+            };
+          });
+
+          const seen = new Set(items.map((x) => x.subtitle.toLowerCase()));
+          nomItems.forEach((ni) => {
+            if (!seen.has(ni.subtitle.toLowerCase())) {
+              seen.add(ni.subtitle.toLowerCase());
+              items.push(ni);
+            }
+          });
+        }
+      }
+
+      items = items.slice(0, 6);
+      addrSuggestionsStore[prefix] = items;
+
+      const fallbackFooter = `
+        <div class="addr-notfound-box" style="background:var(--paper);border-top:1px solid var(--kraft)">
+          <span>Jalan / gang belum muncul di atas?</span>
+          <button type="button" class="addr-notfound-btn" onclick="openManualRegionFromSearch('${prefix}')">
+            📍 Pilih Provinsi, Kota, Kecamatan &amp; Kelurahan Manual
+          </button>
+        </div>
+      `;
+
+      if (!items.length) {
+        suggestEl.innerHTML = `
+          <div class="addr-notfound-box">
+            <span>Alamat <b>"${escHtml(rawQuery)}"</b> tidak ketemu di pencarian otomatis.</span>
+            <button type="button" class="addr-notfound-btn" onclick="openManualRegionFromSearch('${prefix}')">
+              📍 Buka Pilihan Provinsi, Kota, Kecamatan &amp; Kelurahan
+            </button>
+          </div>
+        `;
+      } else {
+        suggestEl.innerHTML = items.map((item, idx) => `
+          <button type="button" class="addr-suggest-item" onclick="selectAddrSuggestion('${prefix}', ${idx})">
+            <strong>${escHtml(item.title)}</strong>
+            <small>${escHtml(item.subtitle || 'Indonesia')}</small>
+          </button>
+        `).join('') + fallbackFooter;
+      }
+      suggestEl.classList.add('open');
+    } catch (err) {
+      if (err.name !== 'AbortError') {
+        suggestEl.classList.remove('open');
+      }
+    } finally {
+      spinEl.classList.remove('show');
+    }
+  }, 420);
+}
+
+function matchSelectOptionByText(selectEl, targetText, isProvince = false) {
+  if (!selectEl || !targetText) return false;
+  let upperRaw = targetText.toUpperCase().trim();
+  if (isProvince && PROV_ALIAS[upperRaw]) {
+    upperRaw = PROV_ALIAS[upperRaw];
+  }
+
+  for (const opt of selectEl.options) {
+    if (!opt.value) continue;
+    const optName = (opt.dataset.name || opt.textContent).toUpperCase().trim();
+    if (optName === upperRaw) {
+      selectEl.value = opt.value;
+      return true;
+    }
+  }
+
+  const cleanTarget = upperRaw
+    .replace(/^(PROVINSI|KABUPATEN|KOTA|KECAMATAN|KELURAHAN|DESA)\s+/i, '')
+    .trim();
+  if (!cleanTarget) return false;
+
+  for (const opt of selectEl.options) {
+    if (!opt.value) continue;
+    const optName = (opt.dataset.name || opt.textContent).toUpperCase();
+    const cleanOpt = optName.replace(/^(PROVINSI|KABUPATEN|KOTA|KECAMATAN|KELURAHAN|DESA)\s+/i, '').trim();
+    if (cleanOpt === cleanTarget || cleanOpt.includes(cleanTarget) || cleanTarget.includes(cleanOpt)) {
+      selectEl.value = opt.value;
+      return true;
+    }
+  }
+  return false;
+}
+
+async function selectAddrSuggestion(prefix, idx) {
+  const item = (addrSuggestionsStore[prefix] || [])[idx];
+  const suggestEl = document.getElementById(`${prefix}-addr-suggest`);
+  const searchEl = document.getElementById(`${prefix}-addr-search`);
+  const detailEl = document.getElementById(`${prefix}-addr-detail`);
+
+  suggestEl.classList.remove('open');
+  if (!item) return;
+
+  searchEl.value = item.title;
+  detailEl.value = item.streetOnly || item.title;
+  toggleRegionPanel(prefix, true);
+
+  const provSel = document.getElementById(`${prefix}-prov`);
+  if (item.state && matchSelectOptionByText(provSel, item.state, true)) {
+    await onProvChange(prefix);
+    const citySel = document.getElementById(`${prefix}-city`);
+    if (item.city && matchSelectOptionByText(citySel, item.city)) {
+      await onCityChange(prefix);
+      const distSel = document.getElementById(`${prefix}-dist`);
+      if (item.district && matchSelectOptionByText(distSel, item.district)) {
+        await onDistChange(prefix);
+        const villSel = document.getElementById(`${prefix}-vill`);
+        if (item.village) matchSelectOptionByText(villSel, item.village);
+      }
+    }
+  }
+  updateRegionPreview(prefix);
+}
+
+document.addEventListener('click', (e) => {
+  if (!e.target.closest('.addr-search-wrap')) {
+    document.querySelectorAll('.addr-suggest-list.open').forEach((el) => el.classList.remove('open'));
+  }
+});
+
+function getFormattedAddress(prefix) {
+  const { provName, cityName, distName, villName, joined } = getSelectedRegionText(prefix);
+  const detailEl = document.getElementById(`${prefix}-addr-detail`);
+  const detail = detailEl ? detailEl.value.trim() : '';
+
+  if (!provName && !detail) {
+    toggleRegionPanel(prefix, true);
+    if (detailEl) detailEl.focus();
+    return { valid: false, message: 'Harap pilih Provinsi/Wilayah atau isi Alamat Pengiriman terlebih dahulu.' };
+  }
+  if (provName && !cityName) {
+    toggleRegionPanel(prefix, true);
+    document.getElementById(`${prefix}-city`)?.focus();
+    return { valid: false, message: 'Harap pilih Kota / Kabupaten pada alamat pengiriman.' };
+  }
+  if (cityName && !distName) {
+    toggleRegionPanel(prefix, true);
+    document.getElementById(`${prefix}-dist`)?.focus();
+    return { valid: false, message: 'Harap pilih Kecamatan pada alamat pengiriman.' };
+  }
+  if (distName && !villName) {
+    toggleRegionPanel(prefix, true);
+    document.getElementById(`${prefix}-vill`)?.focus();
+    return { valid: false, message: 'Harap pilih Kelurahan / Desa pada alamat pengiriman.' };
+  }
+  if (!detail) {
+    if (detailEl) detailEl.focus();
+    return { valid: false, message: 'Harap isi detail jalan / nomor rumah / RT-RW di kolom bawah.' };
+  }
+
+  const fullAddress = joined ? `${detail}, ${joined}` : detail;
+  return { valid: true, fullAddress };
+}
+
+function resetAddressWidget(prefix) {
+  const searchEl = document.getElementById(`${prefix}-addr-search`);
+  const detailEl = document.getElementById(`${prefix}-addr-detail`);
+  const provSel = document.getElementById(`${prefix}-prov`);
+  if (searchEl) searchEl.value = '';
+  if (detailEl) detailEl.value = '';
+  if (provSel) {
+    provSel.value = '';
+    onProvChange(prefix);
+  }
+  updateRegionPreview(prefix);
+  toggleRegionPanel(prefix, false);
+}
+
+// ====== HELPER ANIMASI MODAL (MASUK & KELUAR) & SCROLL REVEAL ======
+function openModalAnimated(id) {
+  const el = document.getElementById(id);
+  el.classList.remove('closing');
+  el.classList.add('open');
+}
+
+function closeModalAnimated(id, callback) {
+  const el = document.getElementById(id);
+  if (!el || !el.classList.contains('open') || el.classList.contains('closing')) return;
+  el.classList.add('closing');
+  setTimeout(() => {
+    el.classList.remove('open', 'closing');
+    if (typeof callback === 'function') callback();
+  }, 215);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('custom-confirm-modal')?.classList.contains('open')) {
+      resolveConfirmModal(false);
+      return;
+    }
+    closeActionModal();
+    closeCartModal();
+  }
+});
+
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      scrollObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12, rootMargin: '0px 0px -30px 0px' });
+
+function initScrollAnimations() {
+  document.querySelectorAll('.reveal:not(.in-view), .reveal-scale:not(.in-view)').forEach((el) => {
+    scrollObserver.observe(el);
+  });
+}
+
+function showProductSkeletons() {
+  const grid = document.getElementById('products');
+  grid.innerHTML = Array.from({ length: 4 }).map(() => `
+    <div class="skel-card" aria-hidden="true">
+      <div class="skel-box skel-pic"></div>
+      <div class="skel-body">
+        <div class="skel-box" style="height:22px;width:72%"></div>
+        <div class="skel-box" style="height:28px;width:48%"></div>
+        <div class="skel-box" style="height:16px;width:62%"></div>
+        <div class="skel-box" style="height:40px;width:100%"></div>
+        <div class="skel-box" style="height:44px;width:100%;margin-top:6px"></div>
+      </div>
+    </div>
+  `).join('');
+}
+
+function hidePageLoader() {
+  const loader = document.getElementById('page-loader');
+  if (loader && !loader.classList.contains('exit')) {
+    loader.classList.add('exit');
+    setTimeout(() => loader.remove(), 420);
+  }
+}
+
+// ====== ILUSTRASI ISOMETRIK KARDUS (HERO & FALLBACK) ======
+const box = (cx, by, w, d, h) => {
+  const R = [0.866 * w, -0.5 * w], L = [-0.866 * d, -0.5 * d];
+  const s = (pts) => pts.map((p) => p[0].toFixed(1) + ',' + p[1].toFixed(1)).join(' ');
+  const p0 = [cx, by], pR = [cx + R[0], by + R[1]], pL = [cx + L[0], by + L[1]];
+  const pRL = [cx + R[0] + L[0], by + R[1] + L[1]];
+  const u = (p) => [p[0], p[1] - h];
+  const t = (a, b) => [cx + L[0] * a + R[0] * b, by - h + L[1] * a + R[1] * b];
+  const f = (b, k) => [cx + R[0] * b, by - h + R[1] * b + h * k];
+  return {
+    R, L,
+    svg: '<polygon points="' + s([p0, pL, u(pL), u(p0)]) + '" fill="#A06F3B"/>' +
+         '<polygon points="' + s([p0, pR, u(pR), u(p0)]) + '" fill="#B9844B"/>' +
+         '<polygon points="' + s([u(p0), u(pR), u(pRL), u(pL)]) + '" fill="#E0B57E"/>' +
+         '<polygon points="' + s([t(0.46, 0), t(0.46, 1), t(0.54, 1), t(0.54, 0)]) + '" fill="#F1DDB6"/>' +
+         (h > 40 ? '<polygon points="' + s([f(0.46, 0), f(0.54, 0), f(0.54, 0.3), f(0.46, 0.3)]) + '" fill="#F1DDB6"/>' : '')
+  };
+};
+const fit = (w, d, h) => box(100 + 0.866 * (d - w) / 2, 75 + (h + 0.5 * (w + d)) / 2, w, d, h);
+
+const b1 = box(300, 420, 200, 150, 150);
+const b2 = box(300 + b1.R[0] * 0.18 + b1.L[0] * 0.2, 270 + b1.R[1] * 0.18 + b1.L[1] * 0.2, 140, 110, 105);
+const b3 = box(470, 445, 100, 90, 78);
+const lx = (300 + b1.R[0] * 0.12).toFixed(1), ly = 270 + b1.R[1] * 0.12;
+const mx = (dy) => 'matrix(0.866 -0.5 0 1 ' + lx + ' ' + (ly + dy).toFixed(1) + ')';
+document.getElementById('hero').innerHTML =
+  '<ellipse cx="300" cy="448" rx="250" ry="18" fill="#231A12" opacity="0.14"/>' + b1.svg + b2.svg + b3.svg +
+  '<text transform="' + mx(80) + '" font-family="Archivo,sans-serif" font-weight="900" font-size="24" fill="#231A12" opacity="0.82">LESTARI</text>' +
+  '<text transform="' + mx(102) + '" font-family="Archivo,sans-serif" font-weight="700" font-size="14" fill="#231A12" opacity="0.72">CORRUGATED</text>';
+
+// ====== STATE PRODUK, MIN ORDER, INPUT PCS & KERANJANG ======
+let products = [];
+let selectedVariants = {};
+let cardQuantities = {};
+let cart = [];
+let activeModalItem = null;
+
+function getEffectiveMin(variant) {
+  if (!variant || variant.stock <= 0) return 0;
+  const min = Number(variant.minOrder) || 1;
+  return variant.stock < min ? variant.stock : min;
+}
+
+async function loadProducts() {
+  showProductSkeletons();
+  try {
+    const res = await fetch('/api/products');
+    products = await res.json();
+    products.forEach((p) => {
+      if (selectedVariants[p._id] === undefined) selectedVariants[p._id] = 0;
+      const activeVar = p.variants[selectedVariants[p._id]] || p.variants[0];
+      const effMin = getEffectiveMin(activeVar) || 1;
+      if (cardQuantities[p._id] === undefined || cardQuantities[p._id] < effMin) {
+        cardQuantities[p._id] = effMin;
+      }
+    });
+    renderProducts(true);
+    populateQuickOrderSelect();
+  } catch (err) {
+    document.getElementById('products').innerHTML =
+      '<p style="color:#B91C1C">Gagal memuat produk dari server.</p>';
+  } finally {
+    hidePageLoader();
+    initScrollAnimations();
+  }
+}
+
+function selectVariant(productId, variantIdx) {
+  selectedVariants[productId] = variantIdx;
+  const product = products.find((p) => p._id === productId);
+  const activeVar = product.variants[variantIdx];
+  const effMin = getEffectiveMin(activeVar) || 1;
+  cardQuantities[productId] = effMin;
+  renderProducts(false);
+}
+
+function stepCardQty(productId, delta) {
+  const product = products.find((p) => p._id === productId);
+  if (!product) return;
+  const activeVar = product.variants[selectedVariants[productId] || 0];
+  const effMin = getEffectiveMin(activeVar) || 1;
+  const current = cardQuantities[productId] || effMin;
+  const next = Math.max(effMin, Math.min(activeVar.stock || effMin, current + delta));
+  cardQuantities[productId] = next;
+  const inputEl = document.getElementById(`card-qty-${safeId(productId)}`);
+  if (inputEl) inputEl.value = next;
+}
+
+function setCardQty(productId, rawVal) {
+  const product = products.find((p) => p._id === productId);
+  if (!product) return;
+  const activeVar = product.variants[selectedVariants[productId] || 0];
+  const effMin = getEffectiveMin(activeVar) || 1;
+  let val = parseInt(rawVal, 10);
+
+  if (isNaN(val) || val < effMin) {
+    showToast(`Minimal pembelian untuk varian "${activeVar.name}" adalah ${effMin} pcs.`, 'warning');
+    val = effMin;
+  } else if (activeVar.stock > 0 && val > activeVar.stock) {
+    showToast(`Stok tersedia untuk varian ini hanya ${activeVar.stock} pcs.`, 'warning');
+    val = activeVar.stock;
+  }
+
+  cardQuantities[productId] = val;
+  const inputEl = document.getElementById(`card-qty-${safeId(productId)}`);
+  if (inputEl) inputEl.value = val;
+}
+
+function renderProducts(animateReveal = true) {
+  const grid = document.getElementById('products');
+  if (!products.length) {
+    grid.innerHTML = '<p style="color:var(--soft)">Belum ada produk yang ditambahkan admin.</p>';
+    return;
+  }
+
+  grid.innerHTML = products.map((p, idx) => {
+    const cleanId = safeId(p._id);
+    const activeIdx = selectedVariants[p._id] || 0;
+    const activeVar = p.variants[activeIdx] || p.variants[0];
+    const stockNum = Number(activeVar.stock) || 0;
+    const minNum = Number(activeVar.minOrder) || 1;
+    const effMin = getEffectiveMin(activeVar);
+    const qtyVal = stockNum > 0
+      ? Math.max(effMin, Math.min(cardQuantities[p._id] || effMin, stockNum))
+      : 0;
+
+    const hasRealPhoto = p.imageUrl && !p.imageUrl.includes('placehold.co');
+    const mediaHtml = hasRealPhoto
+      ? `<img src="${safeUrl(p.imageUrl)}" alt="${escHtml(p.name)}">`
+      : `<svg viewBox="0 0 200 150" aria-hidden="true">${fit(75, 55, 48).svg}</svg>`;
+
+    const variantButtons = p.variants.map((v, vIdx) => `
+      <button type="button" onclick="selectVariant('${cleanId}', ${Number(vIdx)})"
+        class="var-btn ${vIdx === activeIdx ? 'active' : ''}">
+        ${escHtml(v.name)}
+      </button>
+    `).join('');
+
+    const revealClass = animateReveal ? 'reveal-scale' : '';
+    const revealDelay = animateReveal ? `style="transition-delay:${Math.min(idx * 0.06, 0.36)}s"` : '';
+
+    return `
+      <article class="card ${revealClass}" ${revealDelay}>
+        <div class="pic">
+          <span class="cat-badge">${escHtml(p.category || 'Umum')}</span>
+          ${mediaHtml}
+        </div>
+        <div class="body">
+          <h3>${escHtml(p.name)}</h3>
+          <p style="margin:0;font-size:26px;font-weight:900;color:var(--ink)">
+            ${rp(activeVar.price)}<span style="font-size:15px;font-weight:600;color:var(--soft)"> / pcs</span>
+          </p>
+          <div class="meta-badges">
+            <span class="min-order-badge">Min. beli: ${minNum} pcs</span>
+            <span class="stock-info ${stockNum <= 0 ? 'out' : ''}">
+              ${stockNum > 0 ? '· Stok: ' + stockNum + ' pcs' : '· Stok habis'}
+            </span>
+          </div>
+          <p class="desc">${escHtml(p.description || 'Kardus packing berkualitas siap kirim.')}</p>
+
+          <span class="var-label">Pilih Varian:</span>
+          <div class="var-list">${variantButtons}</div>
+
+          <div class="qty-card-row">
+            <label for="card-qty-${cleanId}">Jumlah:</label>
+            <div class="qty-input-box">
+              <button type="button" onclick="stepCardQty('${cleanId}', -1)" ${stockNum <= 0 ? 'disabled' : ''}>-</button>
+              <input type="number" id="card-qty-${cleanId}" value="${qtyVal}" min="${effMin}" max="${stockNum}"
+                onchange="setCardQty('${cleanId}', this.value)" ${stockNum <= 0 ? 'disabled' : ''}>
+              <button type="button" onclick="stepCardQty('${cleanId}', 1)" ${stockNum <= 0 ? 'disabled' : ''}>+</button>
+              <span class="pcs-unit">pcs</span>
+            </div>
+          </div>
+
+          <div class="card-actions">
+            <button type="button" onclick="openActionModal('${cleanId}')" ${stockNum <= 0 ? 'disabled' : ''}
+              class="btn btn-dark">
+              ${stockNum > 0 ? 'Beli / + Keranjang' : 'Stok Habis'}
+            </button>
+          </div>
+        </div>
+      </article>
+    `;
+  }).join('');
+
+  if (animateReveal) initScrollAnimations();
+}
+
+// ====== POPUP PILIHAN AKSI (MASUK KERANJANG / LANGSUNG BELI) ======
+function openActionModal(productId) {
+  const product = products.find((p) => p._id === productId);
+  if (!product) return;
+  const variant = product.variants[selectedVariants[productId] || 0];
+  if (!variant || variant.stock <= 0) {
+    return showToast('Stok varian ini sedang habis.', 'error');
+  }
+
+  const effMin = getEffectiveMin(variant);
+  const inputEl = document.getElementById(`card-qty-${safeId(productId)}`);
+  let qty = inputEl ? parseInt(inputEl.value, 10) : (cardQuantities[productId] || effMin);
+
+  if (isNaN(qty) || qty < effMin) {
+    showToast(`Minimal pembelian untuk varian "${variant.name}" adalah ${effMin} pcs.`, 'warning');
+    qty = effMin;
+  }
+  if (qty > variant.stock) {
+    showToast(`Stok tersedia untuk varian ini hanya ${variant.stock} pcs.`, 'warning');
+    qty = variant.stock;
+  }
+
+  activeModalItem = {
+    productId: product._id,
+    variantId: variant._id,
+    name: product.name,
+    variantName: variant.name,
+    price: variant.price,
+    minOrder: effMin,
+    maxStock: variant.stock
+  };
+
+  document.getElementById('modal-prod-name').textContent = product.name;
+  document.getElementById('modal-prod-variant').textContent =
+    `Varian: ${variant.name} · ${rp(variant.price)} / pcs (Min. beli: ${variant.minOrder || 1} pcs · Stok: ${variant.stock} pcs)`;
+  document.getElementById('modal-min-label').textContent = `Min. ${effMin} pcs`;
+
+  const modalQtyEl = document.getElementById('modal-qty');
+  modalQtyEl.min = effMin;
+  modalQtyEl.max = variant.stock;
+  modalQtyEl.value = qty;
+
+  document.getElementById('modal-order-note').value = '';
+  document.getElementById('direct-buy-section').classList.remove('open');
+  updateModalSubtotal();
+  openModalAnimated('action-modal');
+}
+
+function closeActionModal() {
+  closeModalAnimated('action-modal', () => {
+    activeModalItem = null;
+  });
+}
+
+function stepModalQty(delta) {
+  if (!activeModalItem) return;
+  const el = document.getElementById('modal-qty');
+  const current = parseInt(el.value, 10) || activeModalItem.minOrder;
+  const next = Math.max(activeModalItem.minOrder, Math.min(activeModalItem.maxStock, current + delta));
+  el.value = next;
+  updateModalSubtotal();
+}
+
+function updateModalSubtotal() {
+  if (!activeModalItem) return;
+  const el = document.getElementById('modal-qty');
+  let qty = parseInt(el.value, 10);
+  if (isNaN(qty) || qty < 1) qty = activeModalItem.minOrder;
+  if (qty > activeModalItem.maxStock) {
+    qty = activeModalItem.maxStock;
+    el.value = qty;
+  }
+  document.getElementById('modal-subtotal').textContent = rp(activeModalItem.price * qty);
+}
+
+function getValidatedModalQty() {
+  if (!activeModalItem) return 0;
+  const qty = parseInt(document.getElementById('modal-qty').value, 10);
+  if (isNaN(qty) || qty < activeModalItem.minOrder) {
+    showToast(`Minimal pembelian untuk produk ini adalah ${activeModalItem.minOrder} pcs.`, 'warning');
+    document.getElementById('modal-qty').value = activeModalItem.minOrder;
+    updateModalSubtotal();
+    return 0;
+  }
+  if (qty > activeModalItem.maxStock) {
+    showToast(`Stok tersisa hanya ${activeModalItem.maxStock} pcs.`, 'warning');
+    return 0;
+  }
+  return qty;
+}
+
+function getVariantTotalInCart(productId, variantId) {
+  return cart
+    .filter((i) => i.productId === productId && i.variantId === variantId)
+    .reduce((sum, i) => sum + i.qty, 0);
+}
+
+function confirmAddToCartFromModal() {
+  const qty = getValidatedModalQty();
+  if (!qty) return;
+
+  const itemNote = document.getElementById('modal-order-note').value.trim();
+  const totalExistingForVariant = getVariantTotalInCart(activeModalItem.productId, activeModalItem.variantId);
+
+  if (totalExistingForVariant + qty > activeModalItem.maxStock) {
+    return showToast(`Total di keranjang melebihi stok tersedia (${activeModalItem.maxStock} pcs).`, 'warning');
+  }
+
+  const addedLabel = `${activeModalItem.name} [${activeModalItem.variantName}] (${qty} pcs)`;
+  const key = `${activeModalItem.productId}-${activeModalItem.variantId}-${itemNote}`;
+  const existing = cart.find((item) => item.key === key);
+
+  if (existing) {
+    existing.qty += qty;
+  } else {
+    cart.push({
+      key,
+      productId: activeModalItem.productId,
+      variantId: activeModalItem.variantId,
+      name: activeModalItem.name,
+      variantName: activeModalItem.variantName,
+      price: activeModalItem.price,
+      minOrder: activeModalItem.minOrder,
+      maxStock: activeModalItem.maxStock,
+      note: itemNote,
+      qty
+    });
+  }
+
+  updateCartUI();
+  closeActionModal();
+  showToast(`${addedLabel} ditambahkan ke keranjang.`, 'success');
+}
+
+function openDirectBuyForm() {
+  const section = document.getElementById('direct-buy-section');
+  section.classList.add('open');
+  document.getElementById('direct-buyer-name').focus();
+}
+
+async function processDirectCheckout() {
+  const qty = getValidatedModalQty();
+  if (!qty) return;
+
+  const buyerName = document.getElementById('direct-buyer-name').value.trim();
+  const buyerNote = document.getElementById('modal-order-note').value.trim();
+
+  if (!buyerName) {
+    document.getElementById('direct-buyer-name').focus();
+    return showToast('Harap isi Nama Pembeli terlebih dahulu.', 'warning');
+  }
+
+  const addrCheck = getFormattedAddress('direct');
+  if (!addrCheck.valid) {
+    return showToast(addrCheck.message, 'warning');
+  }
+
+  const btn = document.getElementById('btn-direct-checkout');
+  const overlay = document.getElementById('proc-overlay');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+  overlay.classList.add('open');
+
+  try {
+    const res = await fetch('/api/products/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        items: [{
+          productId: activeModalItem.productId,
+          variantId: activeModalItem.variantId,
+          name: activeModalItem.name,
+          variantName: activeModalItem.variantName,
+          qty
+        }]
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      overlay.classList.remove('open');
+      showToast(data.message || 'Stok tidak mencukupi.', 'error');
+      closeActionModal();
+      await loadProducts();
+      return;
+    }
+
+    const total = activeModalItem.price * qty;
+    const barisCatatan = buyerNote ? `\n*Catatan / Note:* ${buyerNote}` : '';
+    const pesanWA =
+`Halo ${SHOP}, saya ingin melakukan pemesanan langsung:
+
+*Nama Pembeli:* ${buyerName}
+*Alamat Pengiriman:* ${addrCheck.fullAddress}
+*Rincian Pesanan:*
+1. ${activeModalItem.name} [${activeModalItem.variantName}] (${qty} pcs) = ${rp(total)}
+
+*Total Pembayaran:* ${rp(total)} (belum termasuk ongkir)${barisCatatan}
+
+Stok sudah tercatat di sistem. Mohon info rekening/QRIS untuk pembayaran. Terima kasih!`;
+
+    document.getElementById('direct-buyer-name').value = '';
+    document.getElementById('modal-order-note').value = '';
+    resetAddressWidget('direct');
+    closeActionModal();
+    await loadProducts();
+
+    window.location.href = waLink(pesanWA);
+  } catch (err) {
+    overlay.classList.remove('open');
+    showToast('Gagal terhubung ke server.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Bayar & Lanjut ke WhatsApp';
+  }
+}
+
+// ====== KERANJANG BELANJA ======
+function removeCartItemAnimated(idx) {
+  const itemEls = document.querySelectorAll('#cart-items .cart-item');
+  if (itemEls[idx]) {
+    itemEls[idx].classList.add('item-exit');
+    setTimeout(() => {
+      cart.splice(idx, 1);
+      updateCartUI();
+    }, 240);
+  } else {
+    cart.splice(idx, 1);
+    updateCartUI();
+  }
+}
+
+async function changeCartQty(idx, delta) {
+  const item = cart[idx];
+  const newQty = item.qty + delta;
+  const otherQty = getVariantTotalInCart(item.productId, item.variantId) - item.qty;
+
+  if (newQty < item.minOrder) {
+    const ok = await showConfirmModal({
+      title: 'Hapus Item dari Keranjang?',
+      message: `Jumlah pesanan di bawah minimal pembelian (${item.minOrder} pcs). Hapus "${item.name} (${item.variantName})" dari keranjang?`,
+      confirmText: 'Ya, Hapus',
+      cancelText: 'Batal'
+    });
+    if (ok) {
+      removeCartItemAnimated(idx);
+      showToast('Item dihapus dari keranjang.', 'info');
+      return;
+    } else {
+      item.qty = item.minOrder;
+    }
+  } else if (otherQty + newQty > item.maxStock) {
+    return showToast(`Stok tersisa hanya ${item.maxStock} pcs.`, 'warning');
+  } else {
+    item.qty = newQty;
+  }
+  updateCartUI();
+}
+
+function setCartQty(idx, rawVal) {
+  const item = cart[idx];
+  const val = parseInt(rawVal, 10);
+  const otherQty = getVariantTotalInCart(item.productId, item.variantId) - item.qty;
+
+  if (isNaN(val) || val < item.minOrder) {
+    showToast(`Minimal pembelian untuk "${item.name} (${item.variantName})" adalah ${item.minOrder} pcs.`, 'warning');
+    item.qty = item.minOrder;
+  } else if (otherQty + val > item.maxStock) {
+    showToast(`Stok tersisa hanya ${item.maxStock} pcs.`, 'warning');
+    item.qty = Math.max(item.minOrder, item.maxStock - otherQty);
+  } else {
+    item.qty = val;
+  }
+  updateCartUI();
+}
+
+function updateCartUI() {
+  document.getElementById('cart-count').textContent = cart.reduce((sum, i) => sum + i.qty, 0);
+  const itemsEl = document.getElementById('cart-items');
+  let total = 0;
+
+  if (!cart.length) {
+    itemsEl.innerHTML = '<p style="text-align:center;color:var(--soft);margin:14px 0">Keranjang belanja masih kosong.</p>';
+  } else {
+    itemsEl.innerHTML = cart.map((item, idx) => {
+      total += item.price * item.qty;
+      const noteHtml = item.note
+        ? `<span class="cart-item-note">Note: ${escHtml(item.note)}</span>`
+        : '';
+      return `
+        <div class="cart-item">
+          <div>
+            <strong style="display:block;font-size:15px">${escHtml(item.name)} (${escHtml(item.variantName)})</strong>
+            <span style="font-size:13px;color:var(--soft)">${rp(item.price)} / pcs · Min. ${Number(item.minOrder) || 1} pcs</span>
+            ${noteHtml}
+          </div>
+          <div class="qty-ctrl">
+            <button type="button" class="qty-btn" onclick="changeCartQty(${Number(idx)}, -1)">-</button>
+            <input type="number" class="cart-qty-input" value="${Number(item.qty) || 1}" min="${Number(item.minOrder) || 1}" max="${Number(item.maxStock) || 0}" onchange="setCartQty(${Number(idx)}, this.value)">
+            <button type="button" class="qty-btn" onclick="changeCartQty(${Number(idx)}, 1)">+</button>
+            <span style="font-size:12px;font-weight:800;color:var(--soft);margin-left:2px">pcs</span>
+          </div>
+        </div>
+      `;
+    }).join('');
+  }
+
+  document.getElementById('cart-total').textContent = rp(total);
+}
+
+function openCartModal() {
+  openModalAnimated('cart-modal');
+}
+
+function closeCartModal() {
+  closeModalAnimated('cart-modal');
+}
+
+async function processCheckout() {
+  if (!cart.length) return showToast('Keranjang belanja masih kosong!', 'warning');
+
+  const buyerName = document.getElementById('buyer-name').value.trim();
+  const buyerNote = document.getElementById('buyer-note').value.trim();
+
+  if (!buyerName) {
+    document.getElementById('buyer-name').focus();
+    return showToast('Harap isi Nama Pembeli terlebih dahulu.', 'warning');
+  }
+
+  const addrCheck = getFormattedAddress('cart');
+  if (!addrCheck.valid) {
+    return showToast(addrCheck.message, 'warning');
+  }
+
+  const btn = document.getElementById('btn-checkout');
+  const overlay = document.getElementById('proc-overlay');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+  overlay.classList.add('open');
+
+  try {
+    const res = await fetch('/api/products/checkout', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ items: cart })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      overlay.classList.remove('open');
+      showToast(data.message || 'Stok tidak mencukupi.', 'error');
+      await loadProducts();
+      return;
+    }
+
+    let total = 0;
+    let daftarPesanan = '';
+    cart.forEach((item, index) => {
+      const subtotal = item.price * item.qty;
+      total += subtotal;
+      const noteItem = item.note ? ` — _Note: ${item.note}_` : '';
+      daftarPesanan += `${index + 1}. ${item.name} [${item.variantName}] (${item.qty} pcs) = ${rp(subtotal)}${noteItem}\n`;
+    });
+
+    const barisCatatanUmum = buyerNote ? `\n*Catatan Tambahan:* ${buyerNote}` : '';
+    const pesanWA =
+`Halo ${SHOP}, saya ingin melakukan pemesanan:
+
+*Nama Pembeli:* ${buyerName}
+*Alamat Pengiriman:* ${addrCheck.fullAddress}
+*Rincian Pesanan:*
+${daftarPesanan}
+*Total Pembayaran:* ${rp(total)} (belum termasuk ongkir)${barisCatatanUmum}
+
+Stok sudah tercatat di sistem. Mohon info rekening/QRIS untuk pembayaran. Terima kasih!`;
+
+    cart = [];
+    updateCartUI();
+    document.getElementById('buyer-name').value = '';
+    document.getElementById('buyer-note').value = '';
+    resetAddressWidget('cart');
+    closeCartModal();
+    await loadProducts();
+
+    window.location.href = waLink(pesanWA);
+  } catch (err) {
+    overlay.classList.remove('open');
+    showToast('Gagal terhubung ke server.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Bayar & Pesan via WhatsApp';
+  }
+}
+
+// ====== FORMULIR PESAN CEPAT DI BAGIAN KONTAK (#kontak) ======
+let flatOptions = [];
+
+function populateQuickOrderSelect() {
+  const sel = document.getElementById('f-jenis');
+  flatOptions = [];
+
+  products.forEach((p) => {
+    p.variants.forEach((v) => {
+      if (v.stock > 0) {
+        flatOptions.push({
+          productId: p._id,
+          variantId: v._id,
+          name: p.name,
+          variantName: v.name,
+          price: v.price,
+          minOrder: getEffectiveMin(v),
+          stock: v.stock
+        });
+      }
+    });
+  });
+
+  sel.innerHTML = flatOptions.map((opt, i) =>
+    `<option value="${Number(i)}">${escHtml(opt.name)} (${escHtml(opt.variantName)}) — ${rp(opt.price)} [Min: ${Number(opt.minOrder) || 1} · Stok: ${Number(opt.stock) || 0} pcs]</option>`
+  ).join('') + '<option value="custom">Ukuran lain / minta saran</option>';
+
+  onQuickOptionChange();
+}
+
+function onQuickOptionChange() {
+  const idx = document.getElementById('f-jenis').value;
+  const opt = flatOptions[idx];
+  const qtyInput = document.getElementById('f-jumlah');
+
+  if (opt) {
+    qtyInput.min = opt.minOrder;
+    qtyInput.placeholder = `Min. ${opt.minOrder} pcs`;
+    if (!qtyInput.value || Number(qtyInput.value) < opt.minOrder) {
+      qtyInput.value = opt.minOrder;
+    }
+  } else {
+    qtyInput.min = 1;
+    qtyInput.placeholder = '100 pcs';
+  }
+  updateQuickTotal();
+}
+
+function updateQuickTotal() {
+  const idx = document.getElementById('f-jenis').value;
+  const qty = parseInt(document.getElementById('f-jumlah').value, 10);
+  const opt = flatOptions[idx];
+  const totalEl = document.getElementById('f-total');
+
+  if (opt && qty > 0) {
+    totalEl.textContent = `Perkiraan harga: ${qty.toLocaleString('id-ID')} pcs × ${rp(opt.price)} = ${rp(qty * opt.price)} (Min. beli: ${opt.minOrder} pcs · belum termasuk ongkir)`;
+  } else {
+    totalEl.textContent = 'Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.';
+  }
+}
+
+document.getElementById('f-jenis').addEventListener('change', onQuickOptionChange);
+document.getElementById('f-jumlah').addEventListener('input', updateQuickTotal);
+
+document.getElementById('order').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const nama = document.getElementById('f-nama').value.trim();
+  const idx = document.getElementById('f-jenis').value;
+  const qty = parseInt(document.getElementById('f-jumlah').value, 10);
+  const catatan = document.getElementById('f-catatan').value.trim();
+  const opt = flatOptions[idx];
+
+  if (!nama) return showToast('Harap isi nama Anda terlebih dahulu.', 'warning');
+  if (!qty || qty <= 0) return showToast('Harap isi jumlah pesanan.', 'warning');
+
+  const addrCheck = getFormattedAddress('quick');
+  if (!addrCheck.valid) {
+    return showToast(addrCheck.message, 'warning');
+  }
+
+  if (opt) {
+    if (qty < opt.minOrder) {
+      return showToast(`Minimal pembelian "${opt.name} (${opt.variantName})" adalah ${opt.minOrder} pcs.`, 'warning');
+    }
+    if (qty > opt.stock) {
+      return showToast(`Stok "${opt.name} (${opt.variantName})" hanya tersisa ${opt.stock} pcs.`, 'warning');
+    }
+
+    const btn = document.getElementById('f-submit');
+    const overlay = document.getElementById('proc-overlay');
+    btn.disabled = true;
+    btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+    overlay.classList.add('open');
+
+    try {
+      const res = await fetch('/api/products/checkout', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          items: [{
+            productId: opt.productId,
+            variantId: opt.variantId,
+            name: opt.name,
+            variantName: opt.variantName,
+            qty
+          }]
+        })
+      });
+
+      const data = await res.json();
+      if (!res.ok) {
+        overlay.classList.remove('open');
+        showToast(data.message || 'Stok tidak mencukupi.', 'error');
+        await loadProducts();
+        return;
+      }
+
+      await loadProducts();
+      const barisCatatan = catatan ? `\n*Catatan / Note:* ${catatan}` : '';
+      const msg =
+`Halo ${SHOP}, saya *${nama}*. Saya mau pesan:
+- ${opt.name} [${opt.variantName}] (${qty} pcs) = ${rp(qty * opt.price)} (belum termasuk ongkir)
+*Alamat Pengiriman:* ${addrCheck.fullAddress}${barisCatatan}
+
+Stok sudah tercatat di sistem. Mohon info pembayarannya. Terima kasih.`;
+
+      e.target.reset();
+      resetAddressWidget('quick');
+      updateQuickTotal();
+      window.location.href = waLink(msg);
+    } catch (err) {
+      overlay.classList.remove('open');
+      showToast('Gagal terhubung ke server.', 'error');
+    } finally {
+      btn.disabled = false;
+      btn.textContent = 'Bayar & Kirim ke WhatsApp';
+    }
+  } else {
+    const barisCatatan = catatan ? `\n*Catatan:* ${catatan}` : '';
+    const msg = `Halo ${SHOP}, saya *${nama}*. Saya mau tanya/pesan kardus ukuran custom, perkiraan jumlah ${qty} pcs.\n*Alamat Pengiriman:* ${addrCheck.fullAddress}${barisCatatan}\nTerima kasih.`;
+    window.location.href = waLink(msg);
+  }
+});
+
+// Inisialisasi
+initAddressWidget('direct-addr-container', 'direct', true);
+initAddressWidget('cart-addr-container', 'cart', true);
+initAddressWidget('quick-addr-container', 'quick', true);
+updateCartUI();
+loadProducts();
+</script>
+</body>
+</html>

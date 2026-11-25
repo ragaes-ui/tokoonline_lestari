@@ -1,0 +1,1130 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Admin Panel — Lestari Corrugated</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@75..125,400..900&display=swap" rel="stylesheet">
+<style>
+:root{
+  --kraft:#D4A46C;
+  --paper:#F6EBDA;
+  --ink:#231A12;
+  --soft:#5A4A3A;
+  --accent:#1F8F4E;
+  --cream:#F3E3CB;
+  --muted:#CDBBA2;
+  --danger:#B91C1C;
+  --danger-bg:#FEE2E2;
+  --warn:#B45309;
+  --warn-bg:#FEF3C7;
+}
+*{box-sizing:border-box;min-width:0}
+body{margin:0;font:15px/1.5 Archivo,system-ui,sans-serif;color:var(--ink);background:var(--paper);overflow-x:clip}
+input,select,textarea,button{font:inherit}
+:focus-visible{outline:3px solid var(--accent);outline-offset:2px}
+.hidden{display:none!important}
+
+/* ==================== LOADING SPINNER, AUTH LOADER & SKELETON ==================== */
+.spinner{width:16px;height:16px;border:2.5px solid rgba(255,255,255,.35);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;flex-shrink:0}
+.spinner.dark{border-color:rgba(35,26,18,.2);border-top-color:var(--ink)}
+.spinner.danger{border-color:rgba(185,28,28,.25);border-top-color:var(--danger)}
+.spinner.lg{width:40px;height:40px;border-width:4px}
+@keyframes spin{to{transform:rotate(360deg)}}
+
+.auth-loader{position:fixed;inset:0;background:var(--ink);color:var(--cream);z-index:100;display:flex;flex-direction:column;align-items:center;justify-content:center;gap:14px;transition:opacity .38s ease,visibility .38s ease}
+.auth-loader.exit{opacity:0;visibility:hidden;pointer-events:none}
+.auth-loader p{margin:0;font-size:14px;color:var(--muted)}
+
+.skel-bar{height:16px;border-radius:5px;background:linear-gradient(90deg,#EAD5B5 25%,#F5E6CE 50%,#EAD5B5 75%);background-size:200% 100%;animation:shimmer 1.3s infinite linear}
+@keyframes shimmer{0%{background-position:200% 0}100%{background-position:-200% 0}}
+
+/* ==================== ANIMASI SCROLL & KELUAR ==================== */
+.reveal{opacity:0;transform:translateY(20px);transition:opacity .5s cubic-bezier(.22,1,.36,1),transform .5s cubic-bezier(.22,1,.36,1)}
+.reveal.in-view{opacity:1;transform:translateY(0)}
+.view-enter{animation:viewFadeIn .35s cubic-bezier(.22,1,.36,1) both}
+@keyframes viewFadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+
+/* Header */
+header{background:var(--ink);color:var(--cream);padding:14px max(4vw,16px);position:sticky;top:0;z-index:20;box-shadow:0 2px 10px rgba(0,0,0,.15)}
+.wrap{max-width:1300px;margin:0 auto}
+header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:12px}
+.logo{display:flex;align-items:center;gap:10px;color:var(--cream);text-decoration:none;font-weight:900;font-size:20px;font-stretch:110%}
+.badge-admin{background:var(--kraft);color:var(--ink);font-size:11px;font-weight:900;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
+
+/* Buttons */
+.btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:9px 16px;border-radius:6px;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:filter .15s,opacity .15s,transform .15s;font-size:14px}
+.btn:active:not(:disabled){transform:scale(.98)}
+.btn:disabled{opacity:.65;cursor:not-allowed}
+.btn-dark{background:var(--ink);color:#fff}.btn-dark:hover:not(:disabled){filter:brightness(1.2)}
+.btn-wa{background:var(--accent);color:#fff}.btn-wa:hover:not(:disabled){filter:brightness(1.08)}
+.btn-kraft{background:var(--kraft);color:var(--ink)}.btn-kraft:hover:not(:disabled){filter:brightness(1.05)}
+.btn-line{border:2px solid var(--ink);background:transparent;color:var(--ink)}.btn-line:hover{background:rgba(35,26,18,.06)}
+.btn-line-light{border:1.5px solid var(--kraft);background:transparent;color:var(--cream)}.btn-line-light:hover{background:rgba(212,164,108,.15)}
+.btn-sm{min-height:34px;padding:6px 12px;font-size:13px;border-radius:5px}
+.btn-edit{background:var(--paper);color:var(--ink);border:1.5px solid var(--kraft)}.btn-edit:hover{border-color:var(--ink)}
+.btn-del{background:var(--danger-bg);color:var(--danger)}.btn-del:hover:not(:disabled){filter:brightness(.95)}
+.btn-del-photo{margin-top:8px;width:100%}
+
+/* Login Screen */
+.login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--kraft)}
+.login-card{background:#fff;border-radius:14px;max-width:410px;width:100%;padding:32px 28px;box-shadow:0 18px 40px rgba(35,26,18,.22);border:2px solid var(--ink);animation:modalPopIn .35s cubic-bezier(.22,1,.36,1) both}
+.login-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;margin-bottom:6px}
+.login-sub{margin:0 0 22px;color:var(--soft);font-size:14px}
+
+/* Main & Stats */
+main{padding:28px max(4vw,16px) 56px}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(190px,1fr));gap:14px;margin-bottom:24px}
+.stat-card{background:#fff;border:1.5px solid rgba(35,26,18,.1);border-radius:10px;padding:16px 18px;transition:transform .2s ease,opacity .5s cubic-bezier(.22,1,.36,1)}
+.stat-card:hover{transform:translateY(-2px)}
+.stat-card span{display:block;font-size:12.5px;font-weight:700;color:var(--soft);text-transform:uppercase;letter-spacing:.03em}
+.stat-card strong{display:block;font-size:26px;font-weight:900;color:var(--ink);margin-top:4px;line-height:1.1}
+.stat-card.warn strong{color:var(--warn)}
+
+/* Layout Grid */
+.layout{display:grid;grid-template-columns:510px 1fr;gap:24px;align-items:start}
+@media(max-width:1024px){.layout{grid-template-columns:1fr}}
+
+/* Panels */
+.panel{background:#fff;border-radius:12px;border:1.5px solid rgba(35,26,18,.1);padding:22px;box-shadow:0 4px 16px rgba(35,26,18,.04)}
+.panel-sticky{position:sticky;top:84px}
+@media(max-width:1024px){.panel-sticky{position:static}}
+.panel-head{display:flex;justify-content:space-between;align-items:center;gap:12px;border-bottom:2px solid var(--cream);padding-bottom:14px;margin-bottom:18px}
+.panel-head h2{margin:0;font-size:20px;font-weight:900}
+
+/* Form Elements */
+.field{margin-bottom:14px}
+.field label{display:block;font-size:13px;font-weight:800;margin-bottom:5px;color:var(--ink)}
+input[type="text"],input[type="password"],input[type="number"],textarea,select{
+  width:100%;padding:10px 12px;border:2px solid var(--kraft);border-radius:6px;background:#fff;color:var(--ink);font-size:14px
+}
+input:focus,textarea:focus{border-color:var(--ink);outline:none}
+textarea{resize:vertical}
+
+/* File Upload & Preview */
+.upload-box{border:2px dashed var(--kraft);background:var(--paper);border-radius:8px;padding:12px;text-align:center}
+.upload-box input[type="file"]{width:100%;font-size:13px;cursor:pointer}
+.preview-wrap{position:relative;margin-top:10px;display:none}
+.preview-wrap.show{display:block;animation:viewFadeIn .25s ease}
+.preview-wrap img{width:100%;height:150px;object-fit:cover;border-radius:6px;border:1.5px solid var(--kraft);display:block}
+
+/* Variants Section + Input Satuan Pcs & Min Beli */
+.variants-box{border-top:2px solid var(--cream);padding-top:14px;margin-top:14px}
+.variants-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
+.variants-head span{font-size:13px;font-weight:800}
+.var-cols{display:grid;grid-template-columns:3.2fr 2.6fr 2.9fr 2.9fr 28px;gap:6px;font-size:11px;font-weight:800;color:var(--soft);margin-bottom:4px;padding:0 2px}
+.variant-row{display:grid;grid-template-columns:3.2fr 2.6fr 2.9fr 2.9fr 28px;gap:6px;align-items:center;margin-bottom:8px;animation:viewFadeIn .22s ease;transition:opacity .22s ease,transform .22s ease}
+.variant-row.row-exit{opacity:0;transform:translateX(20px)}
+.variant-row > input{padding:8px 8px;font-size:13px;height:36px}
+
+.input-pcs-wrap{display:flex;align-items:center;border:2px solid var(--kraft);border-radius:6px;background:#fff;overflow:hidden;height:36px}
+.input-pcs-wrap:focus-within{border-color:var(--ink)}
+.input-pcs-wrap input{border:0!important;border-radius:0!important;padding:6px 6px!important;height:100%;font-size:13px;font-weight:700;text-align:right}
+.input-pcs-wrap span{padding:0 6px;font-size:11px;font-weight:800;color:var(--soft);background:var(--paper);height:100%;display:flex;align-items:center;border-left:1.5px solid var(--kraft);user-select:none}
+
+.btn-remove-var{width:28px;height:36px;border-radius:5px;border:0;background:var(--danger-bg);color:var(--danger);font-weight:900;cursor:pointer;display:flex;align-items:center;justify-content:center}
+.btn-remove-var:hover{filter:brightness(.94)}
+
+/* Search & Table */
+.toolbar{display:flex;flex-wrap:wrap;gap:10px;margin-bottom:16px}
+.toolbar input{flex:1 1 220px}
+.table-wrap{overflow-x:auto;border:1.5px solid var(--cream);border-radius:8px}
+table{width:100%;border-collapse:collapse;font-size:14px;min-width:560px}
+th{background:var(--ink);color:var(--cream);text-align:left;padding:11px 14px;font-size:12.5px;text-transform:uppercase;letter-spacing:.04em}
+td{padding:12px 14px;border-top:1px solid var(--cream);vertical-align:top;transition:background .2s}
+tbody tr{transition:opacity .3s ease,transform .3s ease,background .2s}
+tbody tr:hover td{background:rgba(246,235,218,.45)}
+tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg)!important}
+
+.prod-cell{display:flex;align-items:flex-start;gap:12px}
+.prod-thumb{width:54px;height:54px;border-radius:7px;object-fit:cover;border:1.5px solid var(--kraft);background:var(--paper);flex-shrink:0}
+.prod-thumb-empty{width:54px;height:54px;border-radius:7px;border:1.5px dashed var(--kraft);background:var(--paper);color:var(--soft);font-size:10.5px;font-weight:800;display:flex;align-items:center;justify-content:center;text-align:center;flex-shrink:0}
+.prod-cat{display:inline-block;background:var(--paper);border:1px solid var(--kraft);color:var(--soft);font-size:11px;font-weight:800;padding:1px 7px;border-radius:4px;margin-top:3px}
+
+.var-pills{list-style:none;padding:0;margin:0;display:grid;gap:5px}
+.var-pills li{display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:6px;background:var(--paper);padding:6px 10px;border-radius:5px;font-size:12.5px}
+.min-tag{background:#fff;border:1px solid var(--kraft);color:var(--soft);font-weight:800;padding:1px 6px;border-radius:4px;font-size:11px}
+.stock-tag{font-weight:800;padding:1px 6px;border-radius:4px;font-size:11.5px}
+.stock-ok{background:#DCFCE7;color:#166534}
+.stock-low{background:var(--warn-bg);color:var(--warn)}
+.stock-out{background:var(--danger-bg);color:var(--danger)}
+
+.action-group{display:flex;justify-content:flex-end;gap:6px}
+.empty-state{text-align:center;padding:36px 16px;color:var(--soft)}
+
+/* Modal Ganti Password + Animasi Masuk / Keluar */
+.modal-backdrop{position:fixed;inset:0;background:rgba(23,17,11,.72);display:none;align-items:center;justify-content:center;z-index:50;padding:16px}
+.modal-backdrop.open{display:flex;animation:backdropIn .22s ease forwards}
+.modal-backdrop.closing{animation:backdropOut .22s ease forwards;pointer-events:none}
+.modal-box{background:#fff;border-radius:12px;max-width:420px;width:100%;padding:24px;box-shadow:0 20px 45px rgba(0,0,0,.35);border:2px solid var(--ink)}
+.modal-backdrop.open .modal-box{animation:modalPopIn .25s cubic-bezier(.22,1,.36,1) forwards}
+.modal-backdrop.closing .modal-box{animation:modalPopOut .22s cubic-bezier(.4,0,1,1) forwards}
+
+@keyframes backdropIn{from{opacity:0}to{opacity:1}}
+@keyframes backdropOut{from{opacity:1}to{opacity:0}}
+@keyframes modalPopIn{from{opacity:0;transform:translateY(16px) scale(.96)}to{opacity:1;transform:translateY(0) scale(1)}}
+@keyframes modalPopOut{from{opacity:1;transform:translateY(0) scale(1)}to{opacity:0;transform:translateY(14px) scale(.95)}}
+
+.modal-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--cream);padding-bottom:12px;margin-bottom:16px}
+.modal-close{background:none;border:0;font-size:20px;font-weight:900;cursor:pointer;color:var(--soft);padding:4px 8px;border-radius:6px}
+.modal-close:hover{background:var(--paper);color:var(--ink)}
+
+/* ==================== CUSTOM TOAST & CONFIRM POPUP ==================== */
+.toast-container{position:fixed;top:20px;right:20px;z-index:9999;display:grid;gap:10px;width:min(380px,calc(100vw - 32px));pointer-events:none;font-family:Archivo,system-ui,sans-serif}
+.toast-item{pointer-events:auto;background:#fff;color:var(--ink);border:2px solid var(--ink);border-left-width:6px;border-radius:10px;padding:13px 14px;box-shadow:0 14px 32px rgba(23,17,11,.24);display:flex;align-items:flex-start;gap:11px;position:relative;overflow:hidden;animation:toastIn .28s cubic-bezier(.22,1,.36,1) forwards}
+.toast-item.toast-exit{animation:toastOut .24s ease forwards}
+.toast-item.success{border-left-color:var(--accent)}
+.toast-item.warning{border-left-color:#D97706}
+.toast-item.error{border-left-color:#B91C1C}
+.toast-item.info{border-left-color:var(--ink)}
+.toast-icon{width:26px;height:26px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:900;font-size:14px;flex-shrink:0;margin-top:1px}
+.toast-item.success .toast-icon{background:#DCFCE7;color:#15803D}
+.toast-item.warning .toast-icon{background:#FEF3C7;color:#B45309}
+.toast-item.error .toast-icon{background:#FEE2E2;color:#B91C1C}
+.toast-item.info .toast-icon{background:var(--paper);color:var(--ink)}
+.toast-body{flex:1;font-size:14px;line-height:1.45}
+.toast-body strong{display:block;font-size:14.5px;font-weight:800;margin-bottom:2px}
+.toast-close{background:none;border:0;color:var(--soft);font-size:18px;font-weight:900;line-height:1;cursor:pointer;padding:2px 4px;border-radius:4px}
+.toast-close:hover{background:var(--paper);color:var(--ink)}
+.toast-bar{position:absolute;left:0;right:0;bottom:0;height:3px;background:currentColor;opacity:.22;transform-origin:left;animation:toastProgress linear forwards}
+@keyframes toastIn{from{opacity:0;transform:translateX(24px) scale(.96)}to{opacity:1;transform:translateX(0) scale(1)}}
+@keyframes toastOut{from{opacity:1;transform:translateX(0) scale(1)}to{opacity:0;transform:translateX(24px) scale(.96)}}
+@keyframes toastProgress{from{transform:scaleX(1)}to{transform:scaleX(0)}}
+
+.adm-confirm-backdrop{position:fixed;inset:0;background:rgba(23,17,11,.74);display:none;align-items:center;justify-content:center;z-index:9998;padding:16px;font-family:Archivo,system-ui,sans-serif}
+.adm-confirm-backdrop.open{display:flex;animation:backdropIn .2s ease forwards}
+.adm-confirm-backdrop.closing{animation:backdropOut .2s ease forwards;pointer-events:none}
+.adm-confirm-box{background:#fff;color:var(--ink);border:2px solid var(--ink);border-radius:12px;max-width:420px;width:100%;padding:22px;box-shadow:0 20px 45px rgba(0,0,0,.35)}
+.adm-confirm-backdrop.open .adm-confirm-box{animation:modalPopIn .24s cubic-bezier(.22,1,.36,1) forwards}
+.adm-confirm-backdrop.closing .adm-confirm-box{animation:modalPopOut .2s ease forwards}
+.adm-confirm-head{display:flex;justify-content:space-between;align-items:center;border-bottom:2px solid var(--cream);padding-bottom:10px;margin-bottom:12px}
+.adm-confirm-head h3{margin:0;font-size:19px;font-weight:900}
+.adm-confirm-actions{display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-top:18px}
+.adm-cbtn{min-height:44px;padding:10px 16px;border-radius:6px;font-weight:700;font-size:14.5px;cursor:pointer;border:2px solid var(--ink)}
+.adm-cbtn-cancel{background:transparent;color:var(--ink)}
+.adm-cbtn-cancel:hover{background:rgba(35,26,18,.06)}
+.adm-cbtn-ok{background:#B91C1C;border-color:#B91C1C;color:#fff}
+.adm-cbtn-ok:hover{filter:brightness(1.08)}
+
+@media(prefers-reduced-motion:reduce){
+  .reveal,.view-enter,.login-card,.modal-backdrop,.modal-box,.variant-row,tbody tr,.auth-loader,.toast-item,.adm-confirm-backdrop,.adm-confirm-box{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
+}
+@media(max-width:720px){.toast-container{top:14px;right:14px;left:14px;width:auto}}
+</style>
+</head>
+<body>
+<!-- ==================== TOAST & POPUP KONFIRMASI ADMIN ==================== -->
+<div id="toast-container" class="toast-container" aria-live="polite" aria-atomic="true"></div>
+
+<div id="custom-confirm-modal" class="adm-confirm-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" onclick="if(event.target===this)resolveConfirmModal(false)">
+  <div class="adm-confirm-box">
+    <div class="adm-confirm-head">
+      <h3 id="confirm-modal-title">Konfirmasi</h3>
+      <button type="button" class="modal-close" onclick="resolveConfirmModal(false)" aria-label="Tutup">✕</button>
+    </div>
+    <p id="confirm-modal-msg" style="margin:0;font-size:15px;color:var(--soft);line-height:1.5"></p>
+    <div class="adm-confirm-actions">
+      <button type="button" id="confirm-btn-cancel" class="adm-cbtn adm-cbtn-cancel" onclick="resolveConfirmModal(false)">Batal</button>
+      <button type="button" id="confirm-btn-ok" class="adm-cbtn adm-cbtn-ok" onclick="resolveConfirmModal(true)">Ya, Hapus</button>
+    </div>
+  </div>
+</div>
+
+<!-- ==================== LOADING AWAL VERIFIKASI ADMIN ==================== -->
+<div id="auth-loader" class="auth-loader" role="status" aria-live="polite">
+  <span class="spinner lg"></span>
+  <p>Memeriksa sesi admin...</p>
+</div>
+
+<!-- ==================== HALAMAN LOGIN ADMIN ==================== -->
+<div id="login-view" class="login-screen hidden">
+  <div class="login-card">
+    <div class="login-brand">
+      <svg width="32" height="32" viewBox="0 0 36 36" aria-hidden="true">
+        <polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/>
+        <polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/>
+        <polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/>
+      </svg>
+      Lestari Corrugated
+    </div>
+    <p class="login-sub">Masuk ke Panel Admin untuk mengelola produk, stok, dan harga.</p>
+
+    <form id="login-form">
+      <div class="field">
+        <label for="login-username">Username</label>
+        <input type="text" id="login-username" value="admin" required autocomplete="username">
+      </div>
+      <div class="field">
+        <label for="login-password">Password</label>
+        <input type="password" id="login-password" placeholder="Masukkan password admin" required autocomplete="current-password">
+      </div>
+      <button type="submit" id="btn-login" class="btn btn-dark" style="width:100%;min-height:46px;margin-top:6px">
+        Masuk ke Dashboard
+      </button>
+      <div style="text-align:center;margin-top:14px">
+        <a href="/" style="font-size:13.5px;color:var(--soft);font-weight:700">← Kembali ke Halaman Toko</a>
+      </div>
+    </form>
+  </div>
+</div>
+
+<!-- ==================== HALAMAN DASHBOARD ADMIN ==================== -->
+<div id="dashboard-view" class="hidden">
+  <header>
+    <div class="wrap">
+      <a class="logo" href="/admin">
+        <svg width="32" height="32" viewBox="0 0 36 36" aria-hidden="true">
+          <polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/>
+          <polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/>
+          <polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/>
+        </svg>
+        Lestari Corrugated
+        <span class="badge-admin">Admin</span>
+      </a>
+      <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
+        <a href="/" class="btn btn-kraft btn-sm">← Lihat Toko</a>
+        <button type="button" onclick="openPasswordModal()" class="btn btn-line-light btn-sm">Ganti Password</button>
+        <button type="button" onclick="logout()" class="btn btn-del btn-sm">Keluar</button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <div class="wrap">
+      <!-- Ringkasan Statistik -->
+      <section class="stats" aria-label="Ringkasan Inventaris">
+        <div class="stat-card reveal" style="transition-delay:.03s">
+          <span>Total Produk</span>
+          <strong id="stat-products">0</strong>
+        </div>
+        <div class="stat-card reveal" style="transition-delay:.09s">
+          <span>Total Varian</span>
+          <strong id="stat-variants">0</strong>
+        </div>
+        <div class="stat-card reveal" style="transition-delay:.15s">
+          <span>Total Stok (pcs)</span>
+          <strong id="stat-stock">0 pcs</strong>
+        </div>
+        <div class="stat-card warn reveal" style="transition-delay:.21s">
+          <span>Stok Menipis / Habis</span>
+          <strong id="stat-low">0</strong>
+        </div>
+      </section>
+
+      <div class="layout">
+        <!-- Kolom Kiri: Form Tambah / Edit Produk -->
+        <section class="panel panel-sticky reveal" style="transition-delay:.1s">
+          <div class="panel-head">
+            <h2 id="form-title">Tambah Produk Baru</h2>
+            <button type="button" id="btn-cancel-edit" onclick="resetForm()" class="btn btn-line btn-sm" style="display:none">
+              Batal Edit
+            </button>
+          </div>
+
+          <form id="product-form">
+            <input type="hidden" id="edit-product-id">
+
+            <div class="field">
+              <label for="name">Nama Produk <span style="color:var(--danger)">*</span></label>
+              <input type="text" id="name" required placeholder="Contoh: Kardus Polos Die Cut">
+            </div>
+
+            <div class="field">
+              <label for="category">Kategori</label>
+              <input type="text" id="category" placeholder="Contoh: Kardus Polos / Mailer Box">
+            </div>
+
+            <div class="field">
+              <label for="imageFile">Foto Produk (Upload ke Supabase)</label>
+              <div class="upload-box">
+                <input type="file" id="imageFile" accept="image/jpeg,image/png,image/webp" onchange="previewImage(event)">
+                <small style="display:block;color:var(--soft);margin-top:4px;font-size:12px">Format JPG, PNG, WEBP · Maksimal 5MB</small>
+                <div id="preview-wrap" class="preview-wrap">
+                  <img id="image-preview" alt="Pratinjau foto produk">
+                  <button type="button" id="btn-delete-photo" onclick="deleteProductImage()" class="btn btn-del btn-sm btn-del-photo" style="display:none">
+                    🗑 Hapus Foto Produk
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <div class="field">
+              <label for="description">Deskripsi Produk</label>
+              <textarea id="description" rows="2" placeholder="Keterangan bahan, ketebalan flute, kegunaan, dll."></textarea>
+            </div>
+
+            <!-- Input Dinamis Varian + Min Beli + Stok Pcs -->
+            <div class="variants-box">
+              <div class="variants-head">
+                <span>Daftar Varian, Harga, Min. Beli &amp; Stok</span>
+                <button type="button" onclick="addVariantRow()" class="btn btn-kraft btn-sm">+ Varian</button>
+              </div>
+              <div class="var-cols">
+                <span>Varian</span>
+                <span>Harga (Rp)</span>
+                <span>Min. Beli</span>
+                <span>Stok</span>
+                <span></span>
+              </div>
+              <div id="variants-container"></div>
+            </div>
+
+            <button type="submit" id="btn-submit" class="btn btn-wa" style="width:100%;margin-top:14px;min-height:46px">
+              Simpan Produk
+            </button>
+          </form>
+        </section>
+
+        <!-- Kolom Kanan: Daftar Produk -->
+        <section class="panel reveal" style="transition-delay:.18s">
+          <div class="panel-head">
+            <h2>Daftar Produk di Database</h2>
+            <button type="button" id="btn-reload" onclick="loadAdminProducts()" class="btn btn-line btn-sm">↻ Muat Ulang</button>
+          </div>
+
+          <div class="toolbar">
+            <input type="text" id="search-input" oninput="renderTable(false)" placeholder="Cari nama produk, kategori, atau varian ukuran...">
+          </div>
+
+          <div class="table-wrap">
+            <table>
+              <thead>
+                <tr>
+                  <th>Produk</th>
+                  <th>Varian, Harga, Min. Beli &amp; Stok</th>
+                  <th style="text-align:right">Aksi</th>
+                </tr>
+              </thead>
+              <tbody id="admin-product-list"></tbody>
+            </table>
+          </div>
+        </section>
+      </div>
+    </div>
+  </main>
+</div>
+
+<!-- ==================== MODAL GANTI PASSWORD ==================== -->
+<div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" onclick="if(event.target===this)closePasswordModal()">
+  <div class="modal-box">
+    <div class="modal-head">
+      <h3 style="margin:0;font-size:19px;font-weight:900">Ganti Password Admin</h3>
+      <button type="button" class="modal-close" onclick="closePasswordModal()">✕</button>
+    </div>
+    <form id="change-password-form">
+      <div class="field">
+        <label for="old-password">Password Lama</label>
+        <input type="password" id="old-password" required>
+      </div>
+      <div class="field">
+        <label for="new-password">Password Baru (Minimal 6 karakter)</label>
+        <input type="password" id="new-password" minlength="6" required>
+      </div>
+      <button type="submit" id="btn-save-password" class="btn btn-wa" style="width:100%;min-height:44px">
+        Simpan Password Baru
+      </button>
+    </form>
+  </div>
+</div>
+
+<script>
+let allProducts = [];
+const TOKEN_KEY = 'butari_admin_token';
+
+// ====== CUSTOM TOAST & CONFIRM MODAL ======
+const TOAST_META = {
+  success: { title: 'Berhasil', icon: '✓' },
+  warning: { title: 'Perhatian', icon: '!' },
+  error: { title: 'Gagal', icon: '✕' },
+  info: { title: 'Info', icon: 'i' }
+};
+
+function escHtml(str) {
+  return String(str || '').replace(/[&<>"']/g, (m) => ({
+    '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
+  }[m]));
+}
+
+function safeId(id) {
+  return String(id || '').replace(/[^a-zA-Z0-9_-]/g, '');
+}
+
+function safeUrl(url) {
+  const raw = String(url || '').trim();
+  if (/^(https?:\/\/|\/)/i.test(raw)) return escHtml(raw);
+  return '';
+}
+
+function hasUploadedPhoto(imageUrl) {
+  const raw = String(imageUrl || '').trim();
+  return Boolean(raw) && !raw.includes('placehold.co') && Boolean(safeUrl(raw));
+}
+
+function showToast(message, type = 'info', duration = 3500) {
+  const container = document.getElementById('toast-container');
+  if (!container) return;
+
+  const meta = TOAST_META[type] || TOAST_META.info;
+  const toast = document.createElement('div');
+  toast.className = `toast-item ${type}`;
+  toast.setAttribute('role', 'status');
+  toast.innerHTML = `
+    <span class="toast-icon" aria-hidden="true">${meta.icon}</span>
+    <div class="toast-body">
+      <strong>${meta.title}</strong>
+      <span>${escHtml(message)}</span>
+    </div>
+    <button type="button" class="toast-close" aria-label="Tutup">✕</button>
+    <div class="toast-bar" style="animation-duration:${duration}ms"></div>
+  `;
+
+  const dismiss = () => {
+    if (toast.classList.contains('toast-exit')) return;
+    toast.classList.add('toast-exit');
+    setTimeout(() => toast.remove(), 240);
+  };
+
+  toast.querySelector('.toast-close').addEventListener('click', dismiss);
+  container.appendChild(toast);
+
+  while (container.children.length > 4) {
+    container.firstElementChild.remove();
+  }
+  setTimeout(dismiss, duration);
+}
+
+window.alert = function(msg) {
+  const text = String(msg || '');
+  const isSuccess = /berhasil|sukses|tersimpan|diperbarui|dihapus|ditambahkan/i.test(text);
+  const isError = /gagal|error|salah|tidak|kosong|wajib|harap|invalid/i.test(text);
+  showToast(text, isSuccess ? 'success' : (isError ? 'error' : 'warning'));
+};
+
+let confirmModalResolver = null;
+
+function showConfirmModal({ title = 'Konfirmasi Hapus', message = '', confirmText = 'Ya, Hapus', cancelText = 'Batal' }) {
+  return new Promise((resolve) => {
+    confirmModalResolver = resolve;
+    document.getElementById('confirm-modal-title').textContent = title;
+    document.getElementById('confirm-modal-msg').textContent = message;
+    document.getElementById('confirm-btn-ok').textContent = confirmText;
+    document.getElementById('confirm-btn-cancel').textContent = cancelText;
+    const modal = document.getElementById('custom-confirm-modal');
+    modal.classList.remove('closing');
+    modal.classList.add('open');
+  });
+}
+
+function resolveConfirmModal(result) {
+  const modal = document.getElementById('custom-confirm-modal');
+  if (!modal || !modal.classList.contains('open')) return;
+  modal.classList.add('closing');
+  setTimeout(() => {
+    modal.classList.remove('open', 'closing');
+    if (typeof confirmModalResolver === 'function') {
+      const fn = confirmModalResolver;
+      confirmModalResolver = null;
+      fn(result);
+    }
+  }, 200);
+}
+
+// ====== HELPER ANIMASI SCROLL & MODAL ======
+const scrollObserver = new IntersectionObserver((entries) => {
+  entries.forEach((entry) => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('in-view');
+      scrollObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.1, rootMargin: '0px 0px -20px 0px' });
+
+function initScrollAnimations() {
+  document.querySelectorAll('.reveal:not(.in-view)').forEach((el) => {
+    scrollObserver.observe(el);
+  });
+}
+
+function hideAuthLoader() {
+  const loader = document.getElementById('auth-loader');
+  if (loader && !loader.classList.contains('exit')) {
+    loader.classList.add('exit');
+    setTimeout(() => loader.remove(), 400);
+  }
+}
+
+function openPasswordModal() {
+  const el = document.getElementById('password-modal');
+  el.classList.remove('closing');
+  el.classList.add('open');
+}
+
+function closePasswordModal() {
+  const el = document.getElementById('password-modal');
+  if (!el.classList.contains('open') || el.classList.contains('closing')) return;
+  el.classList.add('closing');
+  setTimeout(() => {
+    el.classList.remove('open', 'closing');
+  }, 215);
+}
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    if (document.getElementById('custom-confirm-modal')?.classList.contains('open')) {
+      resolveConfirmModal(false);
+      return;
+    }
+    closePasswordModal();
+  }
+});
+
+function showTableSkeleton() {
+  const tbody = document.getElementById('admin-product-list');
+  tbody.innerHTML = Array.from({ length: 4 }).map(() => `
+    <tr aria-hidden="true">
+      <td>
+        <div class="prod-cell">
+          <div class="skel-bar" style="width:54px;height:54px;border-radius:7px;flex-shrink:0"></div>
+          <div style="flex:1;display:grid;gap:8px">
+            <div class="skel-bar" style="width:75%"></div>
+            <div class="skel-bar" style="width:45%;height:13px"></div>
+          </div>
+        </div>
+      </td>
+      <td>
+        <div style="display:grid;gap:6px">
+          <div class="skel-bar" style="width:92%;height:26px"></div>
+          <div class="skel-bar" style="width:78%;height:26px"></div>
+        </div>
+      </td>
+      <td>
+        <div class="action-group">
+          <div class="skel-bar" style="width:52px;height:34px"></div>
+          <div class="skel-bar" style="width:62px;height:34px"></div>
+        </div>
+      </td>
+    </tr>
+  `).join('');
+}
+
+// ====== AUTHENTIKASI ======
+function getToken() {
+  return sessionStorage.getItem(TOKEN_KEY);
+}
+
+function showLogin() {
+  sessionStorage.removeItem(TOKEN_KEY);
+  document.getElementById('dashboard-view').classList.add('hidden');
+  const loginView = document.getElementById('login-view');
+  loginView.classList.remove('hidden');
+  hideAuthLoader();
+}
+
+function showDashboard() {
+  document.getElementById('login-view').classList.add('hidden');
+  const dash = document.getElementById('dashboard-view');
+  dash.classList.remove('hidden');
+  dash.classList.add('view-enter');
+  hideAuthLoader();
+  initScrollAnimations();
+  resetForm();
+  loadAdminProducts();
+}
+
+async function logout() {
+  const ok = await showConfirmModal({
+    title: 'Keluar dari Admin?',
+    message: 'Sesi login Anda akan diakhiri dan Anda harus masuk kembali untuk mengelola produk.',
+    confirmText: 'Ya, Keluar',
+    cancelText: 'Batal'
+  });
+  if (!ok) return;
+  showLogin();
+  showToast('Anda telah keluar dari panel admin.', 'info');
+}
+
+async function checkAuthOnLoad() {
+  const token = getToken();
+  if (!token) return showLogin();
+
+  try {
+    const res = await fetch('/api/auth/me', {
+      headers: { 'Authorization': 'Bearer ' + token }
+    });
+    if (res.ok) {
+      showDashboard();
+    } else {
+      showLogin();
+    }
+  } catch (err) {
+    showLogin();
+  }
+}
+
+document.getElementById('login-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('btn-login');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Memeriksa...';
+
+  try {
+    const res = await fetch('/api/auth/login', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        username: document.getElementById('login-username').value.trim(),
+        password: document.getElementById('login-password').value
+      })
+    });
+
+    const data = await res.json();
+    if (!res.ok) {
+      return showToast(data.message || 'Username atau password salah.', 'error');
+    }
+
+    sessionStorage.setItem(TOKEN_KEY, data.token);
+    document.getElementById('login-password').value = '';
+    showDashboard();
+    showToast('Selamat datang kembali di Dashboard Admin!', 'success');
+  } catch (err) {
+    showToast('Gagal terhubung ke server.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Masuk ke Dashboard';
+  }
+});
+
+document.getElementById('change-password-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const btn = document.getElementById('btn-save-password');
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Menyimpan...';
+
+  try {
+    const res = await fetch('/api/auth/change-password', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Authorization': 'Bearer ' + getToken()
+      },
+      body: JSON.stringify({
+        oldPassword: document.getElementById('old-password').value,
+        newPassword: document.getElementById('new-password').value
+      })
+    });
+
+    const data = await res.json();
+    if (res.status === 401) {
+      showToast('Sesi berakhir, silakan login ulang.', 'warning');
+      return showLogin();
+    }
+    if (!res.ok) return showToast(data.message || 'Gagal mengganti password.', 'error');
+
+    showToast(data.message || 'Password berhasil diperbarui!', 'success');
+    e.target.reset();
+    closePasswordModal();
+  } catch (err) {
+    showToast('Gagal terhubung ke server.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.textContent = 'Simpan Password Baru';
+  }
+});
+
+// ==================== KELOLA PRODUK & FOTO SUPABASE ====================
+function previewImage(event) {
+  const file = event.target.files[0];
+  const wrap = document.getElementById('preview-wrap');
+  const preview = document.getElementById('image-preview');
+  const btnDelPhoto = document.getElementById('btn-delete-photo');
+
+  if (file) {
+    preview.src = URL.createObjectURL(file);
+    wrap.classList.add('show');
+    // File baru belum tersimpan di Supabase
+    if (btnDelPhoto) btnDelPhoto.style.display = 'none';
+  }
+}
+
+async function deleteProductImage() {
+  const productId = document.getElementById('edit-product-id').value;
+  if (!productId) return;
+
+  const product = allProducts.find(p => p._id === productId);
+  const prodName = product ? product.name : 'produk ini';
+
+  const confirmed = await showConfirmModal({
+    title: 'Hapus Foto Produk?',
+    message: `Foto untuk "${prodName}" akan dihapus permanen dari Supabase Storage. Lanjutkan?`,
+    confirmText: 'Ya, Hapus Foto',
+    cancelText: 'Batal'
+  });
+  if (!confirmed) return;
+
+  const btn = document.getElementById('btn-delete-photo');
+  const origHtml = btn.innerHTML;
+  btn.disabled = true;
+  btn.innerHTML = '<span class="spinner"></span> Menghapus Foto...';
+
+  try {
+    const res = await fetch(`/api/products/${encodeURIComponent(productId)}/image`, {
+      method: 'DELETE',
+      headers: { 'Authorization': 'Bearer ' + getToken() }
+    });
+
+    const data = await res.json();
+    if (res.status === 401) {
+      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      return showLogin();
+    }
+    if (!res.ok) {
+      return showToast(data.message || 'Gagal menghapus foto produk.', 'error');
+    }
+
+    if (product) {
+      product.imageUrl = data.product?.imageUrl || '';
+    }
+    document.getElementById('imageFile').value = '';
+    document.getElementById('image-preview').src = '';
+    document.getElementById('preview-wrap').classList.remove('show');
+    btn.style.display = 'none';
+
+    updateStats();
+    renderTable(false);
+    showToast(data.message || 'Foto produk berhasil dihapus dari Supabase.', 'success');
+  } catch (err) {
+    showToast('Gagal terhubung ke server.', 'error');
+  } finally {
+    btn.disabled = false;
+    btn.innerHTML = origHtml;
+  }
+}
+
+function removeVariantRowAnimated(btn) {
+  const row = btn.parentElement;
+  row.classList.add('row-exit');
+  setTimeout(() => row.remove(), 210);
+}
+
+function addVariantRow(name = '', price = '', minOrder = '1', stock = '', id = '') {
+  const container = document.getElementById('variants-container');
+  const div = document.createElement('div');
+  div.className = 'variant-row';
+  div.dataset.id = id;
+  div.innerHTML = `
+    <input type="text" placeholder="10x10x5 cm" value="${escHtml(name)}" required class="var-name">
+    <input type="number" min="0" placeholder="500" value="${escHtml(price)}" required class="var-price">
+    <div class="input-pcs-wrap" title="Minimal pembelian (pcs)">
+      <input type="number" min="1" placeholder="1" value="${escHtml(minOrder)}" required class="var-min">
+      <span>pcs</span>
+    </div>
+    <div class="input-pcs-wrap" title="Stok tersedia (pcs)">
+      <input type="number" min="0" placeholder="100" value="${escHtml(stock)}" required class="var-stock">
+      <span>pcs</span>
+    </div>
+    <button type="button" onclick="removeVariantRowAnimated(this)" class="btn-remove-var" title="Hapus varian">✕</button>
+  `;
+  container.appendChild(div);
+}
+
+function resetForm() {
+  document.getElementById('product-form').reset();
+  document.getElementById('edit-product-id').value = '';
+  document.getElementById('form-title').textContent = 'Tambah Produk Baru';
+  document.getElementById('btn-submit').textContent = 'Simpan Produk';
+  document.getElementById('btn-cancel-edit').style.display = 'none';
+  document.getElementById('preview-wrap').classList.remove('show');
+  document.getElementById('image-preview').src = '';
+
+  const btnDelPhoto = document.getElementById('btn-delete-photo');
+  if (btnDelPhoto) btnDelPhoto.style.display = 'none';
+
+  document.getElementById('variants-container').innerHTML = '';
+  addVariantRow('Standar', '', '10', '100');
+}
+
+function startEdit(id) {
+  const product = allProducts.find(p => p._id === id);
+  if (!product) return;
+
+  document.getElementById('edit-product-id').value = product._id;
+  document.getElementById('name').value = product.name;
+  document.getElementById('category').value = product.category || '';
+  document.getElementById('description').value = product.description || '';
+  document.getElementById('imageFile').value = '';
+
+  const wrap = document.getElementById('preview-wrap');
+  const preview = document.getElementById('image-preview');
+  const btnDelPhoto = document.getElementById('btn-delete-photo');
+
+  if (hasUploadedPhoto(product.imageUrl)) {
+    preview.src = safeUrl(product.imageUrl);
+    wrap.classList.add('show');
+    if (btnDelPhoto) btnDelPhoto.style.display = 'inline-flex';
+  } else {
+    wrap.classList.remove('show');
+    preview.src = '';
+    if (btnDelPhoto) btnDelPhoto.style.display = 'none';
+  }
+
+  const container = document.getElementById('variants-container');
+  container.innerHTML = '';
+  product.variants.forEach(v => addVariantRow(v.name, v.price, v.minOrder || 1, v.stock, v._id));
+
+  document.getElementById('form-title').textContent = 'Edit Produk';
+  document.getElementById('btn-submit').textContent = 'Update Produk';
+  document.getElementById('btn-cancel-edit').style.display = 'inline-flex';
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+  showToast(`Mode edit: "${product.name}"`, 'info', 2500);
+}
+
+document.getElementById('product-form').addEventListener('submit', async (e) => {
+  e.preventDefault();
+  const variantRows = document.querySelectorAll('.variant-row');
+  const variants = Array.from(variantRows).map(row => {
+    const obj = {
+      name: row.querySelector('.var-name').value.trim(),
+      price: Number(row.querySelector('.var-price').value),
+      minOrder: Math.max(1, Number(row.querySelector('.var-min').value) || 1),
+      stock: Number(row.querySelector('.var-stock').value)
+    };
+    if (row.dataset.id) obj._id = row.dataset.id;
+    return obj;
+  });
+
+  if (variants.length === 0) {
+    return showToast('Minimal tambahkan 1 varian produk!', 'warning');
+  }
+
+  const imageFile = document.getElementById('imageFile').files[0];
+  const btnSubmit = document.getElementById('btn-submit');
+  const originalText = btnSubmit.textContent;
+  btnSubmit.disabled = true;
+  btnSubmit.innerHTML = `<span class="spinner"></span> ${imageFile ? 'Mengupload Foto & Menyimpan...' : 'Menyimpan Produk...'}`;
+
+  try {
+    const formData = new FormData();
+    formData.append('name', document.getElementById('name').value.trim());
+    formData.append('category', document.getElementById('category').value.trim() || 'Umum');
+    formData.append('description', document.getElementById('description').value.trim());
+    formData.append('variants', JSON.stringify(variants));
+
+    if (imageFile) {
+      formData.append('image', imageFile);
+    }
+
+    const editId = document.getElementById('edit-product-id').value;
+    const url = editId ? `/api/products/${encodeURIComponent(editId)}` : '/api/products';
+    const method = editId ? 'PUT' : 'POST';
+
+    const res = await fetch(url, {
+      method,
+      headers: { 'Authorization': 'Bearer ' + getToken() },
+      body: formData
+    });
+
+    const data = await res.json();
+    if (res.status === 401) {
+      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      return showLogin();
+    }
+    if (!res.ok) {
+      return showToast(data.message || 'Gagal menyimpan produk.', 'error');
+    }
+
+    showToast(editId ? 'Produk berhasil diperbarui!' : 'Produk baru berhasil disimpan!', 'success');
+    resetForm();
+    await loadAdminProducts();
+  } catch (err) {
+    showToast('Terjadi kesalahan koneksi ke server.', 'error');
+  } finally {
+    btnSubmit.disabled = false;
+    btnSubmit.textContent = originalText;
+  }
+});
+
+function updateStats() {
+  let totalVariants = 0;
+  let totalStock = 0;
+  let lowStockCount = 0;
+
+  allProducts.forEach(p => {
+    totalVariants += p.variants.length;
+    p.variants.forEach(v => {
+      totalStock += Number(v.stock || 0);
+      if (v.stock <= 5) lowStockCount += 1;
+    });
+  });
+
+  document.getElementById('stat-products').textContent = allProducts.length.toLocaleString('id-ID');
+  document.getElementById('stat-variants').textContent = totalVariants.toLocaleString('id-ID');
+  document.getElementById('stat-stock').textContent = totalStock.toLocaleString('id-ID') + ' pcs';
+  document.getElementById('stat-low').textContent = lowStockCount.toLocaleString('id-ID');
+}
+
+function renderTable(animateRows = true) {
+  const keyword = document.getElementById('search-input').value.trim().toLowerCase();
+  const tbody = document.getElementById('admin-product-list');
+
+  const filtered = allProducts.filter(p => {
+    if (!keyword) return true;
+    const matchMain = (p.name || '').toLowerCase().includes(keyword) ||
+                      (p.category || '').toLowerCase().includes(keyword);
+    const matchVar = p.variants.some(v => (v.name || '').toLowerCase().includes(keyword));
+    return matchMain || matchVar;
+  });
+
+  if (!filtered.length) {
+    tbody.innerHTML = `<tr><td colspan="3" class="empty-state">${keyword ? 'Produk tidak ditemukan untuk kata kunci tersebut.' : 'Belum ada produk di database.'}</td></tr>`;
+    return;
+  }
+
+  tbody.innerHTML = filtered.map((p, idx) => {
+    const cleanId = safeId(p._id);
+    const variantsHtml = p.variants.map(v => {
+      let stockClass = 'stock-ok';
+      let stockLabel = `Stok: ${v.stock} pcs`;
+      if (v.stock <= 0) {
+        stockClass = 'stock-out';
+        stockLabel = 'Habis (0 pcs)';
+      } else if (v.stock <= 5) {
+        stockClass = 'stock-low';
+        stockLabel = `Menipis: ${v.stock} pcs`;
+      }
+
+      return `
+        <li>
+          <span><strong>${escHtml(v.name)}</strong> · Rp${Number(v.price).toLocaleString('id-ID')} / pcs</span>
+          <div style="display:flex;gap:5px;align-items:center">
+            <span class="min-tag">Min: ${v.minOrder || 1} pcs</span>
+            <span class="stock-tag ${stockClass}">${stockLabel}</span>
+          </div>
+        </li>
+      `;
+    }).join('');
+
+    const rowClass = animateRows ? 'reveal' : '';
+    const rowStyle = animateRows ? `style="transition-delay:${Math.min(idx * 0.04, 0.28)}s"` : '';
+    const thumbHtml = hasUploadedPhoto(p.imageUrl)
+      ? `<img src="${safeUrl(p.imageUrl)}" alt="${escHtml(p.name)}" class="prod-thumb">`
+      : `<div class="prod-thumb-empty">Tanpa Foto</div>`;
+
+    return `
+      <tr id="row-prod-${cleanId}" class="${rowClass}" ${rowStyle}>
+        <td>
+          <div class="prod-cell">
+            ${thumbHtml}
+            <div>
+              <strong style="display:block;font-size:15px">${escHtml(p.name)}</strong>
+              <span class="prod-cat">${escHtml(p.category || 'Umum')}</span>
+            </div>
+          </div>
+        </td>
+        <td>
+          <ul class="var-pills">${variantsHtml}</ul>
+        </td>
+        <td>
+          <div class="action-group">
+            <button type="button" onclick="startEdit('${cleanId}')" class="btn btn-edit btn-sm">Edit</button>
+            <button type="button" onclick="deleteProduct('${cleanId}', this)" class="btn btn-del btn-sm">Hapus</button>
+          </div>
+        </td>
+      </tr>
+    `;
+  }).join('');
+
+  if (animateRows) initScrollAnimations();
+}
+
+async function loadAdminProducts() {
+  const reloadBtn = document.getElementById('btn-reload');
+  if (reloadBtn) {
+    reloadBtn.disabled = true;
+    reloadBtn.innerHTML = '<span class="spinner dark"></span> Memuat...';
+  }
+  showTableSkeleton();
+
+  try {
+    const res = await fetch('/api/products');
+    allProducts = await res.json();
+    updateStats();
+    renderTable(true);
+  } catch (err) {
+    document.getElementById('admin-product-list').innerHTML =
+      '<tr><td colspan="3" class="empty-state" style="color:var(--danger)">Gagal memuat data dari server.</td></tr>';
+    showToast('Gagal memuat daftar produk dari server.', 'error');
+  } finally {
+    if (reloadBtn) {
+      reloadBtn.disabled = false;
+      reloadBtn.textContent = '↻ Muat Ulang';
+    }
+  }
+}
+
+async function deleteProduct(id, btnEl) {
+  const product = allProducts.find(p => p._id === id);
+  const name = product ? product.name : 'produk ini';
+
+  const confirmed = await showConfirmModal({
+    title: 'Hapus Produk?',
+    message: `Yakin ingin menghapus "${name}" beserta fotonya? Tindakan ini tidak dapat dibatalkan.`,
+    confirmText: 'Ya, Hapus',
+    cancelText: 'Batal'
+  });
+  if (!confirmed) return;
+
+  if (btnEl) {
+    btnEl.disabled = true;
+    btnEl.innerHTML = '<span class="spinner danger"></span>';
+  }
+
+  try {
+    const res = await fetch(`/api/products/${encodeURIComponent(id)}`, {
+      method: 'DELETE',
+      headers: { 'Authorization': 'Bearer ' + getToken() }
+    });
+
+    const data = await res.json();
+    if (res.status === 401) {
+      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      return showLogin();
+    }
+    if (!res.ok) {
+      if (btnEl) {
+        btnEl.disabled = false;
+        btnEl.textContent = 'Hapus';
+      }
+      return showToast(data.message || 'Gagal menghapus produk.', 'error');
+    }
+
+    if (document.getElementById('edit-product-id').value === id) {
+      resetForm();
+    }
+
+    showToast(`Produk "${name}" berhasil dihapus.`, 'success');
+
+    const row = document.getElementById(`row-prod-${safeId(id)}`);
+    if (row) {
+      row.classList.add('tr-exit');
+      setTimeout(() => {
+        allProducts = allProducts.filter(p => p._id !== id);
+        updateStats();
+        renderTable(false);
+      }, 280);
+    } else {
+      await loadAdminProducts();
+    }
+  } catch (err) {
+    if (btnEl) {
+      btnEl.disabled = false;
+      btnEl.textContent = 'Hapus';
+    }
+    showToast('Gagal terhubung ke server.', 'error');
+  }
+}
+
+checkAuthOnLoad();
+</script>
+</body>
+</html>
