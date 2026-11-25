@@ -48,19 +48,42 @@ async function seedDefaultAdmin() {
   }
 }
 
-// Koneksi MongoDB
-mongoose.connect(process.env.MONGO_URI, {
-  family: 4,
-  autoSelectFamily: false,
-  connectTimeoutMS: 20000,
-  serverSelectionTimeoutMS: 20000,
-  socketTimeoutMS: 45000
-})
-  .then(async () => {
-    console.log('Terhubung ke MongoDB');
-    await seedDefaultAdmin();
-  })
-  .catch(err => console.error('Gagal koneksi MongoDB:', err));
+// Cache koneksi MongoDB agar aman & efisien di serverless Vercel
+let dbConnectPromise = null;
+
+async function connectToDatabase() {
+  if (!process.env.MONGO_URI) {
+    throw new Error('MONGO_URI belum diatur di environment variables.');
+  }
+  if (mongoose.connection.readyState === 1) {
+    return mongoose.connection;
+  }
+  if (!dbConnectPromise) {
+    dbConnectPromise = mongoose.connect(process.env.MONGO_URI, {
+      serverSelectionTimeoutMS: 20000,
+      socketTimeoutMS: 45000
+    }).then(async (conn) => {
+      console.log('Terhubung ke MongoDB');
+      await seedDefaultAdmin();
+      return conn;
+    }).catch((err) => {
+      dbConnectPromise = null;
+      console.error('Gagal koneksi MongoDB:', err);
+      throw err;
+    });
+  }
+  return dbConnectPromise;
+}
+
+// Pastikan koneksi DB siap sebelum memproses route /api
+app.use('/api', async (req, res, next) => {
+  try {
+    await connectToDatabase();
+    next();
+  } catch (err) {
+    res.status(500).json({ message: 'Koneksi database gagal: ' + err.message });
+  }
+});
 
 // Endpoint API
 app.use('/api/auth', authRoutes);
@@ -111,8 +134,15 @@ app.use('/api/wilayah', async (req, res) => {
   res.status(502).json({ message: 'Gagal mengambil data wilayah' });
 });
 
+// Jalankan app.listen hanya saat dijalankan langsung (lokal)
 const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => {
-  console.log(`Server berjalan di http://localhost:${PORT}`);
-  console.log(`Halaman Admin: http://localhost:${PORT}/admin`);
-});
+if (require.main === module) {
+  connectToDatabase().finally(() => {
+    app.listen(PORT, () => {
+      console.log(`Server berjalan di http://localhost:${PORT}`);
+      console.log(`Halaman Admin: http://localhost:${PORT}/admin`);
+    });
+  });
+}
+
+module.exports = app;
