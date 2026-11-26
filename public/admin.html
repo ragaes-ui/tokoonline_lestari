@@ -85,7 +85,7 @@ main{padding:28px max(4vw,16px) 56px}
 .stat-card.warn strong{color:var(--warn)}
 
 /* Layout Grid */
-.layout{display:grid;grid-template-columns:510px 1fr;gap:24px;align-items:start}
+.layout{display:grid;grid-template-columns:520px 1fr;gap:24px;align-items:start}
 @media(max-width:1024px){.layout{grid-template-columns:1fr}}
 
 /* Panels */
@@ -111,14 +111,19 @@ textarea{resize:vertical}
 .preview-wrap.show{display:block;animation:viewFadeIn .25s ease}
 .preview-wrap img{width:100%;height:150px;object-fit:cover;border-radius:6px;border:1.5px solid var(--kraft);display:block}
 
-/* Variants Section + Input Satuan Pcs & Min Beli */
+/* Variants Section + Input Rupiah, Satuan Pcs & Min Beli */
 .variants-box{border-top:2px solid var(--cream);padding-top:14px;margin-top:14px}
 .variants-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}
 .variants-head span{font-size:13px;font-weight:800}
-.var-cols{display:grid;grid-template-columns:3.2fr 2.6fr 2.9fr 2.9fr 28px;gap:6px;font-size:11px;font-weight:800;color:var(--soft);margin-bottom:4px;padding:0 2px}
-.variant-row{display:grid;grid-template-columns:3.2fr 2.6fr 2.9fr 2.9fr 28px;gap:6px;align-items:center;margin-bottom:8px;animation:viewFadeIn .22s ease;transition:opacity .22s ease,transform .22s ease}
+.var-cols{display:grid;grid-template-columns:3fr 3.1fr 2.7fr 2.7fr 28px;gap:6px;font-size:11px;font-weight:800;color:var(--soft);margin-bottom:4px;padding:0 2px}
+.variant-row{display:grid;grid-template-columns:3fr 3.1fr 2.7fr 2.7fr 28px;gap:6px;align-items:center;margin-bottom:8px;animation:viewFadeIn .22s ease;transition:opacity .22s ease,transform .22s ease}
 .variant-row.row-exit{opacity:0;transform:translateX(20px)}
 .variant-row > input{padding:8px 8px;font-size:13px;height:36px}
+
+.input-rp-wrap{display:flex;align-items:center;border:2px solid var(--kraft);border-radius:6px;background:#fff;overflow:hidden;height:36px}
+.input-rp-wrap:focus-within{border-color:var(--ink)}
+.input-rp-wrap span{padding:0 7px;font-size:11.5px;font-weight:800;color:var(--soft);background:var(--paper);height:100%;display:flex;align-items:center;border-right:1.5px solid var(--kraft);user-select:none}
+.input-rp-wrap input{border:0!important;border-radius:0!important;padding:6px 7px!important;height:100%;font-size:13px;font-weight:700;text-align:right;width:100%}
 
 .input-pcs-wrap{display:flex;align-items:center;border:2px solid var(--kraft);border-radius:6px;background:#fff;overflow:hidden;height:36px}
 .input-pcs-wrap:focus-within{border-color:var(--ink)}
@@ -356,7 +361,7 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
               <textarea id="description" rows="2" placeholder="Keterangan bahan, ketebalan flute, kegunaan, dll."></textarea>
             </div>
 
-            <!-- Input Dinamis Varian + Min Beli + Stok Pcs -->
+            <!-- Input Dinamis Varian + Harga Rupiah + Min Beli + Stok Pcs -->
             <div class="variants-box">
               <div class="variants-head">
                 <span>Daftar Varian, Harga, Min. Beli &amp; Stok</span>
@@ -744,7 +749,6 @@ function previewImage(event) {
   if (file) {
     preview.src = URL.createObjectURL(file);
     wrap.classList.add('show');
-    // File baru belum tersimpan di Supabase
     if (btnDelPhoto) btnDelPhoto.style.display = 'none';
   }
 }
@@ -803,6 +807,36 @@ async function deleteProductImage() {
   }
 }
 
+// ==================== FORMAT HARGA RUPIAH ====================
+function formatRupiahDigits(val) {
+  const digits = String(val ?? '').replace(/\D/g, '');
+  if (!digits) return '';
+  const normalized = digits.replace(/^0+(?=\d)/, '');
+  return normalized.replace(/\B(?=(\d{3})+(?!\d))/g, '.');
+}
+
+function parseRupiahNumber(formattedVal) {
+  const digits = String(formattedVal ?? '').replace(/\D/g, '');
+  return digits ? Number(digits) : 0;
+}
+
+function handleRupiahInput(input) {
+  const raw = input.value;
+  const selStart = input.selectionStart || raw.length;
+  const digitsBeforeCursor = raw.slice(0, selStart).replace(/\D/g, '').length;
+
+  const formatted = formatRupiahDigits(raw);
+  input.value = formatted;
+
+  let newPos = 0;
+  let digitCount = 0;
+  while (newPos < formatted.length && digitCount < digitsBeforeCursor) {
+    if (/\d/.test(formatted[newPos])) digitCount++;
+    newPos++;
+  }
+  input.setSelectionRange(newPos, newPos);
+}
+
 function removeVariantRowAnimated(btn) {
   const row = btn.parentElement;
   row.classList.add('row-exit');
@@ -816,7 +850,10 @@ function addVariantRow(name = '', price = '', minOrder = '1', stock = '', id = '
   div.dataset.id = id;
   div.innerHTML = `
     <input type="text" placeholder="10x10x5 cm" value="${escHtml(name)}" required class="var-name">
-    <input type="number" min="0" placeholder="500" value="${escHtml(price)}" required class="var-price">
+    <div class="input-rp-wrap" title="Harga per pcs (Rupiah)">
+      <span>Rp</span>
+      <input type="text" inputmode="numeric" placeholder="500" value="${escHtml(formatRupiahDigits(price))}" oninput="handleRupiahInput(this)" required class="var-price">
+    </div>
     <div class="input-pcs-wrap" title="Minimal pembelian (pcs)">
       <input type="number" min="1" placeholder="1" value="${escHtml(minOrder)}" required class="var-min">
       <span>pcs</span>
@@ -887,7 +924,7 @@ document.getElementById('product-form').addEventListener('submit', async (e) => 
   const variants = Array.from(variantRows).map(row => {
     const obj = {
       name: row.querySelector('.var-name').value.trim(),
-      price: Number(row.querySelector('.var-price').value),
+      price: parseRupiahNumber(row.querySelector('.var-price').value),
       minOrder: Math.max(1, Number(row.querySelector('.var-min').value) || 1),
       stock: Number(row.querySelector('.var-stock').value)
     };
