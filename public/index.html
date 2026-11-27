@@ -73,6 +73,12 @@ nav a{color:var(--cream);text-decoration:none;padding:10px 0;transition:color .1
 nav a:hover{color:var(--kraft)}
 .header-actions{display:flex;align-items:center;gap:10px}
 
+/* Tombol Ubah Bahasa (ID / EN) */
+.lang-switch{display:inline-flex;align-items:center;background:rgba(255,255,255,.1);border:1.5px solid rgba(212,164,108,.55);border-radius:999px;padding:3px;gap:2px;flex-shrink:0}
+.lang-btn{border:0;background:transparent;color:var(--cream);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;cursor:pointer;letter-spacing:.04em;transition:background .18s ease,color .18s ease}
+.lang-btn:hover{color:#fff}
+.lang-btn.active{background:var(--kraft);color:var(--ink)}
+
 /* Hero */
 .hero{background:var(--kraft);padding-bottom:0}
 .hero .wrap{display:flex;flex-wrap:wrap;align-items:flex-end;gap:24px 48px}
@@ -250,6 +256,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
   html{scroll-behavior:auto}
   .reveal,.reveal-scale,.hero-anim-left,.hero-anim-right,.card,.modal-backdrop,.modal-box,.cart-item,.page-loader,.toast-item{animation:none!important;transition:none!important;opacity:1!important;transform:none!important}
 }
+
 /* Default sembunyikan bottom bar di desktop */
 .mobile-bottom-bar {
   display: none;
@@ -408,7 +415,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
     Lestari Corrugated
   </div>
   <span class="spinner lg"></span>
-  <p>Menyiapkan katalog kardus...</p>
+  <p data-i18n="loader_text">Menyiapkan katalog kardus...</p>
 </div>
 
 <!-- ==================== TOAST NOTIFICATION & CUSTOM CONFIRM ==================== -->
@@ -417,7 +424,7 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 <div id="custom-confirm-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" onclick="if(event.target===this)resolveConfirmModal(false)">
   <div class="modal-box confirm-box">
     <div class="modal-head" style="margin-bottom:12px">
-      <h3 id="confirm-modal-title" style="font-size:19px">Konfirmasi</h3>
+      <h3 id="confirm-modal-title" style="font-size:19px" data-i18n="confirm_default_title">Konfirmasi</h3>
       <button type="button" class="modal-close" onclick="resolveConfirmModal(false)" aria-label="Tutup">✕</button>
     </div>
     <p id="confirm-modal-msg" style="margin:0;font-size:15px;color:var(--soft);line-height:1.5"></p>
@@ -431,8 +438,8 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 <!-- ==================== OVERLAY LOADING CHECKOUT ==================== -->
 <div id="proc-overlay" class="proc-overlay" role="status" aria-live="assertive">
   <span class="spinner lg"></span>
-  <strong style="font-size:19px">Mengunci Stok &amp; Menyiapkan WhatsApp...</strong>
-  <span style="font-size:14px;color:var(--muted)">Mohon tunggu sebentar, halaman akan segera dialihkan.</span>
+  <strong style="font-size:19px" data-i18n="proc_title">Mengunci Stok &amp; Menyiapkan WhatsApp...</strong>
+  <span style="font-size:14px;color:var(--muted)" data-i18n="proc_sub">Mohon tunggu sebentar, halaman akan segera dialihkan.</span>
 </div>
 
 <header>
@@ -441,13 +448,20 @@ footer .wrap{display:flex;flex-wrap:wrap;justify-content:space-between;gap:8px 2
 <svg width="34" height="34" viewBox="0 0 36 36" aria-hidden="true"><polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/><polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/><polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/></svg>
 Lestari Corrugated</a>
 <nav aria-label="Menu utama">
-<a href="#produk">Produk</a><a href="#cara-pesan">Cara pesan</a><a href="#faq">FAQ</a><a href="#kontak">Kontak</a>
+<a href="#produk" data-i18n="nav_products">Produk</a>
+<a href="#cara-pesan" data-i18n="nav_how">Cara pesan</a>
+<a href="#faq" data-i18n="nav_faq">FAQ</a>
+<a href="#kontak" data-i18n="nav_contact">Kontak</a>
 </nav>
+<div class="lang-switch" role="group" aria-label="Pilih Bahasa / Select Language">
+  <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setSiteLanguage('id')">ID</button>
+  <button type="button" class="lang-btn" data-lang-btn="en" onclick="setSiteLanguage('en')">EN</button>
+</div>
 <div class="header-actions">
 <button type="button" onclick="openCartModal()" class="btn btn-kraft" style="min-height:42px;padding:8px 16px;font-size:15px">
-Keranjang (<span id="cart-count">0</span>)
+<span data-i18n="cart_btn">Keranjang</span> (<span id="cart-count">0</span>)
 </button>
-<a class="btn btn-wa wa-umum" href="#" target="_blank" rel="noopener" style="min-height:42px;padding:8px 16px;font-size:15px">Chat WhatsApp</a>
+<a class="btn btn-wa wa-umum" href="#" target="_blank" rel="noopener" style="min-height:42px;padding:8px 16px;font-size:15px" data-i18n="chat_wa">Chat WhatsApp</a>
 </div>
 </div>
 </header>
@@ -455,11 +469,11 @@ Keranjang (<span id="cart-count">0</span>)
 <section id="beranda" class="band hero">
 <div class="wrap">
 <div class="hero-text hero-anim-left">
-<h1>Kardus packing polos, mulai Rp300 per pcs.</h1>
-<p>Kardus corrugated ukuran kecil untuk packing online shop, aksesori, kosmetik, dan barang kecil lainnya. Pilih ukurannya, pesan lewat WhatsApp.</p>
+<h1 data-i18n="hero_title">Kardus packing polos, mulai Rp300 per pcs.</h1>
+<p data-i18n="hero_desc">Kardus corrugated ukuran kecil untuk packing online shop, aksesori, kosmetik, dan barang kecil lainnya. Pilih ukurannya, pesan lewat WhatsApp.</p>
 <div class="row">
-<a class="btn btn-dark wa-umum" href="#" target="_blank" rel="noopener">Pesan via WhatsApp</a>
-<a class="btn btn-line" href="#produk">Lihat produk</a>
+<a class="btn btn-dark wa-umum" href="#" target="_blank" rel="noopener" data-i18n="hero_cta_wa">Pesan via WhatsApp</a>
+<a class="btn btn-line" href="#produk" data-i18n="hero_cta_products">Lihat produk</a>
 </div>
 </div>
 <div class="hero-pic hero-anim-right"><svg id="hero" viewBox="0 -20 560 480" role="img" aria-label="Tumpukan kardus cokelat"></svg></div>
@@ -469,8 +483,8 @@ Keranjang (<span id="cart-count">0</span>)
 <section id="produk" class="band" style="background:var(--paper)">
 <div class="wrap">
 <div class="reveal">
-<h2>Daftar ukuran &amp; harga</h2>
-<p style="margin:0 0 28px">Pilih varian ukuran dan masukkan jumlah <b>pcs</b> sesuai minimal pembelian, lalu pilih masukkan ke keranjang atau langsung beli via WhatsApp.</p>
+<h2 data-i18n="catalog_title">Daftar ukuran &amp; harga</h2>
+<p style="margin:0 0 28px" data-i18n-html="catalog_sub">Pilih varian ukuran dan masukkan jumlah <b>pcs</b> sesuai minimal pembelian, lalu pilih masukkan ke keranjang atau langsung beli via WhatsApp.</p>
 </div>
 <div class="grid" id="products"></div>
 </div>
@@ -478,71 +492,71 @@ Keranjang (<span id="cart-count">0</span>)
 
 <section class="band dark">
 <div class="wrap">
-<h2 class="reveal">Kenapa belanja di Lestari Corrugated</h2>
+<h2 class="reveal" data-i18n="why_title">Kenapa belanja di Lestari Corrugated</h2>
 <div class="whys">
-<div class="reveal" style="transition-delay:.05s"><b>Harga terjangkau</b><span>Mulai Rp300 per pcs, cocok untuk usaha kecil yang baru mulai.</span></div>
-<div class="reveal" style="transition-delay:.12s"><b>Pilihan ukuran lengkap</b><span>Berbagai ukuran kardus dan varian untuk barang-barang kecil maupun sedang.</span></div>
-<div class="reveal" style="transition-delay:.19s"><b>Dibantu pilih yang pas</b><span>Sebutkan barang Anda, kami sarankan ukuran yang paling cocok.</span></div>
-<div class="reveal" style="transition-delay:.26s"><b>Pesan mudah</b><span>Bisa langsung beli 1 produk atau kumpulkan banyak ukuran di keranjang.</span></div>
+<div class="reveal" style="transition-delay:.05s"><b data-i18n="why_1_t">Harga terjangkau</b><span data-i18n="why_1_d">Mulai Rp300 per pcs, cocok untuk usaha kecil yang baru mulai.</span></div>
+<div class="reveal" style="transition-delay:.12s"><b data-i18n="why_2_t">Pilihan ukuran lengkap</b><span data-i18n="why_2_d">Berbagai ukuran kardus dan varian untuk barang-barang kecil maupun sedang.</span></div>
+<div class="reveal" style="transition-delay:.19s"><b data-i18n="why_3_t">Dibantu pilih yang pas</b><span data-i18n="why_3_d">Sebutkan barang Anda, kami sarankan ukuran yang paling cocok.</span></div>
+<div class="reveal" style="transition-delay:.26s"><b data-i18n="why_4_t">Pesan mudah</b><span data-i18n="why_4_d">Bisa langsung beli 1 produk atau kumpulkan banyak ukuran di keranjang.</span></div>
 </div>
 </div>
 </section>
 
 <section id="cara-pesan" class="band" style="background:var(--kraft)">
 <div class="wrap">
-<h2 class="reveal">Cara pesan</h2>
+<h2 class="reveal" data-i18n="how_title">Cara pesan</h2>
 <ol class="steps">
-<li class="reveal-scale" style="transition-delay:.05s"><span class="n">1</span><b>Pilih ukuran &amp; pcs</b><span>Tentukan varian ukuran dan jumlah pcs sesuai minimal pembelian.</span></li>
-<li class="reveal-scale" style="transition-delay:.12s"><span class="n">2</span><b>Isi nama &amp; alamat otomatis</b><span>Ketik nama jalan atau pilih wilayah otomatis untuk pengiriman.</span></li>
-<li class="reveal-scale" style="transition-delay:.19s"><span class="n">3</span><b>Klik Bayar &amp; WhatsApp</b><span>Stok otomatis dikunci sistem dan rincian pesanan terkirim ke WhatsApp kami.</span></li>
-<li class="reveal-scale" style="transition-delay:.26s"><span class="n">4</span><b>Transfer &amp; kirim</b><span>Setelah konfirmasi pembayaran, pesanan langsung diproses dan dikirim.</span></li>
+<li class="reveal-scale" style="transition-delay:.05s"><span class="n">1</span><b data-i18n="step_1_t">Pilih ukuran &amp; pcs</b><span data-i18n="step_1_d">Tentukan varian ukuran dan jumlah pcs sesuai minimal pembelian.</span></li>
+<li class="reveal-scale" style="transition-delay:.12s"><span class="n">2</span><b data-i18n="step_2_t">Isi nama &amp; alamat otomatis</b><span data-i18n="step_2_d">Ketik nama jalan atau pilih wilayah otomatis untuk pengiriman.</span></li>
+<li class="reveal-scale" style="transition-delay:.19s"><span class="n">3</span><b data-i18n="step_3_t">Klik Bayar &amp; WhatsApp</b><span data-i18n="step_3_d">Stok otomatis dikunci sistem dan rincian pesanan terkirim ke WhatsApp kami.</span></li>
+<li class="reveal-scale" style="transition-delay:.26s"><span class="n">4</span><b data-i18n="step_4_t">Transfer &amp; kirim</b><span data-i18n="step_4_d">Setelah konfirmasi pembayaran, pesanan langsung diproses dan dikirim.</span></li>
 </ol>
 </div>
 </section>
 
 <section id="faq" class="band" style="background:var(--paper)">
 <div class="wrap faq">
-<h2 class="reveal" style="margin-bottom:20px">Pertanyaan umum</h2>
-<details class="reveal" open><summary>Berapa minimal pembelian kardus?</summary><p>Setiap ukuran/varian memiliki ketentuan minimal pembelian (pcs) yang tertera langsung di kartu produk.</p></details>
-<details class="reveal"><summary>Bagaimana cara tahu harganya?</summary><p>Pilih varian ukuran pada katalog di atas, harga per pcs, minimal beli, dan sisa stok akan langsung muncul otomatis.</p></details>
-<details class="reveal"><summary>Saya belum tahu ukurannya, bisa dibantu?</summary><p>Bisa. Ceritakan barang apa yang mau dikemas lewat WhatsApp, kami bantu sarankan ukuran yang cocok.</p></details>
-<details class="reveal"><summary>Ukuran yang saya cari tidak ada di daftar?</summary><p>Tanyakan saja lewat WhatsApp, kami cek apakah ukuran tersebut bisa disediakan.</p></details>
-<details class="reveal"><summary>Bagaimana pengirimannya?</summary><p>Pesanan dikirim ke alamat Anda. Ongkos kirim dihitung sesuai lokasi dan berat pesanan.</p></details>
+<h2 class="reveal" style="margin-bottom:20px" data-i18n="faq_title">Pertanyaan umum</h2>
+<details class="reveal" open><summary data-i18n="faq_1_q">Berapa minimal pembelian kardus?</summary><p data-i18n="faq_1_a">Setiap ukuran/varian memiliki ketentuan minimal pembelian (pcs) yang tertera langsung di kartu produk.</p></details>
+<details class="reveal"><summary data-i18n="faq_2_q">Bagaimana cara tahu harganya?</summary><p data-i18n="faq_2_a">Pilih varian ukuran pada katalog di atas, harga per pcs, minimal beli, dan sisa stok akan langsung muncul otomatis.</p></details>
+<details class="reveal"><summary data-i18n="faq_3_q">Saya belum tahu ukurannya, bisa dibantu?</summary><p data-i18n="faq_3_a">Bisa. Ceritakan barang apa yang mau dikemas lewat WhatsApp, kami bantu sarankan ukuran yang cocok.</p></details>
+<details class="reveal"><summary data-i18n="faq_4_q">Ukuran yang saya cari tidak ada di daftar?</summary><p data-i18n="faq_4_a">Tanyakan saja lewat WhatsApp, kami cek apakah ukuran tersebut bisa disediakan.</p></details>
+<details class="reveal"><summary data-i18n="faq_5_q">Bagaimana pengirimannya?</summary><p data-i18n="faq_5_a">Pesanan dikirim ke alamat Anda. Ongkos kirim dihitung sesuai lokasi dan berat pesanan.</p></details>
 </div>
 </section>
 
 <section id="kontak" class="band dark contact">
 <div class="wrap">
 <div class="contact-info reveal">
-<h2>Pesan cepat atau tanya harga</h2>
-<p style="margin:0 0 24px;font-size:18px">Isi formulir ini untuk memesan langsung satu ukuran atau menanyakan ukuran khusus ke WhatsApp kami.</p>
+<h2 data-i18n="contact_title">Pesan cepat atau tanya harga</h2>
+<p style="margin:0 0 24px;font-size:18px" data-i18n="contact_sub">Isi formulir ini untuk memesan langsung satu ukuran atau menanyakan ukuran khusus ke WhatsApp kami.</p>
 <p style="margin:0 0 6px;font-weight:800;color:#fff">WhatsApp</p>
 <a class="phone wa-umum" href="#" target="_blank" rel="noopener">0895-3361-45836</a>
 </div>
 <form id="order" class="order-form reveal-scale">
-<label>Nama<input id="f-nama" type="text" placeholder="Nama Anda / nama usaha" autocomplete="name" required></label>
+<label><span data-i18n="form_name">Nama</span><input id="f-nama" type="text" data-i18n-placeholder="form_name_ph" placeholder="Nama Anda / nama usaha" autocomplete="name" required></label>
 <div class="two">
-<label>Pilih Produk &amp; Varian<select id="f-jenis"></select></label>
-<label>Jumlah (pcs)<input id="f-jumlah" type="number" min="1" placeholder="100 pcs" inputmode="numeric" required></label>
+<label><span data-i18n="form_select_prod">Pilih Produk &amp; Varian</span><select id="f-jenis"></select></label>
+<label><span data-i18n="form_qty">Jumlah (pcs)</span><input id="f-jumlah" type="number" min="1" placeholder="100 pcs" inputmode="numeric" required></label>
 </div>
-<p id="f-total" style="margin:0;background:var(--paper);border-radius:6px;padding:12px 14px;font-size:15px">Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.</p>
+<p id="f-total" style="margin:0;background:var(--paper);border-radius:6px;padding:12px 14px;font-size:15px" data-i18n="form_total_default">Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.</p>
 
 <!-- Widget Alamat Otomatis (Form Kontak) -->
 <div id="quick-addr-container"></div>
 
-<label><span>Catatan / Note Pemesanan <span class="opt-tag">(opsional)</span></span><textarea id="f-catatan" rows="2" placeholder="Contoh: Request packing, kirim sore hari, atau catatan khusus lainnya..."></textarea></label>
+<label><span><span data-i18n="form_note">Catatan / Note Pemesanan</span> <span class="opt-tag" data-i18n="optional_tag">(opsional)</span></span><textarea id="f-catatan" rows="2" data-i18n-placeholder="form_note_ph" placeholder="Contoh: Request packing, kirim sore hari, atau catatan khusus lainnya..."></textarea></label>
 <div class="buyer-note-warning" style="margin:0">
-<strong>⚠️ Catatan Sebelum Bayar:</strong>
-<span>Jika memilih produk dari daftar, stok akan otomatis dikurangi saat tombol ditekan sebelum menuju WhatsApp.</span>
+<strong data-i18n="note_before_pay_short">⚠️ Catatan Sebelum Bayar:</strong>
+<span data-i18n="note_before_pay_short_desc">Jika memilih produk dari daftar, stok akan otomatis dikurangi saat tombol ditekan sebelum menuju WhatsApp.</span>
 </div>
-<button type="submit" id="f-submit" class="btn btn-wa" style="min-height:52px">Bayar &amp; Kirim ke WhatsApp</button>
+<button type="submit" id="f-submit" class="btn btn-wa" style="min-height:52px" data-i18n="form_submit_btn">Bayar &amp; Kirim ke WhatsApp</button>
 </form>
 </div>
 </section>
 
 <footer>
 <div class="wrap">
-<span><strong style="color:var(--cream)">Lestari Corrugated</strong> · Jual kardus corrugated</span>
+<span><strong style="color:var(--cream)">Lestari Corrugated</strong> · <span data-i18n="footer_tagline">Jual kardus corrugated</span></span>
 <span>© 2026 Lestari Corrugated</span>
 </div>
 </footer>
@@ -550,6 +564,7 @@ Keranjang (<span id="cart-count">0</span>)
 <a class="float-wa wa-umum" href="#" target="_blank" rel="noopener" aria-label="Chat WhatsApp">
 <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><path d="M21 12a9 9 0 0 1-13.5 7.8L3 21l1.2-4.4A9 9 0 1 1 21 12z"/></svg>
 </a>
+
 <!-- Bottom Tab Bar Khusus Mobile -->
 <nav class="mobile-bottom-bar" aria-label="Menu Cepat Mobile">
   <button type="button" class="mbar-btn mbar-cart" onclick="openCartModal()">
@@ -561,21 +576,22 @@ Keranjang (<span id="cart-count">0</span>)
       </svg>
       <span id="mobile-cart-badge" class="mbar-badge">0</span>
     </span>
-    <span>Keranjang</span>
+    <span data-i18n="cart_btn">Keranjang</span>
   </button>
 
   <a href="#" target="_blank" rel="noopener" class="mbar-btn mbar-wa wa-umum">
     <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
       <path d="M12.04 2C6.58 2 2.13 6.45 2.13 11.91c0 1.75.46 3.45 1.32 4.95L2.05 22l5.25-1.38c1.45.79 3.08 1.21 4.74 1.21 5.46 0 9.91-4.45 9.91-9.91C21.95 6.45 17.5 2 12.04 2zm5.82 14.01c-.24.68-1.41 1.3-1.95 1.38-.5.07-1.13.1-1.82-.11-.42-.13-.96-.31-1.65-.61-2.9-1.25-4.79-4.17-4.94-4.36-.14-.19-1.18-1.57-1.18-3 0-1.43.75-2.13 1.01-2.42.27-.29.58-.36.77-.36.19 0 .39 0 .56.01.18.01.42-.07.66.5.24.58.82 2.01.89 2.15.07.14.12.31.02.5-.1.19-.14.31-.29.48-.14.17-.3.38-.43.51-.14.14-.29.3-.13.58.17.29.75 1.23 1.6 1.99 1.1.98 2.02 1.28 2.31 1.43.29.14.46.12.63-.07.17-.19.72-.84.91-1.13.19-.29.39-.24.65-.14.27.1 1.69.8 1.98.94.29.14.48.22.55.34.07.12.07.69-.17 1.37z"/>
     </svg>
-    <span>Chat WhatsApp</span>
+    <span data-i18n="chat_wa">Chat WhatsApp</span>
   </a>
 </nav>
+
 <!-- ==================== POPUP PILIHAN AKSI (KERANJANG / LANGSUNG BELI) ==================== -->
 <div id="action-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="action-title" onclick="if(event.target===this)closeActionModal()">
 <div class="modal-box">
 <div class="modal-head">
-<h3 id="action-title" style="font-size:21px">Konfirmasi Pilihan Produk</h3>
+<h3 id="action-title" style="font-size:21px" data-i18n="modal_action_title">Konfirmasi Pilihan Produk</h3>
 <button type="button" class="modal-close" onclick="closeActionModal()" aria-label="Tutup">✕</button>
 </div>
 
@@ -584,7 +600,7 @@ Keranjang (<span id="cart-count">0</span>)
 <p id="modal-prod-variant" style="margin:0 0 8px;font-size:14px;color:var(--soft);font-weight:700">Varian: -</p>
 <div style="display:flex;flex-wrap:wrap;justify-content:space-between;align-items:center;gap:10px;padding-top:8px;border-top:1px solid var(--kraft)">
 <div>
-<span style="font-size:12px;color:var(--soft);display:block">Jumlah Pesanan (<span id="modal-min-label">Min. 1 pcs</span>):</span>
+<span style="font-size:12px;color:var(--soft);display:block"><span data-i18n="modal_order_qty_label">Jumlah Pesanan</span> (<span id="modal-min-label">Min. 1 pcs</span>):</span>
 <div class="qty-input-box" style="margin-top:4px;background:#fff">
 <button type="button" onclick="stepModalQty(-1)">-</button>
 <input type="number" id="modal-qty" min="1" value="1" oninput="updateModalSubtotal()">
@@ -593,7 +609,7 @@ Keranjang (<span id="cart-count">0</span>)
 </div>
 </div>
 <div style="text-align:right">
-<span style="font-size:12px;color:var(--soft);display:block">Total Harga:</span>
+<span style="font-size:12px;color:var(--soft);display:block" data-i18n="modal_total_price">Total Harga:</span>
 <strong id="modal-subtotal" style="font-size:22px;font-weight:900;color:var(--ink)">Rp0</strong>
 </div>
 </div>
@@ -601,38 +617,38 @@ Keranjang (<span id="cart-count">0</span>)
 
 <!-- Note Opsional Pemesanan -->
 <label style="margin-bottom:4px">
-  <span>Catatan / Note Pemesanan <span class="opt-tag">(opsional)</span></span>
-  <textarea id="modal-order-note" rows="2" placeholder="Contoh: Request warna lakban, kirim sore hari, atau catatan khusus untuk pesanan ini..."></textarea>
+  <span><span data-i18n="form_note">Catatan / Note Pemesanan</span> <span class="opt-tag" data-i18n="optional_tag">(opsional)</span></span>
+  <textarea id="modal-order-note" rows="2" data-i18n-placeholder="modal_note_ph" placeholder="Contoh: Request warna lakban, kirim sore hari, atau catatan khusus untuk pesanan ini..."></textarea>
 </label>
 
 <!-- 2 Opsi Utama -->
 <div class="choice-grid">
-<button type="button" onclick="confirmAddToCartFromModal()" class="btn btn-dark" style="min-height:48px">
+<button type="button" onclick="confirmAddToCartFromModal()" class="btn btn-dark" style="min-height:48px" data-i18n="btn_add_cart">
 + Masukkan ke Keranjang
 </button>
-<button type="button" onclick="openDirectBuyForm()" class="btn btn-wa" style="min-height:48px">
+<button type="button" onclick="openDirectBuyForm()" class="btn btn-wa" style="min-height:48px" data-i18n="btn_direct_buy">
 ⚡ Langsung Beli
 </button>
 </div>
 
 <!-- Form Langsung Beli + Alamat Otomatis API -->
 <div id="direct-buy-section" class="direct-buy-panel">
-<label>Nama Pembeli / Usaha <span style="color:#B91C1C">*</span>
-<input type="text" id="direct-buyer-name" placeholder="Masukkan nama lengkap Anda">
+<label><span><span data-i18n="buyer_name_label">Nama Pembeli / Usaha</span> <span style="color:#B91C1C">*</span></span>
+<input type="text" id="direct-buyer-name" data-i18n-placeholder="buyer_name_ph" placeholder="Masukkan nama lengkap Anda">
 </label>
 
 <div id="direct-addr-container"></div>
 
 <div class="buyer-note-warning">
-<strong>⚠️ Catatan Penting Sebelum Bayar:</strong>
+<strong data-i18n="important_note_title">⚠️ Catatan Penting Sebelum Bayar:</strong>
 <ul>
-<li>Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
-<li>Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikurangi</b> dari sistem.</li>
-<li>Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian &amp; alamat pesanan.</li>
+<li data-i18n-html="important_note_1">Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
+<li data-i18n-html="important_note_2">Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikurangi</b> dari sistem.</li>
+<li data-i18n="important_note_3">Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian &amp; alamat pesanan.</li>
 </ul>
 </div>
 
-<button type="button" id="btn-direct-checkout" onclick="processDirectCheckout()" class="btn btn-wa" style="width:100%;min-height:50px">
+<button type="button" id="btn-direct-checkout" onclick="processDirectCheckout()" class="btn btn-wa" style="width:100%;min-height:50px" data-i18n="btn_pay_direct">
 Bayar &amp; Lanjut ke WhatsApp
 </button>
 </div>
@@ -643,50 +659,370 @@ Bayar &amp; Lanjut ke WhatsApp
 <div id="cart-modal" class="modal-backdrop" role="dialog" aria-modal="true" aria-labelledby="cart-title" onclick="if(event.target===this)closeCartModal()">
 <div class="modal-box">
 <div class="modal-head">
-<h3 id="cart-title" style="font-size:22px">Ringkasan Keranjang</h3>
+<h3 id="cart-title" style="font-size:22px" data-i18n="cart_modal_title">Ringkasan Keranjang</h3>
 <button type="button" class="modal-close" onclick="closeCartModal()" aria-label="Tutup">✕</button>
 </div>
 
 <div id="cart-items" class="cart-list"></div>
 
 <div class="total-bar">
-<span>Total Pembayaran</span>
+<span data-i18n="cart_total_label">Total Pembayaran</span>
 <span id="cart-total">Rp0</span>
 </div>
 
 <div style="display:grid;gap:12px">
-<label>Nama Pembeli / Usaha <span style="color:#B91C1C">*</span>
-<input type="text" id="buyer-name" placeholder="Masukkan nama lengkap Anda">
+<label><span><span data-i18n="buyer_name_label">Nama Pembeli / Usaha</span> <span style="color:#B91C1C">*</span></span>
+<input type="text" id="buyer-name" data-i18n-placeholder="buyer_name_ph" placeholder="Masukkan nama lengkap Anda">
 </label>
 
 <div id="cart-addr-container"></div>
 
-<label><span>Catatan Tambahan <span class="opt-tag">(opsional)</span></span>
-<textarea id="buyer-note" rows="2" placeholder="Contoh: Kirim sore hari, titip satpam, dll."></textarea>
+<label><span><span data-i18n="cart_extra_note">Catatan Tambahan</span> <span class="opt-tag" data-i18n="optional_tag">(opsional)</span></span>
+<textarea id="buyer-note" rows="2" data-i18n-placeholder="cart_note_ph" placeholder="Contoh: Kirim sore hari, titip satpam, dll."></textarea>
 </label>
 </div>
 
 <div class="buyer-note-warning">
-<strong>⚠️ Catatan Penting Sebelum Bayar:</strong>
+<strong data-i18n="important_note_title">⚠️ Catatan Penting Sebelum Bayar:</strong>
 <ul>
-<li>Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
-<li>Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikunci/dikurangi</b> dari sistem.</li>
-<li>Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian pesanan untuk konfirmasi pembayaran.</li>
+<li data-i18n-html="important_note_1">Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.</li>
+<li data-i18n-html="important_note_2">Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikunci/dikurangi</b> dari sistem.</li>
+<li data-i18n="important_note_3_cart">Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian pesanan untuk konfirmasi pembayaran.</li>
 </ul>
 </div>
 
-<button type="button" id="btn-checkout" onclick="processCheckout()" class="btn btn-wa" style="width:100%;min-height:52px">
+<button type="button" id="btn-checkout" onclick="processCheckout()" class="btn btn-wa" style="width:100%;min-height:52px" data-i18n="btn_pay_cart">
 Bayar &amp; Pesan via WhatsApp
 </button>
 </div>
 </div>
 
 <script>
-// ====== KONFIGURASI TOKO & HELPER KEAMANAN (ANTI-XSS) ======
+// ====== KONFIGURASI TOKO, BAHASA (ID / EN) & HELPER KEAMANAN (ANTI-XSS) ======
 const WA = '628159246516';
 const SHOP = 'Lestari Corrugated';
+const LANG_KEY = 'lestari_lang';
+let currentLang = localStorage.getItem(LANG_KEY) || 'id';
 
-const waLink = (t) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(t);
+const SITE_I18N = {
+  id: {
+    page_title: 'Lestari Corrugated — Jual Kardus Corrugated',
+    loader_text: 'Menyiapkan katalog kardus...',
+    confirm_default_title: 'Konfirmasi',
+    proc_title: 'Mengunci Stok & Menyiapkan WhatsApp...',
+    proc_sub: 'Mohon tunggu sebentar, halaman akan segera dialihkan.',
+    nav_products: 'Produk',
+    nav_how: 'Cara pesan',
+    nav_faq: 'FAQ',
+    nav_contact: 'Kontak',
+    cart_btn: 'Keranjang',
+    chat_wa: 'Chat WhatsApp',
+    hero_title: 'Kardus packing polos, mulai Rp300 per pcs.',
+    hero_desc: 'Kardus corrugated ukuran kecil untuk packing online shop, aksesori, kosmetik, dan barang kecil lainnya. Pilih ukurannya, pesan lewat WhatsApp.',
+    hero_cta_wa: 'Pesan via WhatsApp',
+    hero_cta_products: 'Lihat produk',
+    catalog_title: 'Daftar ukuran & harga',
+    catalog_sub: 'Pilih varian ukuran dan masukkan jumlah <b>pcs</b> sesuai minimal pembelian, lalu pilih masukkan ke keranjang atau langsung beli via WhatsApp.',
+    why_title: 'Kenapa belanja di Lestari Corrugated',
+    why_1_t: 'Harga terjangkau',
+    why_1_d: 'Mulai Rp300 per pcs, cocok untuk usaha kecil yang baru mulai.',
+    why_2_t: 'Pilihan ukuran lengkap',
+    why_2_d: 'Berbagai ukuran kardus dan varian untuk barang-barang kecil maupun sedang.',
+    why_3_t: 'Dibantu pilih yang pas',
+    why_3_d: 'Sebutkan barang Anda, kami sarankan ukuran yang paling cocok.',
+    why_4_t: 'Pesan mudah',
+    why_4_d: 'Bisa langsung beli 1 produk atau kumpulkan banyak ukuran di keranjang.',
+    how_title: 'Cara pesan',
+    step_1_t: 'Pilih ukuran & pcs',
+    step_1_d: 'Tentukan varian ukuran dan jumlah pcs sesuai minimal pembelian.',
+    step_2_t: 'Isi nama & alamat otomatis',
+    step_2_d: 'Ketik nama jalan atau pilih wilayah otomatis untuk pengiriman.',
+    step_3_t: 'Klik Bayar & WhatsApp',
+    step_3_d: 'Stok otomatis dikunci sistem dan rincian pesanan terkirim ke WhatsApp kami.',
+    step_4_t: 'Transfer & kirim',
+    step_4_d: 'Setelah konfirmasi pembayaran, pesanan langsung diproses dan dikirim.',
+    faq_title: 'Pertanyaan umum',
+    faq_1_q: 'Berapa minimal pembelian kardus?',
+    faq_1_a: 'Setiap ukuran/varian memiliki ketentuan minimal pembelian (pcs) yang tertera langsung di kartu produk.',
+    faq_2_q: 'Bagaimana cara tahu harganya?',
+    faq_2_a: 'Pilih varian ukuran pada katalog di atas, harga per pcs, minimal beli, dan sisa stok akan langsung muncul otomatis.',
+    faq_3_q: 'Saya belum tahu ukurannya, bisa dibantu?',
+    faq_3_a: 'Bisa. Ceritakan barang apa yang mau dikemas lewat WhatsApp, kami bantu sarankan ukuran yang cocok.',
+    faq_4_q: 'Ukuran yang saya cari tidak ada di daftar?',
+    faq_4_a: 'Tanyakan saja lewat WhatsApp, kami cek apakah ukuran tersebut bisa disediakan.',
+    faq_5_q: 'Bagaimana pengirimannya?',
+    faq_5_a: 'Pesanan dikirim ke alamat Anda. Ongkos kirim dihitung sesuai lokasi dan berat pesanan.',
+    contact_title: 'Pesan cepat atau tanya harga',
+    contact_sub: 'Isi formulir ini untuk memesan langsung satu ukuran atau menanyakan ukuran khusus ke WhatsApp kami.',
+    form_name: 'Nama',
+    form_name_ph: 'Nama Anda / nama usaha',
+    form_select_prod: 'Pilih Produk & Varian',
+    form_qty: 'Jumlah (pcs)',
+    form_total_default: 'Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.',
+    form_note: 'Catatan / Note Pemesanan',
+    optional_tag: '(opsional)',
+    form_note_ph: 'Contoh: Request packing, kirim sore hari, atau catatan khusus lainnya...',
+    note_before_pay_short: '⚠️ Catatan Sebelum Bayar:',
+    note_before_pay_short_desc: 'Jika memilih produk dari daftar, stok akan otomatis dikurangi saat tombol ditekan sebelum menuju WhatsApp.',
+    form_submit_btn: 'Bayar & Kirim ke WhatsApp',
+    footer_tagline: 'Jual kardus corrugated',
+    modal_action_title: 'Konfirmasi Pilihan Produk',
+    modal_order_qty_label: 'Jumlah Pesanan',
+    modal_total_price: 'Total Harga:',
+    modal_note_ph: 'Contoh: Request warna lakban, kirim sore hari, atau catatan khusus untuk pesanan ini...',
+    btn_add_cart: '+ Masukkan ke Keranjang',
+    btn_direct_buy: '⚡ Langsung Beli',
+    buyer_name_label: 'Nama Pembeli / Usaha',
+    buyer_name_ph: 'Masukkan nama lengkap Anda',
+    important_note_title: '⚠️ Catatan Penting Sebelum Bayar:',
+    important_note_1: 'Pastikan varian ukuran, jumlah <b>pcs</b>, dan alamat sudah sesuai sebelum menekan tombol bayar.',
+    important_note_2: 'Saat tombol <b>Bayar</b> diklik, <b>stok produk akan otomatis dikurangi</b> dari sistem.',
+    important_note_3: 'Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian & alamat pesanan.',
+    important_note_3_cart: 'Anda akan langsung diarahkan ke WhatsApp Admin beserta rincian pesanan untuk konfirmasi pembayaran.',
+    btn_pay_direct: 'Bayar & Lanjut ke WhatsApp',
+    cart_modal_title: 'Ringkasan Keranjang',
+    cart_total_label: 'Total Pembayaran',
+    cart_extra_note: 'Catatan Tambahan',
+    cart_note_ph: 'Contoh: Kirim sore hari, titip satpam, dll.',
+    btn_pay_cart: 'Bayar & Pesan via WhatsApp',
+
+    // Dynamic strings
+    toast_success: 'Berhasil',
+    toast_warning: 'Perhatian',
+    toast_error: 'Gagal',
+    toast_info: 'Info',
+    btn_cancel: 'Batal',
+    btn_yes_delete: 'Ya, Hapus',
+    addr_title: 'Alamat Pengiriman',
+    addr_open_region: '+ Pilih Provinsi / Wilayah',
+    addr_close_region: '− Tutup Pilihan Wilayah',
+    addr_search_ph: 'Ketik nama jalan / perumahan / desa...',
+    addr_prov_loading: 'Memuat Provinsi...',
+    addr_prov_pick: 'Pilih Provinsi',
+    addr_city_pick: 'Pilih Kota / Kab.',
+    addr_city_loading: 'Memuat Kota/Kab...',
+    addr_city_fail: 'Gagal memuat Kota/Kab (cek koneksi)',
+    addr_dist_pick: 'Pilih Kecamatan',
+    addr_dist_loading: 'Memuat Kecamatan...',
+    addr_dist_fail: 'Gagal memuat Kecamatan',
+    addr_vill_pick: 'Pilih Kelurahan / Desa',
+    addr_vill_loading: 'Memuat Kelurahan...',
+    addr_vill_fail: 'Gagal memuat Kelurahan',
+    addr_auto_filled: '✓ Wilayah Otomatis Terisi:',
+    addr_detail_ph: 'Detail alamat: Nama Jalan / Gang, No. Rumah, RT/RW, Patokan...',
+    addr_detail_ph_filled: 'Tinggal tambahin nama jalan / gang, no. rumah, RT/RW, patokan...',
+    addr_notfound_hint: 'Jalan / gang belum muncul di atas?',
+    addr_notfound_manual_btn: '📍 Pilih Provinsi, Kota, Kecamatan & Kelurahan Manual',
+    addr_notfound_empty: 'Alamat <b>"{q}"</b> tidak ketemu di pencarian otomatis.',
+    addr_notfound_open_btn: '📍 Buka Pilihan Provinsi, Kota, Kecamatan & Kelurahan',
+    addr_err_empty: 'Harap pilih Provinsi/Wilayah atau isi Alamat Pengiriman terlebih dahulu.',
+    addr_err_city: 'Harap pilih Kota / Kabupaten pada alamat pengiriman.',
+    addr_err_dist: 'Harap pilih Kecamatan pada alamat pengiriman.',
+    addr_err_vill: 'Harap pilih Kelurahan / Desa pada alamat pengiriman.',
+    addr_err_detail: 'Harap isi detail jalan / nomor rumah / RT-RW di kolom bawah.',
+    prod_load_fail: 'Gagal memuat produk dari server.',
+    prod_empty: 'Belum ada produk yang ditambahkan admin.',
+    prod_min_badge: 'Min. beli: {n} pcs',
+    prod_stock_avail: '· Stok: {n} pcs',
+    prod_stock_out: '· Stok habis',
+    prod_default_desc: 'Kardus packing berkualitas siap kirim.',
+    prod_pick_var: 'Pilih Varian:',
+    prod_qty_label: 'Jumlah:',
+    prod_btn_buy: 'Beli / + Keranjang',
+    prod_btn_out: 'Stok Habis',
+    toast_min_var: 'Minimal pembelian untuk varian "{name}" adalah {n} pcs.',
+    toast_max_var: 'Stok tersedia untuk varian ini hanya {n} pcs.',
+    toast_var_out: 'Stok varian ini sedang habis.',
+    modal_var_info: 'Varian: {v} · {price} / pcs (Min. beli: {min} pcs · Stok: {stock} pcs)',
+    modal_min_tag: 'Min. {n} pcs',
+    toast_min_prod: 'Minimal pembelian untuk produk ini adalah {n} pcs.',
+    toast_stock_left: 'Stok tersisa hanya {n} pcs.',
+    toast_cart_exceed: 'Total di keranjang melebihi stok tersedia ({n} pcs).',
+    toast_added_cart: '{item} ditambahkan ke keranjang.',
+    toast_fill_buyer: 'Harap isi Nama Pembeli terlebih dahulu.',
+    processing_stock: 'Memproses Stok...',
+    toast_insufficient_stock: 'Stok tidak mencukupi.',
+    toast_server_err: 'Gagal terhubung ke server.',
+    confirm_del_cart_title: 'Hapus Item dari Keranjang?',
+    confirm_del_cart_msg: 'Jumlah pesanan di bawah minimal pembelian ({min} pcs). Hapus "{item}" dari keranjang?',
+    toast_removed_cart: 'Item dihapus dari keranjang.',
+    cart_empty_msg: 'Keranjang belanja masih kosong.',
+    cart_item_meta: '{price} / pcs · Min. {min} pcs',
+    toast_cart_empty: 'Keranjang belanja masih kosong!',
+    quick_custom_opt: 'Ukuran lain / minta saran',
+    quick_min_ph: 'Min. {n} pcs',
+    quick_estimate: 'Perkiraan harga: {qty} pcs × {price} = {total} (Min. beli: {min} pcs · belum termasuk ongkir)',
+    toast_fill_name: 'Harap isi nama Anda terlebih dahulu.',
+    toast_fill_qty: 'Harap isi jumlah pesanan.',
+    toast_min_quick: 'Minimal pembelian "{item}" adalah {min} pcs.',
+    toast_max_quick: 'Stok "{item}" hanya tersisa {stock} pcs.',
+    wa_greeting: 'Halo Lestari Corrugated, saya mau tanya soal produk kardus.'
+  },
+  en: {
+    page_title: 'Lestari Corrugated — Corrugated Cardboard Boxes',
+    loader_text: 'Loading cardboard catalog...',
+    confirm_default_title: 'Confirmation',
+    proc_title: 'Locking Stock & Opening WhatsApp...',
+    proc_sub: 'Please wait a moment, redirecting to WhatsApp.',
+    nav_products: 'Products',
+    nav_how: 'How to Order',
+    nav_faq: 'FAQ',
+    nav_contact: 'Contact',
+    cart_btn: 'Cart',
+    chat_wa: 'Chat WhatsApp',
+    hero_title: 'Plain packing boxes, starting from Rp300 per pcs.',
+    hero_desc: 'Small corrugated cardboard boxes for online shops, accessories, cosmetics, and small items. Pick your size and order easily via WhatsApp.',
+    hero_cta_wa: 'Order via WhatsApp',
+    hero_cta_products: 'Browse Products',
+    catalog_title: 'Sizes & Pricing',
+    catalog_sub: 'Select a size variant and enter the quantity in <b>pcs</b> according to the minimum order, then add to cart or buy directly via WhatsApp.',
+    why_title: 'Why Shop at Lestari Corrugated',
+    why_1_t: 'Affordable Pricing',
+    why_1_d: 'Starting from Rp300 per pcs, ideal for growing small businesses.',
+    why_2_t: 'Complete Size Options',
+    why_2_d: 'Wide range of box dimensions and variants for small to medium items.',
+    why_3_t: 'Free Size Recommendation',
+    why_3_d: 'Tell us what you are packing, and we will recommend the best fit.',
+    why_4_t: 'Easy Ordering',
+    why_4_d: 'Buy a single item immediately or combine multiple sizes in your cart.',
+    how_title: 'How to Order',
+    step_1_t: 'Choose Size & Qty',
+    step_1_d: 'Select the size variant and quantity (pcs) meeting the minimum order.',
+    step_2_t: 'Fill Name & Address',
+    step_2_d: 'Type your street name or select your region automatically for delivery.',
+    step_3_t: 'Click Pay & WhatsApp',
+    step_3_d: 'Stock is automatically reserved and order details are sent to our WhatsApp.',
+    step_4_t: 'Transfer & Ship',
+    step_4_d: 'Once payment is confirmed, your order is processed and shipped promptly.',
+    faq_title: 'Frequently Asked Questions',
+    faq_1_q: 'What is the minimum order quantity?',
+    faq_1_a: 'Each size/variant has its own minimum order requirement (pcs) displayed directly on the product card.',
+    faq_2_q: 'How do I check the prices?',
+    faq_2_a: 'Select a size variant in the catalog above—unit price, minimum order, and available stock update automatically.',
+    faq_3_q: 'Not sure which size fits my product?',
+    faq_3_a: 'No problem! Tell us what you want to pack via WhatsApp and we will suggest the most suitable box size.',
+    faq_4_q: 'What if the size I need is not listed?',
+    faq_4_a: 'Just ask us via WhatsApp and we will check if we can supply or custom-make that size.',
+    faq_5_q: 'How does shipping work?',
+    faq_5_a: 'Orders are delivered directly to your address. Shipping fees are calculated based on destination and total weight.',
+    contact_title: 'Quick Order or Price Inquiry',
+    contact_sub: 'Fill out this form to order one size directly or inquire about custom sizes via WhatsApp.',
+    form_name: 'Name',
+    form_name_ph: 'Your name / business name',
+    form_select_prod: 'Select Product & Variant',
+    form_qty: 'Quantity (pcs)',
+    form_total_default: 'Select a product and enter quantity to see the estimated price.',
+    form_note: 'Order Notes',
+    optional_tag: '(optional)',
+    form_note_ph: 'Example: Packing request, afternoon delivery, or other special notes...',
+    note_before_pay_short: '⚠️ Note Before Paying:',
+    note_before_pay_short_desc: 'When selecting a listed product, stock is automatically deducted upon clicking submit before redirecting to WhatsApp.',
+    form_submit_btn: 'Pay & Send to WhatsApp',
+    footer_tagline: 'Corrugated cardboard boxes supplier',
+    modal_action_title: 'Confirm Product Selection',
+    modal_order_qty_label: 'Order Quantity',
+    modal_total_price: 'Total Price:',
+    modal_note_ph: 'Example: Tape color preference, afternoon delivery, or special notes for this order...',
+    btn_add_cart: '+ Add to Cart',
+    btn_direct_buy: '⚡ Direct Buy',
+    buyer_name_label: 'Buyer / Business Name',
+    buyer_name_ph: 'Enter your full name',
+    important_note_title: '⚠️ Important Note Before Paying:',
+    important_note_1: 'Please verify the size variant, quantity (<b>pcs</b>), and delivery address before clicking pay.',
+    important_note_2: 'Once <b>Pay</b> is clicked, <b>product stock will be automatically deducted</b> from the system.',
+    important_note_3: 'You will be redirected to Admin WhatsApp with your order summary & delivery address.',
+    important_note_3_cart: 'You will be redirected to Admin WhatsApp with your order summary for payment confirmation.',
+    btn_pay_direct: 'Pay & Continue to WhatsApp',
+    cart_modal_title: 'Cart Summary',
+    cart_total_label: 'Total Payment',
+    cart_extra_note: 'Additional Notes',
+    cart_note_ph: 'Example: Deliver in the afternoon, leave with security, etc.',
+    btn_pay_cart: 'Pay & Order via WhatsApp',
+
+    // Dynamic strings
+    toast_success: 'Success',
+    toast_warning: 'Warning',
+    toast_error: 'Error',
+    toast_info: 'Info',
+    btn_cancel: 'Cancel',
+    btn_yes_delete: 'Yes, Remove',
+    addr_title: 'Delivery Address',
+    addr_open_region: '+ Select Province / Region',
+    addr_close_region: '− Close Region Selector',
+    addr_search_ph: 'Type street name / residential area / village...',
+    addr_prov_loading: 'Loading Provinces...',
+    addr_prov_pick: 'Select Province',
+    addr_city_pick: 'Select City / Regency',
+    addr_city_loading: 'Loading Cities...',
+    addr_city_fail: 'Failed to load Cities (check connection)',
+    addr_dist_pick: 'Select District',
+    addr_dist_loading: 'Loading Districts...',
+    addr_dist_fail: 'Failed to load Districts',
+    addr_vill_pick: 'Select Sub-district / Village',
+    addr_vill_loading: 'Loading Villages...',
+    addr_vill_fail: 'Failed to load Villages',
+    addr_auto_filled: '✓ Auto-Filled Region:',
+    addr_detail_ph: 'Address details: Street name, House No., RT/RW, Landmark...',
+    addr_detail_ph_filled: 'Add street name, house number, RT/RW, landmark...',
+    addr_notfound_hint: 'Street / alley not showing up above?',
+    addr_notfound_manual_btn: '📍 Select Province, City, District & Village Manually',
+    addr_notfound_empty: 'Address <b>"{q}"</b> was not found in auto-search.',
+    addr_notfound_open_btn: '📍 Open Province, City, District & Village Selector',
+    addr_err_empty: 'Please select a Province/Region or fill in the Delivery Address first.',
+    addr_err_city: 'Please select a City / Regency for the delivery address.',
+    addr_err_dist: 'Please select a District for the delivery address.',
+    addr_err_vill: 'Please select a Sub-district / Village for the delivery address.',
+    addr_err_detail: 'Please fill in street details / house number / RT-RW below.',
+    prod_load_fail: 'Failed to load products from server.',
+    prod_empty: 'No products added by admin yet.',
+    prod_min_badge: 'Min. order: {n} pcs',
+    prod_stock_avail: '· Stock: {n} pcs',
+    prod_stock_out: '· Out of stock',
+    prod_default_desc: 'Quality packing boxes ready to ship.',
+    prod_pick_var: 'Select Variant:',
+    prod_qty_label: 'Quantity:',
+    prod_btn_buy: 'Buy / + Cart',
+    prod_btn_out: 'Out of Stock',
+    toast_min_var: 'Minimum order for variant "{name}" is {n} pcs.',
+    toast_max_var: 'Available stock for this variant is only {n} pcs.',
+    toast_var_out: 'This variant is currently out of stock.',
+    modal_var_info: 'Variant: {v} · {price} / pcs (Min. order: {min} pcs · Stock: {stock} pcs)',
+    modal_min_tag: 'Min. {n} pcs',
+    toast_min_prod: 'Minimum order for this product is {n} pcs.',
+    toast_stock_left: 'Only {n} pcs left in stock.',
+    toast_cart_exceed: 'Total in cart exceeds available stock ({n} pcs).',
+    toast_added_cart: '{item} added to cart.',
+    toast_fill_buyer: 'Please enter the Buyer Name first.',
+    processing_stock: 'Reserving Stock...',
+    toast_insufficient_stock: 'Insufficient stock.',
+    toast_server_err: 'Failed to connect to server.',
+    confirm_del_cart_title: 'Remove Item from Cart?',
+    confirm_del_cart_msg: 'Quantity is below the minimum order ({min} pcs). Remove "{item}" from cart?',
+    toast_removed_cart: 'Item removed from cart.',
+    cart_empty_msg: 'Your shopping cart is empty.',
+    cart_item_meta: '{price} / pcs · Min. {min} pcs',
+    toast_cart_empty: 'Your shopping cart is empty!',
+    quick_custom_opt: 'Custom size / ask for recommendation',
+    quick_min_ph: 'Min. {n} pcs',
+    quick_estimate: 'Estimated price: {qty} pcs × {price} = {total} (Min. order: {min} pcs · excluding shipping)',
+    toast_fill_name: 'Please enter your name first.',
+    toast_fill_qty: 'Please enter the order quantity.',
+    toast_min_quick: 'Minimum order for "{item}" is {min} pcs.',
+    toast_max_quick: 'Remaining stock for "{item}" is only {stock} pcs.',
+    wa_greeting: 'Hello Lestari Corrugated, I would like to inquire about cardboard boxes.'
+  }
+};
+
+function t(key, vars = {}) {
+  const dict = SITE_I18N[currentLang] || SITE_I18N.id;
+  let str = dict[key] ?? SITE_I18N.id[key] ?? key;
+  Object.entries(vars).forEach(([k, v]) => {
+    str = str.replaceAll(`{${k}}`, String(v));
+  });
+  return str;
+}
+
+const waLink = (text) => 'https://wa.me/' + WA + '?text=' + encodeURIComponent(text);
 const rp = (n) => 'Rp' + Number(n).toLocaleString('id-ID');
 const escHtml = (str) => String(str || '').replace(/[&<>"']/g, (m) => ({
   '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;'
@@ -697,23 +1033,79 @@ const safeUrl = (url) => {
   return /^(https?:\/\/|\/)/i.test(raw) ? escHtml(raw) : '';
 };
 
-document.querySelectorAll('.wa-umum').forEach((a) => {
-  a.href = waLink('Halo ' + SHOP + ', saya mau tanya soal produk kardus.');
-});
+function updateGeneralWaLinks() {
+  document.querySelectorAll('.wa-umum').forEach((a) => {
+    a.href = waLink(t('wa_greeting'));
+  });
+}
+
+function setSiteLanguage(lang) {
+  currentLang = lang === 'en' ? 'en' : 'id';
+  localStorage.setItem(LANG_KEY, currentLang);
+  document.documentElement.lang = currentLang;
+  document.title = t('page_title');
+
+  document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.langBtn === currentLang);
+  });
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+
+  document.querySelectorAll('[data-i18n-html]').forEach((el) => {
+    el.innerHTML = t(el.dataset.i18nHtml);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    el.setAttribute('placeholder', t(el.dataset.i18nPlaceholder));
+  });
+
+  // Update state dinamis widget alamat tanpa menghapus pilihan user
+  ['direct', 'cart', 'quick'].forEach((prefix) => {
+    const panel = document.getElementById(`${prefix}-region-panel`);
+    const toggleBtn = document.getElementById(`${prefix}-toggle-region`);
+    if (panel && toggleBtn) {
+      toggleBtn.textContent = t(panel.classList.contains('open') ? 'addr_close_region' : 'addr_open_region');
+    }
+    updateRegionPreview(prefix);
+  });
+
+  updateGeneralWaLinks();
+
+  if (products.length) {
+    renderProducts(false);
+    populateQuickOrderSelect();
+  }
+  updateCartUI();
+
+  if (activeModalItem) {
+    document.getElementById('modal-prod-variant').textContent = t('modal_var_info', {
+      v: activeModalItem.variantName,
+      price: rp(activeModalItem.price),
+      min: activeModalItem.minOrder,
+      stock: activeModalItem.maxStock
+    });
+    document.getElementById('modal-min-label').textContent = t('modal_min_tag', { n: activeModalItem.minOrder });
+  }
+}
 
 // ====== CUSTOM TOAST & CONFIRM MODAL ======
-const TOAST_META = {
-  success: { title: 'Berhasil', icon: '✓' },
-  warning: { title: 'Perhatian', icon: '!' },
-  error: { title: 'Gagal', icon: '✕' },
-  info: { title: 'Info', icon: 'i' }
-};
+function getToastMeta(type) {
+  const map = {
+    success: { title: t('toast_success'), icon: '✓' },
+    warning: { title: t('toast_warning'), icon: '!' },
+    error: { title: t('toast_error'), icon: '✕' },
+    info: { title: t('toast_info'), icon: 'i' }
+  };
+  return map[type] || map.info;
+}
 
 function showToast(message, type = 'warning', duration = 3600) {
   const container = document.getElementById('toast-container');
   if (!container) return;
 
-  const meta = TOAST_META[type] || TOAST_META.info;
+  const meta = getToastMeta(type);
   const toast = document.createElement('div');
   toast.className = `toast-item ${type}`;
   toast.setAttribute('role', 'status');
@@ -745,13 +1137,13 @@ function showToast(message, type = 'warning', duration = 3600) {
 
 let confirmModalResolver = null;
 
-function showConfirmModal({ title = 'Konfirmasi', message = '', confirmText = 'Ya, Hapus', cancelText = 'Batal' }) {
+function showConfirmModal({ title, message = '', confirmText, cancelText }) {
   return new Promise((resolve) => {
     confirmModalResolver = resolve;
-    document.getElementById('confirm-modal-title').textContent = title;
+    document.getElementById('confirm-modal-title').textContent = title || t('confirm_default_title');
     document.getElementById('confirm-modal-msg').textContent = message;
-    document.getElementById('confirm-btn-ok').textContent = confirmText;
-    document.getElementById('confirm-btn-cancel').textContent = cancelText;
+    document.getElementById('confirm-btn-ok').textContent = confirmText || t('btn_yes_delete');
+    document.getElementById('confirm-btn-cancel').textContent = cancelText || t('btn_cancel');
     openModalAnimated('custom-confirm-modal');
   });
 }
@@ -832,15 +1224,16 @@ function renderAddressWidget(prefix, required = true) {
   return `
     <div class="addr-widget">
       <div class="addr-widget-head">
-        <span>Alamat Pengiriman ${required ? '<span style="color:#B91C1C">*</span>' : ''}</span>
+        <span><span data-i18n="addr_title">${t('addr_title')}</span> ${required ? '<span style="color:#B91C1C">*</span>' : ''}</span>
         <button type="button" id="${prefix}-toggle-region" class="addr-toggle-btn" onclick="toggleRegionPanel('${prefix}')">
-          + Pilih Provinsi / Wilayah
+          ${t('addr_open_region')}
         </button>
       </div>
 
       <div class="addr-search-wrap">
         <input type="text" id="${prefix}-addr-search" autocomplete="off"
-          placeholder="Ketik nama jalan / perumahan / desa..."
+          data-i18n-placeholder="addr_search_ph"
+          placeholder="${t('addr_search_ph')}"
           oninput="onAddrSearchInput('${prefix}')"
           onfocus="if(document.getElementById('${prefix}-addr-suggest').children.length) document.getElementById('${prefix}-addr-suggest').classList.add('open')">
         <span id="${prefix}-addr-spin" class="addr-search-spin"><span class="spinner dark sm"></span></span>
@@ -850,27 +1243,27 @@ function renderAddressWidget(prefix, required = true) {
       <div id="${prefix}-region-panel" class="addr-region-panel">
         <div class="addr-region-grid">
           <select id="${prefix}-prov" onchange="onProvChange('${prefix}')" aria-label="Provinsi">
-            <option value="">Memuat Provinsi...</option>
+            <option value="">${t('addr_prov_loading')}</option>
           </select>
           <select id="${prefix}-city" onchange="onCityChange('${prefix}')" disabled aria-label="Kota / Kabupaten">
-            <option value="">Pilih Kota / Kab.</option>
+            <option value="">${t('addr_city_pick')}</option>
           </select>
           <select id="${prefix}-dist" onchange="onDistChange('${prefix}')" disabled aria-label="Kecamatan">
-            <option value="">Pilih Kecamatan</option>
+            <option value="">${t('addr_dist_pick')}</option>
           </select>
           <select id="${prefix}-vill" onchange="updateRegionPreview('${prefix}')" disabled aria-label="Kelurahan / Desa">
-            <option value="">Pilih Kelurahan / Desa</option>
+            <option value="">${t('addr_vill_pick')}</option>
           </select>
         </div>
       </div>
 
       <div id="${prefix}-auto-preview" class="addr-auto-preview">
-        <strong>✓ Wilayah Otomatis Terisi:</strong>
+        <strong data-i18n="addr_auto_filled">${t('addr_auto_filled')}</strong>
         <span id="${prefix}-auto-text">-</span>
       </div>
 
       <textarea id="${prefix}-addr-detail" rows="2"
-        placeholder="Detail alamat: Nama Jalan / Gang, No. Rumah, RT/RW, Patokan..."></textarea>
+        placeholder="${t('addr_detail_ph')}"></textarea>
     </div>
   `;
 }
@@ -882,7 +1275,7 @@ function toggleRegionPanel(prefix, forceOpen = null) {
 
   const shouldOpen = forceOpen !== null ? forceOpen : !panel.classList.contains('open');
   panel.classList.toggle('open', shouldOpen);
-  btn.textContent = shouldOpen ? '− Tutup Pilihan Wilayah' : '+ Pilih Provinsi / Wilayah';
+  btn.textContent = t(shouldOpen ? 'addr_close_region' : 'addr_open_region');
 }
 
 function openManualRegionFromSearch(prefix) {
@@ -925,12 +1318,12 @@ function updateRegionPreview(prefix) {
     previewText.textContent = joined;
     previewBox.classList.add('show');
     if (detailEl) {
-      detailEl.placeholder = 'Tinggal tambahin nama jalan / gang, no. rumah, RT/RW, patokan...';
+      detailEl.placeholder = t('addr_detail_ph_filled');
     }
   } else {
     previewBox.classList.remove('show');
     if (detailEl) {
-      detailEl.placeholder = 'Detail alamat: Nama Jalan / Gang, No. Rumah, RT/RW, Patokan...';
+      detailEl.placeholder = t('addr_detail_ph');
     }
   }
 }
@@ -944,7 +1337,7 @@ async function initAddressWidget(containerId, prefix, required = true) {
   const fetched = await fetchWilayah('provinces.json');
   const provinces = fetched.length ? fetched : FALLBACK_PROVINCES;
 
-  provSelect.innerHTML = '<option value="">Pilih Provinsi</option>' +
+  provSelect.innerHTML = `<option value="">${t('addr_prov_pick')}</option>` +
     provinces.map((p) => `<option value="${escHtml(p.id)}" data-name="${escHtml(p.name)}">${escHtml(p.name)}</option>`).join('');
 }
 
@@ -954,30 +1347,30 @@ async function onProvChange(prefix) {
   const distSel = document.getElementById(`${prefix}-dist`);
   const villSel = document.getElementById(`${prefix}-vill`);
 
-  distSel.innerHTML = '<option value="">Pilih Kecamatan</option>';
+  distSel.innerHTML = `<option value="">${t('addr_dist_pick')}</option>`;
   distSel.disabled = true;
-  villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+  villSel.innerHTML = `<option value="">${t('addr_vill_pick')}</option>`;
   villSel.disabled = true;
 
   const provId = provSel.value;
   if (!provId) {
-    citySel.innerHTML = '<option value="">Pilih Kota / Kab.</option>';
+    citySel.innerHTML = `<option value="">${t('addr_city_pick')}</option>`;
     citySel.disabled = true;
     updateRegionPreview(prefix);
     return;
   }
 
   citySel.disabled = true;
-  citySel.innerHTML = '<option value="">Memuat Kota/Kab...</option>';
+  citySel.innerHTML = `<option value="">${t('addr_city_loading')}</option>`;
   updateRegionPreview(prefix);
 
   const regencies = await fetchWilayah(`regencies/${provId}.json`);
   if (regencies.length) {
-    citySel.innerHTML = '<option value="">Pilih Kota / Kab.</option>' +
+    citySel.innerHTML = `<option value="">${t('addr_city_pick')}</option>` +
       regencies.map((r) => `<option value="${escHtml(r.id)}" data-name="${escHtml(r.name)}">${escHtml(r.name)}</option>`).join('');
     citySel.disabled = false;
   } else {
-    citySel.innerHTML = '<option value="">Gagal memuat Kota/Kab (cek koneksi)</option>';
+    citySel.innerHTML = `<option value="">${t('addr_city_fail')}</option>`;
   }
 }
 
@@ -986,28 +1379,28 @@ async function onCityChange(prefix) {
   const distSel = document.getElementById(`${prefix}-dist`);
   const villSel = document.getElementById(`${prefix}-vill`);
 
-  villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+  villSel.innerHTML = `<option value="">${t('addr_vill_pick')}</option>`;
   villSel.disabled = true;
 
   const cityId = citySel.value;
   if (!cityId) {
-    distSel.innerHTML = '<option value="">Pilih Kecamatan</option>';
+    distSel.innerHTML = `<option value="">${t('addr_dist_pick')}</option>`;
     distSel.disabled = true;
     updateRegionPreview(prefix);
     return;
   }
 
   distSel.disabled = true;
-  distSel.innerHTML = '<option value="">Memuat Kecamatan...</option>';
+  distSel.innerHTML = `<option value="">${t('addr_dist_loading')}</option>`;
   updateRegionPreview(prefix);
 
   const districts = await fetchWilayah(`districts/${cityId}.json`);
   if (districts.length) {
-    distSel.innerHTML = '<option value="">Pilih Kecamatan</option>' +
+    distSel.innerHTML = `<option value="">${t('addr_dist_pick')}</option>` +
       districts.map((d) => `<option value="${escHtml(d.id)}" data-name="${escHtml(d.name)}">${escHtml(d.name)}</option>`).join('');
     distSel.disabled = false;
   } else {
-    distSel.innerHTML = '<option value="">Gagal memuat Kecamatan</option>';
+    distSel.innerHTML = `<option value="">${t('addr_dist_fail')}</option>`;
   }
 }
 
@@ -1017,23 +1410,23 @@ async function onDistChange(prefix) {
 
   const distId = distSel.value;
   if (!distId) {
-    villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>';
+    villSel.innerHTML = `<option value="">${t('addr_vill_pick')}</option>`;
     villSel.disabled = true;
     updateRegionPreview(prefix);
     return;
   }
 
   villSel.disabled = true;
-  villSel.innerHTML = '<option value="">Memuat Kelurahan...</option>';
+  villSel.innerHTML = `<option value="">${t('addr_vill_loading')}</option>`;
   updateRegionPreview(prefix);
 
   const villages = await fetchWilayah(`villages/${distId}.json`);
   if (villages.length) {
-    villSel.innerHTML = '<option value="">Pilih Kelurahan / Desa</option>' +
+    villSel.innerHTML = `<option value="">${t('addr_vill_pick')}</option>` +
       villages.map((v) => `<option value="${escHtml(v.id)}" data-name="${escHtml(v.name)}">${escHtml(v.name)}</option>`).join('');
     villSel.disabled = false;
   } else {
-    villSel.innerHTML = '<option value="">Gagal memuat Kelurahan</option>';
+    villSel.innerHTML = `<option value="">${t('addr_vill_fail')}</option>`;
   }
 }
 
@@ -1178,9 +1571,9 @@ function onAddrSearchInput(prefix) {
 
       const fallbackFooter = `
         <div class="addr-notfound-box" style="background:var(--paper);border-top:1px solid var(--kraft)">
-          <span>Jalan / gang belum muncul di atas?</span>
+          <span>${t('addr_notfound_hint')}</span>
           <button type="button" class="addr-notfound-btn" onclick="openManualRegionFromSearch('${prefix}')">
-            📍 Pilih Provinsi, Kota, Kecamatan &amp; Kelurahan Manual
+            ${t('addr_notfound_manual_btn')}
           </button>
         </div>
       `;
@@ -1188,9 +1581,9 @@ function onAddrSearchInput(prefix) {
       if (!items.length) {
         suggestEl.innerHTML = `
           <div class="addr-notfound-box">
-            <span>Alamat <b>"${escHtml(rawQuery)}"</b> tidak ketemu di pencarian otomatis.</span>
+            <span>${t('addr_notfound_empty', { q: escHtml(rawQuery) })}</span>
             <button type="button" class="addr-notfound-btn" onclick="openManualRegionFromSearch('${prefix}')">
-              📍 Buka Pilihan Provinsi, Kota, Kecamatan &amp; Kelurahan
+              ${t('addr_notfound_open_btn')}
             </button>
           </div>
         `;
@@ -1290,26 +1683,26 @@ function getFormattedAddress(prefix) {
   if (!provName && !detail) {
     toggleRegionPanel(prefix, true);
     if (detailEl) detailEl.focus();
-    return { valid: false, message: 'Harap pilih Provinsi/Wilayah atau isi Alamat Pengiriman terlebih dahulu.' };
+    return { valid: false, message: t('addr_err_empty') };
   }
   if (provName && !cityName) {
     toggleRegionPanel(prefix, true);
     document.getElementById(`${prefix}-city`)?.focus();
-    return { valid: false, message: 'Harap pilih Kota / Kabupaten pada alamat pengiriman.' };
+    return { valid: false, message: t('addr_err_city') };
   }
   if (cityName && !distName) {
     toggleRegionPanel(prefix, true);
     document.getElementById(`${prefix}-dist`)?.focus();
-    return { valid: false, message: 'Harap pilih Kecamatan pada alamat pengiriman.' };
+    return { valid: false, message: t('addr_err_dist') };
   }
   if (distName && !villName) {
     toggleRegionPanel(prefix, true);
     document.getElementById(`${prefix}-vill`)?.focus();
-    return { valid: false, message: 'Harap pilih Kelurahan / Desa pada alamat pengiriman.' };
+    return { valid: false, message: t('addr_err_vill') };
   }
   if (!detail) {
     if (detailEl) detailEl.focus();
-    return { valid: false, message: 'Harap isi detail jalan / nomor rumah / RT-RW di kolom bawah.' };
+    return { valid: false, message: t('addr_err_detail') };
   }
 
   const fullAddress = joined ? `${detail}, ${joined}` : detail;
@@ -1457,7 +1850,7 @@ async function loadProducts() {
     populateQuickOrderSelect();
   } catch (err) {
     document.getElementById('products').innerHTML =
-      '<p style="color:#B91C1C">Gagal memuat produk dari server.</p>';
+      `<p style="color:#B91C1C">${t('prod_load_fail')}</p>`;
   } finally {
     hidePageLoader();
     initScrollAnimations();
@@ -1493,10 +1886,10 @@ function setCardQty(productId, rawVal) {
   let val = parseInt(rawVal, 10);
 
   if (isNaN(val) || val < effMin) {
-    showToast(`Minimal pembelian untuk varian "${activeVar.name}" adalah ${effMin} pcs.`, 'warning');
+    showToast(t('toast_min_var', { name: activeVar.name, n: effMin }), 'warning');
     val = effMin;
   } else if (activeVar.stock > 0 && val > activeVar.stock) {
-    showToast(`Stok tersedia untuk varian ini hanya ${activeVar.stock} pcs.`, 'warning');
+    showToast(t('toast_max_var', { n: activeVar.stock }), 'warning');
     val = activeVar.stock;
   }
 
@@ -1508,7 +1901,7 @@ function setCardQty(productId, rawVal) {
 function renderProducts(animateReveal = true) {
   const grid = document.getElementById('products');
   if (!products.length) {
-    grid.innerHTML = '<p style="color:var(--soft)">Belum ada produk yang ditambahkan admin.</p>';
+    grid.innerHTML = `<p style="color:var(--soft)">${t('prod_empty')}</p>`;
     return;
   }
 
@@ -1550,18 +1943,18 @@ function renderProducts(animateReveal = true) {
             ${rp(activeVar.price)}<span style="font-size:15px;font-weight:600;color:var(--soft)"> / pcs</span>
           </p>
           <div class="meta-badges">
-            <span class="min-order-badge">Min. beli: ${minNum} pcs</span>
+            <span class="min-order-badge">${t('prod_min_badge', { n: minNum })}</span>
             <span class="stock-info ${stockNum <= 0 ? 'out' : ''}">
-              ${stockNum > 0 ? '· Stok: ' + stockNum + ' pcs' : '· Stok habis'}
+              ${stockNum > 0 ? t('prod_stock_avail', { n: stockNum }) : t('prod_stock_out')}
             </span>
           </div>
-          <p class="desc">${escHtml(p.description || 'Kardus packing berkualitas siap kirim.')}</p>
+          <p class="desc">${escHtml(p.description || t('prod_default_desc'))}</p>
 
-          <span class="var-label">Pilih Varian:</span>
+          <span class="var-label">${t('prod_pick_var')}</span>
           <div class="var-list">${variantButtons}</div>
 
           <div class="qty-card-row">
-            <label for="card-qty-${cleanId}">Jumlah:</label>
+            <label for="card-qty-${cleanId}">${t('prod_qty_label')}</label>
             <div class="qty-input-box">
               <button type="button" onclick="stepCardQty('${cleanId}', -1)" ${stockNum <= 0 ? 'disabled' : ''}>-</button>
               <input type="number" id="card-qty-${cleanId}" value="${qtyVal}" min="${effMin}" max="${stockNum}"
@@ -1574,7 +1967,7 @@ function renderProducts(animateReveal = true) {
           <div class="card-actions">
             <button type="button" onclick="openActionModal('${cleanId}')" ${stockNum <= 0 ? 'disabled' : ''}
               class="btn btn-dark">
-              ${stockNum > 0 ? 'Beli / + Keranjang' : 'Stok Habis'}
+              ${stockNum > 0 ? t('prod_btn_buy') : t('prod_btn_out')}
             </button>
           </div>
         </div>
@@ -1591,7 +1984,7 @@ function openActionModal(productId) {
   if (!product) return;
   const variant = product.variants[selectedVariants[productId] || 0];
   if (!variant || variant.stock <= 0) {
-    return showToast('Stok varian ini sedang habis.', 'error');
+    return showToast(t('toast_var_out'), 'error');
   }
 
   const effMin = getEffectiveMin(variant);
@@ -1599,11 +1992,11 @@ function openActionModal(productId) {
   let qty = inputEl ? parseInt(inputEl.value, 10) : (cardQuantities[productId] || effMin);
 
   if (isNaN(qty) || qty < effMin) {
-    showToast(`Minimal pembelian untuk varian "${variant.name}" adalah ${effMin} pcs.`, 'warning');
+    showToast(t('toast_min_var', { name: variant.name, n: effMin }), 'warning');
     qty = effMin;
   }
   if (qty > variant.stock) {
-    showToast(`Stok tersedia untuk varian ini hanya ${variant.stock} pcs.`, 'warning');
+    showToast(t('toast_max_var', { n: variant.stock }), 'warning');
     qty = variant.stock;
   }
 
@@ -1618,9 +2011,13 @@ function openActionModal(productId) {
   };
 
   document.getElementById('modal-prod-name').textContent = product.name;
-  document.getElementById('modal-prod-variant').textContent =
-    `Varian: ${variant.name} · ${rp(variant.price)} / pcs (Min. beli: ${variant.minOrder || 1} pcs · Stok: ${variant.stock} pcs)`;
-  document.getElementById('modal-min-label').textContent = `Min. ${effMin} pcs`;
+  document.getElementById('modal-prod-variant').textContent = t('modal_var_info', {
+    v: variant.name,
+    price: rp(variant.price),
+    min: variant.minOrder || 1,
+    stock: variant.stock
+  });
+  document.getElementById('modal-min-label').textContent = t('modal_min_tag', { n: effMin });
 
   const modalQtyEl = document.getElementById('modal-qty');
   modalQtyEl.min = effMin;
@@ -1664,13 +2061,13 @@ function getValidatedModalQty() {
   if (!activeModalItem) return 0;
   const qty = parseInt(document.getElementById('modal-qty').value, 10);
   if (isNaN(qty) || qty < activeModalItem.minOrder) {
-    showToast(`Minimal pembelian untuk produk ini adalah ${activeModalItem.minOrder} pcs.`, 'warning');
+    showToast(t('toast_min_prod', { n: activeModalItem.minOrder }), 'warning');
     document.getElementById('modal-qty').value = activeModalItem.minOrder;
     updateModalSubtotal();
     return 0;
   }
   if (qty > activeModalItem.maxStock) {
-    showToast(`Stok tersisa hanya ${activeModalItem.maxStock} pcs.`, 'warning');
+    showToast(t('toast_stock_left', { n: activeModalItem.maxStock }), 'warning');
     return 0;
   }
   return qty;
@@ -1690,7 +2087,7 @@ function confirmAddToCartFromModal() {
   const totalExistingForVariant = getVariantTotalInCart(activeModalItem.productId, activeModalItem.variantId);
 
   if (totalExistingForVariant + qty > activeModalItem.maxStock) {
-    return showToast(`Total di keranjang melebihi stok tersedia (${activeModalItem.maxStock} pcs).`, 'warning');
+    return showToast(t('toast_cart_exceed', { n: activeModalItem.maxStock }), 'warning');
   }
 
   const addedLabel = `${activeModalItem.name} [${activeModalItem.variantName}] (${qty} pcs)`;
@@ -1716,7 +2113,7 @@ function confirmAddToCartFromModal() {
 
   updateCartUI();
   closeActionModal();
-  showToast(`${addedLabel} ditambahkan ke keranjang.`, 'success');
+  showToast(t('toast_added_cart', { item: addedLabel }), 'success');
 }
 
 function openDirectBuyForm() {
@@ -1734,7 +2131,7 @@ async function processDirectCheckout() {
 
   if (!buyerName) {
     document.getElementById('direct-buyer-name').focus();
-    return showToast('Harap isi Nama Pembeli terlebih dahulu.', 'warning');
+    return showToast(t('toast_fill_buyer'), 'warning');
   }
 
   const addrCheck = getFormattedAddress('direct');
@@ -1745,7 +2142,7 @@ async function processDirectCheckout() {
   const btn = document.getElementById('btn-direct-checkout');
   const overlay = document.getElementById('proc-overlay');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+  btn.innerHTML = `<span class="spinner"></span> ${t('processing_stock')}`;
   overlay.classList.add('open');
 
   try {
@@ -1766,7 +2163,7 @@ async function processDirectCheckout() {
     const data = await res.json();
     if (!res.ok) {
       overlay.classList.remove('open');
-      showToast(data.message || 'Stok tidak mencukupi.', 'error');
+      showToast(data.message || t('toast_insufficient_stock'), 'error');
       closeActionModal();
       await loadProducts();
       return;
@@ -1795,10 +2192,10 @@ Stok sudah tercatat di sistem. Mohon info rekening/QRIS untuk pembayaran. Terima
     window.location.href = waLink(pesanWA);
   } catch (err) {
     overlay.classList.remove('open');
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Bayar & Lanjut ke WhatsApp';
+    btn.textContent = t('btn_pay_direct');
   }
 }
 
@@ -1824,20 +2221,20 @@ async function changeCartQty(idx, delta) {
 
   if (newQty < item.minOrder) {
     const ok = await showConfirmModal({
-      title: 'Hapus Item dari Keranjang?',
-      message: `Jumlah pesanan di bawah minimal pembelian (${item.minOrder} pcs). Hapus "${item.name} (${item.variantName})" dari keranjang?`,
-      confirmText: 'Ya, Hapus',
-      cancelText: 'Batal'
+      title: t('confirm_del_cart_title'),
+      message: t('confirm_del_cart_msg', { min: item.minOrder, item: `${item.name} (${item.variantName})` }),
+      confirmText: t('btn_yes_delete'),
+      cancelText: t('btn_cancel')
     });
     if (ok) {
       removeCartItemAnimated(idx);
-      showToast('Item dihapus dari keranjang.', 'info');
+      showToast(t('toast_removed_cart'), 'info');
       return;
     } else {
       item.qty = item.minOrder;
     }
   } else if (otherQty + newQty > item.maxStock) {
-    return showToast(`Stok tersisa hanya ${item.maxStock} pcs.`, 'warning');
+    return showToast(t('toast_stock_left', { n: item.maxStock }), 'warning');
   } else {
     item.qty = newQty;
   }
@@ -1850,10 +2247,10 @@ function setCartQty(idx, rawVal) {
   const otherQty = getVariantTotalInCart(item.productId, item.variantId) - item.qty;
 
   if (isNaN(val) || val < item.minOrder) {
-    showToast(`Minimal pembelian untuk "${item.name} (${item.variantName})" adalah ${item.minOrder} pcs.`, 'warning');
+    showToast(t('toast_min_var', { name: `${item.name} (${item.variantName})`, n: item.minOrder }), 'warning');
     item.qty = item.minOrder;
   } else if (otherQty + val > item.maxStock) {
-    showToast(`Stok tersisa hanya ${item.maxStock} pcs.`, 'warning');
+    showToast(t('toast_stock_left', { n: item.maxStock }), 'warning');
     item.qty = Math.max(item.minOrder, item.maxStock - otherQty);
   } else {
     item.qty = val;
@@ -1871,7 +2268,7 @@ function updateCartUI() {
   let total = 0;
 
   if (!cart.length) {
-    itemsEl.innerHTML = '<p style="text-align:center;color:var(--soft);margin:14px 0">Keranjang belanja masih kosong.</p>';
+    itemsEl.innerHTML = `<p style="text-align:center;color:var(--soft);margin:14px 0">${t('cart_empty_msg')}</p>`;
   } else {
     itemsEl.innerHTML = cart.map((item, idx) => {
       total += item.price * item.qty;
@@ -1882,7 +2279,7 @@ function updateCartUI() {
         <div class="cart-item">
           <div>
             <strong style="display:block;font-size:15px">${escHtml(item.name)} (${escHtml(item.variantName)})</strong>
-            <span style="font-size:13px;color:var(--soft)">${rp(item.price)} / pcs · Min. ${Number(item.minOrder) || 1} pcs</span>
+            <span style="font-size:13px;color:var(--soft)">${t('cart_item_meta', { price: rp(item.price), min: Number(item.minOrder) || 1 })}</span>
             ${noteHtml}
           </div>
           <div class="qty-ctrl">
@@ -1908,14 +2305,14 @@ function closeCartModal() {
 }
 
 async function processCheckout() {
-  if (!cart.length) return showToast('Keranjang belanja masih kosong!', 'warning');
+  if (!cart.length) return showToast(t('toast_cart_empty'), 'warning');
 
   const buyerName = document.getElementById('buyer-name').value.trim();
   const buyerNote = document.getElementById('buyer-note').value.trim();
 
   if (!buyerName) {
     document.getElementById('buyer-name').focus();
-    return showToast('Harap isi Nama Pembeli terlebih dahulu.', 'warning');
+    return showToast(t('toast_fill_buyer'), 'warning');
   }
 
   const addrCheck = getFormattedAddress('cart');
@@ -1926,7 +2323,7 @@ async function processCheckout() {
   const btn = document.getElementById('btn-checkout');
   const overlay = document.getElementById('proc-overlay');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+  btn.innerHTML = `<span class="spinner"></span> ${t('processing_stock')}`;
   overlay.classList.add('open');
 
   try {
@@ -1939,7 +2336,7 @@ async function processCheckout() {
     const data = await res.json();
     if (!res.ok) {
       overlay.classList.remove('open');
-      showToast(data.message || 'Stok tidak mencukupi.', 'error');
+      showToast(data.message || t('toast_insufficient_stock'), 'error');
       await loadProducts();
       return;
     }
@@ -1976,10 +2373,10 @@ Stok sudah tercatat di sistem. Mohon info rekening/QRIS untuk pembayaran. Terima
     window.location.href = waLink(pesanWA);
   } catch (err) {
     overlay.classList.remove('open');
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Bayar & Pesan via WhatsApp';
+    btn.textContent = t('btn_pay_cart');
   }
 }
 
@@ -1988,6 +2385,7 @@ let flatOptions = [];
 
 function populateQuickOrderSelect() {
   const sel = document.getElementById('f-jenis');
+  const prevVal = sel.value;
   flatOptions = [];
 
   products.forEach((p) => {
@@ -2006,10 +2404,14 @@ function populateQuickOrderSelect() {
     });
   });
 
+  const stockWord = currentLang === 'en' ? 'Stock' : 'Stok';
   sel.innerHTML = flatOptions.map((opt, i) =>
-    `<option value="${Number(i)}">${escHtml(opt.name)} (${escHtml(opt.variantName)}) — ${rp(opt.price)} [Min: ${Number(opt.minOrder) || 1} · Stok: ${Number(opt.stock) || 0} pcs]</option>`
-  ).join('') + '<option value="custom">Ukuran lain / minta saran</option>';
+    `<option value="${Number(i)}">${escHtml(opt.name)} (${escHtml(opt.variantName)}) — ${rp(opt.price)} [Min: ${Number(opt.minOrder) || 1} · ${stockWord}: ${Number(opt.stock) || 0} pcs]</option>`
+  ).join('') + `<option value="custom">${t('quick_custom_opt')}</option>`;
 
+  if (prevVal && Array.from(sel.options).some((o) => o.value === prevVal)) {
+    sel.value = prevVal;
+  }
   onQuickOptionChange();
 }
 
@@ -2020,7 +2422,7 @@ function onQuickOptionChange() {
 
   if (opt) {
     qtyInput.min = opt.minOrder;
-    qtyInput.placeholder = `Min. ${opt.minOrder} pcs`;
+    qtyInput.placeholder = t('quick_min_ph', { n: opt.minOrder });
     if (!qtyInput.value || Number(qtyInput.value) < opt.minOrder) {
       qtyInput.value = opt.minOrder;
     }
@@ -2038,9 +2440,14 @@ function updateQuickTotal() {
   const totalEl = document.getElementById('f-total');
 
   if (opt && qty > 0) {
-    totalEl.textContent = `Perkiraan harga: ${qty.toLocaleString('id-ID')} pcs × ${rp(opt.price)} = ${rp(qty * opt.price)} (Min. beli: ${opt.minOrder} pcs · belum termasuk ongkir)`;
+    totalEl.textContent = t('quick_estimate', {
+      qty: qty.toLocaleString('id-ID'),
+      price: rp(opt.price),
+      total: rp(qty * opt.price),
+      min: opt.minOrder
+    });
   } else {
-    totalEl.textContent = 'Pilih produk dan isi jumlah pcs untuk melihat perkiraan harga.';
+    totalEl.textContent = t('form_total_default');
   }
 }
 
@@ -2055,8 +2462,8 @@ document.getElementById('order').addEventListener('submit', async (e) => {
   const catatan = document.getElementById('f-catatan').value.trim();
   const opt = flatOptions[idx];
 
-  if (!nama) return showToast('Harap isi nama Anda terlebih dahulu.', 'warning');
-  if (!qty || qty <= 0) return showToast('Harap isi jumlah pesanan.', 'warning');
+  if (!nama) return showToast(t('toast_fill_name'), 'warning');
+  if (!qty || qty <= 0) return showToast(t('toast_fill_qty'), 'warning');
 
   const addrCheck = getFormattedAddress('quick');
   if (!addrCheck.valid) {
@@ -2065,16 +2472,16 @@ document.getElementById('order').addEventListener('submit', async (e) => {
 
   if (opt) {
     if (qty < opt.minOrder) {
-      return showToast(`Minimal pembelian "${opt.name} (${opt.variantName})" adalah ${opt.minOrder} pcs.`, 'warning');
+      return showToast(t('toast_min_quick', { item: `${opt.name} (${opt.variantName})`, min: opt.minOrder }), 'warning');
     }
     if (qty > opt.stock) {
-      return showToast(`Stok "${opt.name} (${opt.variantName})" hanya tersisa ${opt.stock} pcs.`, 'warning');
+      return showToast(t('toast_max_quick', { item: `${opt.name} (${opt.variantName})`, stock: opt.stock }), 'warning');
     }
 
     const btn = document.getElementById('f-submit');
     const overlay = document.getElementById('proc-overlay');
     btn.disabled = true;
-    btn.innerHTML = '<span class="spinner"></span> Memproses Stok...';
+    btn.innerHTML = `<span class="spinner"></span> ${t('processing_stock')}`;
     overlay.classList.add('open');
 
     try {
@@ -2095,7 +2502,7 @@ document.getElementById('order').addEventListener('submit', async (e) => {
       const data = await res.json();
       if (!res.ok) {
         overlay.classList.remove('open');
-        showToast(data.message || 'Stok tidak mencukupi.', 'error');
+        showToast(data.message || t('toast_insufficient_stock'), 'error');
         await loadProducts();
         return;
       }
@@ -2115,10 +2522,10 @@ Stok sudah tercatat di sistem. Mohon info pembayarannya. Terima kasih.`;
       window.location.href = waLink(msg);
     } catch (err) {
       overlay.classList.remove('open');
-      showToast('Gagal terhubung ke server.', 'error');
+      showToast(t('toast_server_err'), 'error');
     } finally {
       btn.disabled = false;
-      btn.textContent = 'Bayar & Kirim ke WhatsApp';
+      btn.textContent = t('form_submit_btn');
     }
   } else {
     const barisCatatan = catatan ? `\n*Catatan:* ${catatan}` : '';
@@ -2131,6 +2538,7 @@ Stok sudah tercatat di sistem. Mohon info pembayarannya. Terima kasih.`;
 initAddressWidget('direct-addr-container', 'direct', true);
 initAddressWidget('cart-addr-container', 'cart', true);
 initAddressWidget('quick-addr-container', 'quick', true);
+setSiteLanguage(currentLang);
 updateCartUI();
 loadProducts();
 </script>

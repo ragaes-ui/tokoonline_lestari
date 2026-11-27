@@ -55,6 +55,18 @@ header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
 .logo{display:flex;align-items:center;gap:10px;color:var(--cream);text-decoration:none;font-weight:900;font-size:20px;font-stretch:110%}
 .badge-admin{background:var(--kraft);color:var(--ink);font-size:11px;font-weight:900;padding:3px 8px;border-radius:4px;text-transform:uppercase;letter-spacing:.05em}
 
+/* Tombol Ubah Bahasa (ID / EN) */
+.lang-switch{display:inline-flex;align-items:center;background:rgba(255,255,255,.1);border:1.5px solid rgba(212,164,108,.55);border-radius:999px;padding:3px;gap:2px;flex-shrink:0}
+.lang-btn{border:0;background:transparent;color:var(--cream);font-size:12px;font-weight:800;padding:4px 10px;border-radius:999px;cursor:pointer;letter-spacing:.04em;transition:background .18s ease,color .18s ease}
+.lang-btn:hover{color:#fff}
+.lang-btn.active{background:var(--kraft);color:var(--ink)}
+
+/* Varian Tombol Bahasa di Halaman Login (Latar Terang) */
+.login-card .lang-switch{background:var(--paper);border-color:var(--kraft)}
+.login-card .lang-btn{color:var(--soft)}
+.login-card .lang-btn:hover{color:var(--ink)}
+.login-card .lang-btn.active{background:var(--ink);color:var(--cream)}
+
 /* Buttons */
 .btn{display:inline-flex;align-items:center;justify-content:center;gap:6px;min-height:42px;padding:9px 16px;border-radius:6px;font-weight:700;text-decoration:none;border:0;cursor:pointer;transition:filter .15s,opacity .15s,transform .15s;font-size:14px}
 .btn:active:not(:disabled){transform:scale(.98)}
@@ -72,7 +84,8 @@ header .wrap{display:flex;flex-wrap:wrap;align-items:center;justify-content:spac
 /* Login Screen */
 .login-screen{min-height:100vh;display:flex;align-items:center;justify-content:center;padding:20px;background:var(--kraft)}
 .login-card{background:#fff;border-radius:14px;max-width:410px;width:100%;padding:32px 28px;box-shadow:0 18px 40px rgba(35,26,18,.22);border:2px solid var(--ink);animation:modalPopIn .35s cubic-bezier(.22,1,.36,1) both}
-.login-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px;margin-bottom:6px}
+.login-top{display:flex;align-items:center;justify-content:space-between;gap:10px;margin-bottom:6px}
+.login-brand{display:flex;align-items:center;gap:10px;font-weight:900;font-size:21px}
 .login-sub{margin:0 0 22px;color:var(--soft);font-size:14px}
 
 /* Main & Stats */
@@ -227,7 +240,7 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
 <div id="custom-confirm-modal" class="adm-confirm-backdrop" role="dialog" aria-modal="true" aria-labelledby="confirm-modal-title" onclick="if(event.target===this)resolveConfirmModal(false)">
   <div class="adm-confirm-box">
     <div class="adm-confirm-head">
-      <h3 id="confirm-modal-title">Konfirmasi</h3>
+      <h3 id="confirm-modal-title" data-i18n="confirm_default_title">Konfirmasi</h3>
       <button type="button" class="modal-close" onclick="resolveConfirmModal(false)" aria-label="Tutup">✕</button>
     </div>
     <p id="confirm-modal-msg" style="margin:0;font-size:15px;color:var(--soft);line-height:1.5"></p>
@@ -241,36 +254,42 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
 <!-- ==================== LOADING AWAL VERIFIKASI ADMIN ==================== -->
 <div id="auth-loader" class="auth-loader" role="status" aria-live="polite">
   <span class="spinner lg"></span>
-  <p>Memeriksa sesi admin...</p>
+  <p data-i18n="auth_loader_text">Memeriksa sesi admin...</p>
 </div>
 
 <!-- ==================== HALAMAN LOGIN ADMIN ==================== -->
 <div id="login-view" class="login-screen hidden">
   <div class="login-card">
-    <div class="login-brand">
-      <svg width="32" height="32" viewBox="0 0 36 36" aria-hidden="true">
-        <polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/>
-        <polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/>
-        <polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/>
-      </svg>
-      Lestari Corrugated
+    <div class="login-top">
+      <div class="login-brand">
+        <svg width="32" height="32" viewBox="0 0 36 36" aria-hidden="true">
+          <polygon points="18,3 33,11 18,19 3,11" fill="#D9AC74"/>
+          <polygon points="3,11 18,19 18,34 3,26" fill="#A06F3B"/>
+          <polygon points="33,11 18,19 18,34 33,26" fill="#B9844B"/>
+        </svg>
+        Lestari Corrugated
+      </div>
+      <div class="lang-switch" role="group" aria-label="Pilih Bahasa / Select Language">
+        <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setAdminLanguage('id')">ID</button>
+        <button type="button" class="lang-btn" data-lang-btn="en" onclick="setAdminLanguage('en')">EN</button>
+      </div>
     </div>
-    <p class="login-sub">Masuk ke Panel Admin untuk mengelola produk, stok, dan harga.</p>
+    <p class="login-sub" data-i18n="login_sub">Masuk ke Panel Admin untuk mengelola produk, stok, dan harga.</p>
 
     <form id="login-form">
       <div class="field">
-        <label for="login-username">Username</label>
+        <label for="login-username" data-i18n="login_user_label">Username</label>
         <input type="text" id="login-username" value="admin" required autocomplete="username">
       </div>
       <div class="field">
-        <label for="login-password">Password</label>
-        <input type="password" id="login-password" placeholder="Masukkan password admin" required autocomplete="current-password">
+        <label for="login-password" data-i18n="login_pass_label">Password</label>
+        <input type="password" id="login-password" data-i18n-placeholder="login_pass_ph" placeholder="Masukkan password admin" required autocomplete="current-password">
       </div>
-      <button type="submit" id="btn-login" class="btn btn-dark" style="width:100%;min-height:46px;margin-top:6px">
+      <button type="submit" id="btn-login" class="btn btn-dark" style="width:100%;min-height:46px;margin-top:6px" data-i18n="login_btn">
         Masuk ke Dashboard
       </button>
       <div style="text-align:center;margin-top:14px">
-        <a href="/" style="font-size:13.5px;color:var(--soft);font-weight:700">← Kembali ke Halaman Toko</a>
+        <a href="/" style="font-size:13.5px;color:var(--soft);font-weight:700" data-i18n="back_to_store">← Kembali ke Halaman Toko</a>
       </div>
     </form>
   </div>
@@ -290,9 +309,13 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
         <span class="badge-admin">Admin</span>
       </a>
       <div style="display:flex;flex-wrap:wrap;gap:8px;align-items:center">
-        <a href="/" class="btn btn-kraft btn-sm">← Lihat Toko</a>
-        <button type="button" onclick="openPasswordModal()" class="btn btn-line-light btn-sm">Ganti Password</button>
-        <button type="button" onclick="logout()" class="btn btn-del btn-sm">Keluar</button>
+        <div class="lang-switch" role="group" aria-label="Pilih Bahasa / Select Language">
+          <button type="button" class="lang-btn active" data-lang-btn="id" onclick="setAdminLanguage('id')">ID</button>
+          <button type="button" class="lang-btn" data-lang-btn="en" onclick="setAdminLanguage('en')">EN</button>
+        </div>
+        <a href="/" class="btn btn-kraft btn-sm" data-i18n="nav_view_store">← Lihat Toko</a>
+        <button type="button" onclick="openPasswordModal()" class="btn btn-line-light btn-sm" data-i18n="nav_change_pass">Ganti Password</button>
+        <button type="button" onclick="logout()" class="btn btn-del btn-sm" data-i18n="nav_logout">Keluar</button>
       </div>
     </div>
   </header>
@@ -302,19 +325,19 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
       <!-- Ringkasan Statistik -->
       <section class="stats" aria-label="Ringkasan Inventaris">
         <div class="stat-card reveal" style="transition-delay:.03s">
-          <span>Total Produk</span>
+          <span data-i18n="stat_products">Total Produk</span>
           <strong id="stat-products">0</strong>
         </div>
         <div class="stat-card reveal" style="transition-delay:.09s">
-          <span>Total Varian</span>
+          <span data-i18n="stat_variants">Total Varian</span>
           <strong id="stat-variants">0</strong>
         </div>
         <div class="stat-card reveal" style="transition-delay:.15s">
-          <span>Total Stok (pcs)</span>
+          <span data-i18n="stat_stock">Total Stok (pcs)</span>
           <strong id="stat-stock">0 pcs</strong>
         </div>
         <div class="stat-card warn reveal" style="transition-delay:.21s">
-          <span>Stok Menipis / Habis</span>
+          <span data-i18n="stat_low">Stok Menipis / Habis</span>
           <strong id="stat-low">0</strong>
         </div>
       </section>
@@ -323,8 +346,8 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
         <!-- Kolom Kiri: Form Tambah / Edit Produk -->
         <section class="panel panel-sticky reveal" style="transition-delay:.1s">
           <div class="panel-head">
-            <h2 id="form-title">Tambah Produk Baru</h2>
-            <button type="button" id="btn-cancel-edit" onclick="resetForm()" class="btn btn-line btn-sm" style="display:none">
+            <h2 id="form-title" data-i18n="form_title_add">Tambah Produk Baru</h2>
+            <button type="button" id="btn-cancel-edit" onclick="resetForm()" class="btn btn-line btn-sm" style="display:none" data-i18n="btn_cancel_edit">
               Batal Edit
             </button>
           </div>
@@ -333,23 +356,23 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
             <input type="hidden" id="edit-product-id">
 
             <div class="field">
-              <label for="name">Nama Produk <span style="color:var(--danger)">*</span></label>
-              <input type="text" id="name" required placeholder="Contoh: Kardus Polos Die Cut">
+              <label for="name"><span data-i18n="field_name">Nama Produk</span> <span style="color:var(--danger)">*</span></label>
+              <input type="text" id="name" required data-i18n-placeholder="field_name_ph" placeholder="Contoh: Kardus Polos Die Cut">
             </div>
 
             <div class="field">
-              <label for="category">Kategori</label>
-              <input type="text" id="category" placeholder="Contoh: Kardus Polos / Mailer Box">
+              <label for="category" data-i18n="field_category">Kategori</label>
+              <input type="text" id="category" data-i18n-placeholder="field_category_ph" placeholder="Contoh: Kardus Polos / Mailer Box">
             </div>
 
             <div class="field">
-              <label for="imageFile">Foto Produk (Upload ke Supabase)</label>
+              <label for="imageFile" data-i18n="field_photo">Foto Produk (Upload ke Supabase)</label>
               <div class="upload-box">
                 <input type="file" id="imageFile" accept="image/jpeg,image/png,image/webp" onchange="previewImage(event)">
-                <small style="display:block;color:var(--soft);margin-top:4px;font-size:12px">Format JPG, PNG, WEBP · Maksimal 5MB</small>
+                <small style="display:block;color:var(--soft);margin-top:4px;font-size:12px" data-i18n="field_photo_hint">Format JPG, PNG, WEBP · Maksimal 5MB</small>
                 <div id="preview-wrap" class="preview-wrap">
                   <img id="image-preview" alt="Pratinjau foto produk">
-                  <button type="button" id="btn-delete-photo" onclick="deleteProductImage()" class="btn btn-del btn-sm btn-del-photo" style="display:none">
+                  <button type="button" id="btn-delete-photo" onclick="deleteProductImage()" class="btn btn-del btn-sm btn-del-photo" style="display:none" data-i18n="btn_del_photo">
                     🗑 Hapus Foto Produk
                   </button>
                 </div>
@@ -357,27 +380,27 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
             </div>
 
             <div class="field">
-              <label for="description">Deskripsi Produk</label>
-              <textarea id="description" rows="2" placeholder="Keterangan bahan, ketebalan flute, kegunaan, dll."></textarea>
+              <label for="description" data-i18n="field_desc">Deskripsi Produk</label>
+              <textarea id="description" rows="2" data-i18n-placeholder="field_desc_ph" placeholder="Keterangan bahan, ketebalan flute, kegunaan, dll."></textarea>
             </div>
 
             <!-- Input Dinamis Varian + Harga Rupiah + Min Beli + Stok Pcs -->
             <div class="variants-box">
               <div class="variants-head">
-                <span>Daftar Varian, Harga, Min. Beli &amp; Stok</span>
-                <button type="button" onclick="addVariantRow()" class="btn btn-kraft btn-sm">+ Varian</button>
+                <span data-i18n="var_section_title">Daftar Varian, Harga, Min. Beli &amp; Stok</span>
+                <button type="button" onclick="addVariantRow()" class="btn btn-kraft btn-sm" data-i18n="btn_add_var">+ Varian</button>
               </div>
               <div class="var-cols">
-                <span>Varian</span>
-                <span>Harga (Rp)</span>
-                <span>Min. Beli</span>
-                <span>Stok</span>
+                <span data-i18n="col_var">Varian</span>
+                <span data-i18n="col_price">Harga (Rp)</span>
+                <span data-i18n="col_min">Min. Beli</span>
+                <span data-i18n="col_stock">Stok</span>
                 <span></span>
               </div>
               <div id="variants-container"></div>
             </div>
 
-            <button type="submit" id="btn-submit" class="btn btn-wa" style="width:100%;margin-top:14px;min-height:46px">
+            <button type="submit" id="btn-submit" class="btn btn-wa" style="width:100%;margin-top:14px;min-height:46px" data-i18n="btn_save_prod">
               Simpan Produk
             </button>
           </form>
@@ -386,21 +409,21 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
         <!-- Kolom Kanan: Daftar Produk -->
         <section class="panel reveal" style="transition-delay:.18s">
           <div class="panel-head">
-            <h2>Daftar Produk di Database</h2>
-            <button type="button" id="btn-reload" onclick="loadAdminProducts()" class="btn btn-line btn-sm">↻ Muat Ulang</button>
+            <h2 data-i18n="list_title">Daftar Produk di Database</h2>
+            <button type="button" id="btn-reload" onclick="loadAdminProducts()" class="btn btn-line btn-sm" data-i18n="btn_reload">↻ Muat Ulang</button>
           </div>
 
           <div class="toolbar">
-            <input type="text" id="search-input" oninput="renderTable(false)" placeholder="Cari nama produk, kategori, atau varian ukuran...">
+            <input type="text" id="search-input" oninput="renderTable(false)" data-i18n-placeholder="search_ph" placeholder="Cari nama produk, kategori, atau varian ukuran...">
           </div>
 
           <div class="table-wrap">
             <table>
               <thead>
                 <tr>
-                  <th>Produk</th>
-                  <th>Varian, Harga, Min. Beli &amp; Stok</th>
-                  <th style="text-align:right">Aksi</th>
+                  <th data-i18n="th_product">Produk</th>
+                  <th data-i18n="th_variants">Varian, Harga, Min. Beli &amp; Stok</th>
+                  <th style="text-align:right" data-i18n="th_actions">Aksi</th>
                 </tr>
               </thead>
               <tbody id="admin-product-list"></tbody>
@@ -416,19 +439,19 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
 <div id="password-modal" class="modal-backdrop" role="dialog" aria-modal="true" onclick="if(event.target===this)closePasswordModal()">
   <div class="modal-box">
     <div class="modal-head">
-      <h3 style="margin:0;font-size:19px;font-weight:900">Ganti Password Admin</h3>
+      <h3 style="margin:0;font-size:19px;font-weight:900" data-i18n="modal_pass_title">Ganti Password Admin</h3>
       <button type="button" class="modal-close" onclick="closePasswordModal()">✕</button>
     </div>
     <form id="change-password-form">
       <div class="field">
-        <label for="old-password">Password Lama</label>
+        <label for="old-password" data-i18n="old_pass_label">Password Lama</label>
         <input type="password" id="old-password" required>
       </div>
       <div class="field">
-        <label for="new-password">Password Baru (Minimal 6 karakter)</label>
+        <label for="new-password" data-i18n="new_pass_label">Password Baru (Minimal 6 karakter)</label>
         <input type="password" id="new-password" minlength="6" required>
       </div>
-      <button type="submit" id="btn-save-password" class="btn btn-wa" style="width:100%;min-height:44px">
+      <button type="submit" id="btn-save-password" class="btn btn-wa" style="width:100%;min-height:44px" data-i18n="btn_save_pass">
         Simpan Password Baru
       </button>
     </form>
@@ -438,14 +461,281 @@ tbody tr.tr-exit{opacity:0;transform:translateX(24px);background:var(--danger-bg
 <script>
 let allProducts = [];
 const TOKEN_KEY = 'butari_admin_token';
+const LANG_KEY = 'lestari_lang';
+let currentLang = localStorage.getItem(LANG_KEY) || 'id';
+
+// ==================== KAMUS MULTI-BAHASA ADMIN (ID / EN) ====================
+const ADMIN_I18N = {
+  id: {
+    page_title: 'Admin Panel — Lestari Corrugated',
+    confirm_default_title: 'Konfirmasi',
+    auth_loader_text: 'Memeriksa sesi admin...',
+    login_sub: 'Masuk ke Panel Admin untuk mengelola produk, stok, dan harga.',
+    login_user_label: 'Username',
+    login_pass_label: 'Password',
+    login_pass_ph: 'Masukkan password admin',
+    login_btn: 'Masuk ke Dashboard',
+    login_checking: 'Memeriksa...',
+    back_to_store: '← Kembali ke Halaman Toko',
+    nav_view_store: '← Lihat Toko',
+    nav_change_pass: 'Ganti Password',
+    nav_logout: 'Keluar',
+    stat_products: 'Total Produk',
+    stat_variants: 'Total Varian',
+    stat_stock: 'Total Stok (pcs)',
+    stat_low: 'Stok Menipis / Habis',
+    form_title_add: 'Tambah Produk Baru',
+    form_title_edit: 'Edit Produk',
+    btn_cancel_edit: 'Batal Edit',
+    field_name: 'Nama Produk',
+    field_name_ph: 'Contoh: Kardus Polos Die Cut',
+    field_category: 'Kategori',
+    field_category_ph: 'Contoh: Kardus Polos / Mailer Box',
+    field_photo: 'Foto Produk (Upload ke Supabase)',
+    field_photo_hint: 'Format JPG, PNG, WEBP · Maksimal 5MB',
+    btn_del_photo: '🗑 Hapus Foto Produk',
+    field_desc: 'Deskripsi Produk',
+    field_desc_ph: 'Keterangan bahan, ketebalan flute, kegunaan, dll.',
+    var_section_title: 'Daftar Varian, Harga, Min. Beli & Stok',
+    btn_add_var: '+ Varian',
+    col_var: 'Varian',
+    col_price: 'Harga (Rp)',
+    col_min: 'Min. Beli',
+    col_stock: 'Stok',
+    var_price_title: 'Harga per pcs (Rupiah)',
+    var_min_title: 'Minimal pembelian (pcs)',
+    var_stock_title: 'Stok tersedia (pcs)',
+    var_remove_title: 'Hapus varian',
+    default_var_name: 'Standar',
+    btn_save_prod: 'Simpan Produk',
+    btn_update_prod: 'Update Produk',
+    saving_with_photo: 'Mengupload Foto & Menyimpan...',
+    saving_no_photo: 'Menyimpan Produk...',
+    list_title: 'Daftar Produk di Database',
+    btn_reload: '↻ Muat Ulang',
+    btn_reloading: 'Memuat...',
+    search_ph: 'Cari nama produk, kategori, atau varian ukuran...',
+    th_product: 'Produk',
+    th_variants: 'Varian, Harga, Min. Beli & Stok',
+    th_actions: 'Aksi',
+    modal_pass_title: 'Ganti Password Admin',
+    old_pass_label: 'Password Lama',
+    new_pass_label: 'Password Baru (Minimal 6 karakter)',
+    btn_save_pass: 'Simpan Password Baru',
+    btn_saving_pass: 'Menyimpan...',
+
+    // Dynamic strings
+    toast_success: 'Berhasil',
+    toast_warning: 'Perhatian',
+    toast_error: 'Gagal',
+    toast_info: 'Info',
+    btn_cancel: 'Batal',
+    btn_yes_delete: 'Ya, Hapus',
+    confirm_logout_title: 'Keluar dari Admin?',
+    confirm_logout_msg: 'Sesi login Anda akan diakhiri dan Anda harus masuk kembali untuk mengelola produk.',
+    confirm_logout_ok: 'Ya, Keluar',
+    toast_logged_out: 'Anda telah keluar dari panel admin.',
+    toast_login_fail: 'Username atau password salah.',
+    toast_login_welcome: 'Selamat datang kembali di Dashboard Admin!',
+    toast_server_err: 'Gagal terhubung ke server.',
+    toast_session_expired: 'Sesi berakhir, silakan login ulang.',
+    toast_session_expired_short: 'Sesi habis, silakan login ulang.',
+    toast_pass_fail: 'Gagal mengganti password.',
+    toast_pass_ok: 'Password berhasil diperbarui!',
+    this_product: 'produk ini',
+    confirm_del_photo_title: 'Hapus Foto Produk?',
+    confirm_del_photo_msg: 'Foto untuk "{name}" akan dihapus permanen dari Supabase Storage. Lanjutkan?',
+    confirm_del_photo_ok: 'Ya, Hapus Foto',
+    deleting_photo: 'Menghapus Foto...',
+    toast_del_photo_fail: 'Gagal menghapus foto produk.',
+    toast_del_photo_ok: 'Foto produk berhasil dihapus dari Supabase.',
+    toast_edit_mode: 'Mode edit: "{name}"',
+    toast_min_one_var: 'Minimal tambahkan 1 varian produk!',
+    toast_save_prod_fail: 'Gagal menyimpan produk.',
+    toast_prod_updated: 'Produk berhasil diperbarui!',
+    toast_prod_created: 'Produk baru berhasil disimpan!',
+    toast_conn_err: 'Terjadi kesalahan koneksi ke server.',
+    empty_search: 'Produk tidak ditemukan untuk kata kunci tersebut.',
+    empty_db: 'Belum ada produk di database.',
+    stock_avail: 'Stok: {n} pcs',
+    stock_out: 'Habis (0 pcs)',
+    stock_low: 'Menipis: {n} pcs',
+    no_photo: 'Tanpa Foto',
+    btn_edit: 'Edit',
+    btn_delete: 'Hapus',
+    table_load_fail: 'Gagal memuat data dari server.',
+    toast_load_fail: 'Gagal memuat daftar produk dari server.',
+    confirm_del_prod_title: 'Hapus Produk?',
+    confirm_del_prod_msg: 'Yakin ingin menghapus "{name}" beserta fotonya? Tindakan ini tidak dapat dibatalkan.',
+    toast_del_prod_fail: 'Gagal menghapus produk.',
+    toast_del_prod_ok: 'Produk "{name}" berhasil dihapus.'
+  },
+  en: {
+    page_title: 'Admin Panel — Lestari Corrugated',
+    confirm_default_title: 'Confirmation',
+    auth_loader_text: 'Verifying admin session...',
+    login_sub: 'Sign in to the Admin Panel to manage products, stock, and pricing.',
+    login_user_label: 'Username',
+    login_pass_label: 'Password',
+    login_pass_ph: 'Enter admin password',
+    login_btn: 'Sign In to Dashboard',
+    login_checking: 'Verifying...',
+    back_to_store: '← Back to Storefront',
+    nav_view_store: '← View Store',
+    nav_change_pass: 'Change Password',
+    nav_logout: 'Log Out',
+    stat_products: 'Total Products',
+    stat_variants: 'Total Variants',
+    stat_stock: 'Total Stock (pcs)',
+    stat_low: 'Low / Out of Stock',
+    form_title_add: 'Add New Product',
+    form_title_edit: 'Edit Product',
+    btn_cancel_edit: 'Cancel Edit',
+    field_name: 'Product Name',
+    field_name_ph: 'Example: Plain Die Cut Box',
+    field_category: 'Category',
+    field_category_ph: 'Example: Plain Box / Mailer Box',
+    field_photo: 'Product Photo (Upload to Supabase)',
+    field_photo_hint: 'JPG, PNG, WEBP formats · Max 5MB',
+    btn_del_photo: '🗑 Delete Product Photo',
+    field_desc: 'Product Description',
+    field_desc_ph: 'Material details, flute thickness, usage, etc.',
+    var_section_title: 'Variants, Price, Min. Order & Stock',
+    btn_add_var: '+ Variant',
+    col_var: 'Variant',
+    col_price: 'Price (Rp)',
+    col_min: 'Min. Order',
+    col_stock: 'Stock',
+    var_price_title: 'Price per pcs (Rupiah)',
+    var_min_title: 'Minimum order (pcs)',
+    var_stock_title: 'Available stock (pcs)',
+    var_remove_title: 'Remove variant',
+    default_var_name: 'Standard',
+    btn_save_prod: 'Save Product',
+    btn_update_prod: 'Update Product',
+    saving_with_photo: 'Uploading Photo & Saving...',
+    saving_no_photo: 'Saving Product...',
+    list_title: 'Products in Database',
+    btn_reload: '↻ Reload',
+    btn_reloading: 'Loading...',
+    search_ph: 'Search product name, category, or size variant...',
+    th_product: 'Product',
+    th_variants: 'Variants, Price, Min. Order & Stock',
+    th_actions: 'Actions',
+    modal_pass_title: 'Change Admin Password',
+    old_pass_label: 'Current Password',
+    new_pass_label: 'New Password (Minimum 6 characters)',
+    btn_save_pass: 'Save New Password',
+    btn_saving_pass: 'Saving...',
+
+    // Dynamic strings
+    toast_success: 'Success',
+    toast_warning: 'Warning',
+    toast_error: 'Error',
+    toast_info: 'Info',
+    btn_cancel: 'Cancel',
+    btn_yes_delete: 'Yes, Delete',
+    confirm_logout_title: 'Log Out of Admin?',
+    confirm_logout_msg: 'Your login session will end and you will need to sign in again to manage products.',
+    confirm_logout_ok: 'Yes, Log Out',
+    toast_logged_out: 'You have been logged out of the admin panel.',
+    toast_login_fail: 'Invalid username or password.',
+    toast_login_welcome: 'Welcome back to the Admin Dashboard!',
+    toast_server_err: 'Failed to connect to server.',
+    toast_session_expired: 'Session expired, please log in again.',
+    toast_session_expired_short: 'Session expired, please log in again.',
+    toast_pass_fail: 'Failed to change password.',
+    toast_pass_ok: 'Password updated successfully!',
+    this_product: 'this product',
+    confirm_del_photo_title: 'Delete Product Photo?',
+    confirm_del_photo_msg: 'The photo for "{name}" will be permanently deleted from Supabase Storage. Continue?',
+    confirm_del_photo_ok: 'Yes, Delete Photo',
+    deleting_photo: 'Deleting Photo...',
+    toast_del_photo_fail: 'Failed to delete product photo.',
+    toast_del_photo_ok: 'Product photo successfully deleted from Supabase.',
+    toast_edit_mode: 'Edit mode: "{name}"',
+    toast_min_one_var: 'Please add at least 1 product variant!',
+    toast_save_prod_fail: 'Failed to save product.',
+    toast_prod_updated: 'Product updated successfully!',
+    toast_prod_created: 'New product saved successfully!',
+    toast_conn_err: 'A server connection error occurred.',
+    empty_search: 'No products found matching that keyword.',
+    empty_db: 'No products in the database yet.',
+    stock_avail: 'Stock: {n} pcs',
+    stock_out: 'Out of Stock (0 pcs)',
+    stock_low: 'Low Stock: {n} pcs',
+    no_photo: 'No Photo',
+    btn_edit: 'Edit',
+    btn_delete: 'Delete',
+    table_load_fail: 'Failed to load data from server.',
+    toast_load_fail: 'Failed to load product list from server.',
+    confirm_del_prod_title: 'Delete Product?',
+    confirm_del_prod_msg: 'Are you sure you want to delete "{name}" and its photo? This action cannot be undone.',
+    toast_del_prod_fail: 'Failed to delete product.',
+    toast_del_prod_ok: 'Product "{name}" has been deleted.'
+  }
+};
+
+function t(key, vars = {}) {
+  const dict = ADMIN_I18N[currentLang] || ADMIN_I18N.id;
+  let str = dict[key] ?? ADMIN_I18N.id[key] ?? key;
+  Object.entries(vars).forEach(([k, v]) => {
+    str = str.replaceAll(`{${k}}`, String(v));
+  });
+  return str;
+}
+
+function setAdminLanguage(lang) {
+  currentLang = lang === 'en' ? 'en' : 'id';
+  localStorage.setItem(LANG_KEY, currentLang);
+  document.documentElement.lang = currentLang;
+  document.title = t('page_title');
+
+  document.querySelectorAll('[data-lang-btn]').forEach((btn) => {
+    btn.classList.toggle('active', btn.dataset.langBtn === currentLang);
+  });
+
+  document.querySelectorAll('[data-i18n]').forEach((el) => {
+    el.textContent = t(el.dataset.i18n);
+  });
+
+  document.querySelectorAll('[data-i18n-placeholder]').forEach((el) => {
+    el.setAttribute('placeholder', t(el.dataset.i18nPlaceholder));
+  });
+
+  const isEditMode = Boolean(document.getElementById('edit-product-id')?.value);
+  const formTitle = document.getElementById('form-title');
+  const btnSubmit = document.getElementById('btn-submit');
+  if (formTitle) formTitle.textContent = t(isEditMode ? 'form_title_edit' : 'form_title_add');
+  if (btnSubmit && !btnSubmit.disabled) {
+    btnSubmit.textContent = t(isEditMode ? 'btn_update_prod' : 'btn_save_prod');
+  }
+
+  document.querySelectorAll('.variant-row').forEach((row) => {
+    const rpWrap = row.querySelector('.input-rp-wrap');
+    const pcsWraps = row.querySelectorAll('.input-pcs-wrap');
+    const rmBtn = row.querySelector('.btn-remove-var');
+    if (rpWrap) rpWrap.title = t('var_price_title');
+    if (pcsWraps[0]) pcsWraps[0].title = t('var_min_title');
+    if (pcsWraps[1]) pcsWraps[1].title = t('var_stock_title');
+    if (rmBtn) rmBtn.title = t('var_remove_title');
+  });
+
+  if (!document.getElementById('dashboard-view')?.classList.contains('hidden')) {
+    renderTable(false);
+  }
+}
 
 // ====== CUSTOM TOAST & CONFIRM MODAL ======
-const TOAST_META = {
-  success: { title: 'Berhasil', icon: '✓' },
-  warning: { title: 'Perhatian', icon: '!' },
-  error: { title: 'Gagal', icon: '✕' },
-  info: { title: 'Info', icon: 'i' }
-};
+function getToastMeta(type) {
+  const map = {
+    success: { title: t('toast_success'), icon: '✓' },
+    warning: { title: t('toast_warning'), icon: '!' },
+    error: { title: t('toast_error'), icon: '✕' },
+    info: { title: t('toast_info'), icon: 'i' }
+  };
+  return map[type] || map.info;
+}
 
 function escHtml(str) {
   return String(str || '').replace(/[&<>"']/g, (m) => ({
@@ -472,7 +762,7 @@ function showToast(message, type = 'info', duration = 3500) {
   const container = document.getElementById('toast-container');
   if (!container) return;
 
-  const meta = TOAST_META[type] || TOAST_META.info;
+  const meta = getToastMeta(type);
   const toast = document.createElement('div');
   toast.className = `toast-item ${type}`;
   toast.setAttribute('role', 'status');
@@ -503,20 +793,20 @@ function showToast(message, type = 'info', duration = 3500) {
 
 window.alert = function(msg) {
   const text = String(msg || '');
-  const isSuccess = /berhasil|sukses|tersimpan|diperbarui|dihapus|ditambahkan/i.test(text);
-  const isError = /gagal|error|salah|tidak|kosong|wajib|harap|invalid/i.test(text);
+  const isSuccess = /berhasil|sukses|tersimpan|diperbarui|dihapus|ditambahkan|success|updated|saved|deleted/i.test(text);
+  const isError = /gagal|error|salah|tidak|kosong|wajib|harap|invalid|failed/i.test(text);
   showToast(text, isSuccess ? 'success' : (isError ? 'error' : 'warning'));
 };
 
 let confirmModalResolver = null;
 
-function showConfirmModal({ title = 'Konfirmasi Hapus', message = '', confirmText = 'Ya, Hapus', cancelText = 'Batal' }) {
+function showConfirmModal({ title, message = '', confirmText, cancelText }) {
   return new Promise((resolve) => {
     confirmModalResolver = resolve;
-    document.getElementById('confirm-modal-title').textContent = title;
+    document.getElementById('confirm-modal-title').textContent = title || t('confirm_default_title');
     document.getElementById('confirm-modal-msg').textContent = message;
-    document.getElementById('confirm-btn-ok').textContent = confirmText;
-    document.getElementById('confirm-btn-cancel').textContent = cancelText;
+    document.getElementById('confirm-btn-ok').textContent = confirmText || t('btn_yes_delete');
+    document.getElementById('confirm-btn-cancel').textContent = cancelText || t('btn_cancel');
     const modal = document.getElementById('custom-confirm-modal');
     modal.classList.remove('closing');
     modal.classList.add('open');
@@ -641,14 +931,14 @@ function showDashboard() {
 
 async function logout() {
   const ok = await showConfirmModal({
-    title: 'Keluar dari Admin?',
-    message: 'Sesi login Anda akan diakhiri dan Anda harus masuk kembali untuk mengelola produk.',
-    confirmText: 'Ya, Keluar',
-    cancelText: 'Batal'
+    title: t('confirm_logout_title'),
+    message: t('confirm_logout_msg'),
+    confirmText: t('confirm_logout_ok'),
+    cancelText: t('btn_cancel')
   });
   if (!ok) return;
   showLogin();
-  showToast('Anda telah keluar dari panel admin.', 'info');
+  showToast(t('toast_logged_out'), 'info');
 }
 
 async function checkAuthOnLoad() {
@@ -673,7 +963,7 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
   e.preventDefault();
   const btn = document.getElementById('btn-login');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Memeriksa...';
+  btn.innerHTML = `<span class="spinner"></span> ${t('login_checking')}`;
 
   try {
     const res = await fetch('/api/auth/login', {
@@ -687,18 +977,18 @@ document.getElementById('login-form').addEventListener('submit', async (e) => {
 
     const data = await res.json();
     if (!res.ok) {
-      return showToast(data.message || 'Username atau password salah.', 'error');
+      return showToast(data.message || t('toast_login_fail'), 'error');
     }
 
     sessionStorage.setItem(TOKEN_KEY, data.token);
     document.getElementById('login-password').value = '';
     showDashboard();
-    showToast('Selamat datang kembali di Dashboard Admin!', 'success');
+    showToast(t('toast_login_welcome'), 'success');
   } catch (err) {
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Masuk ke Dashboard';
+    btn.textContent = t('login_btn');
   }
 });
 
@@ -706,7 +996,7 @@ document.getElementById('change-password-form').addEventListener('submit', async
   e.preventDefault();
   const btn = document.getElementById('btn-save-password');
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Menyimpan...';
+  btn.innerHTML = `<span class="spinner"></span> ${t('btn_saving_pass')}`;
 
   try {
     const res = await fetch('/api/auth/change-password', {
@@ -723,19 +1013,19 @@ document.getElementById('change-password-form').addEventListener('submit', async
 
     const data = await res.json();
     if (res.status === 401) {
-      showToast('Sesi berakhir, silakan login ulang.', 'warning');
+      showToast(t('toast_session_expired'), 'warning');
       return showLogin();
     }
-    if (!res.ok) return showToast(data.message || 'Gagal mengganti password.', 'error');
+    if (!res.ok) return showToast(data.message || t('toast_pass_fail'), 'error');
 
-    showToast(data.message || 'Password berhasil diperbarui!', 'success');
+    showToast(data.message || t('toast_pass_ok'), 'success');
     e.target.reset();
     closePasswordModal();
   } catch (err) {
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   } finally {
     btn.disabled = false;
-    btn.textContent = 'Simpan Password Baru';
+    btn.textContent = t('btn_save_pass');
   }
 });
 
@@ -758,20 +1048,19 @@ async function deleteProductImage() {
   if (!productId) return;
 
   const product = allProducts.find(p => p._id === productId);
-  const prodName = product ? product.name : 'produk ini';
+  const prodName = product ? product.name : t('this_product');
 
   const confirmed = await showConfirmModal({
-    title: 'Hapus Foto Produk?',
-    message: `Foto untuk "${prodName}" akan dihapus permanen dari Supabase Storage. Lanjutkan?`,
-    confirmText: 'Ya, Hapus Foto',
-    cancelText: 'Batal'
+    title: t('confirm_del_photo_title'),
+    message: t('confirm_del_photo_msg', { name: prodName }),
+    confirmText: t('confirm_del_photo_ok'),
+    cancelText: t('btn_cancel')
   });
   if (!confirmed) return;
 
   const btn = document.getElementById('btn-delete-photo');
-  const origHtml = btn.innerHTML;
   btn.disabled = true;
-  btn.innerHTML = '<span class="spinner"></span> Menghapus Foto...';
+  btn.innerHTML = `<span class="spinner"></span> ${t('deleting_photo')}`;
 
   try {
     const res = await fetch(`/api/products/${encodeURIComponent(productId)}/image`, {
@@ -781,11 +1070,11 @@ async function deleteProductImage() {
 
     const data = await res.json();
     if (res.status === 401) {
-      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      showToast(data.message || t('toast_session_expired_short'), 'warning');
       return showLogin();
     }
     if (!res.ok) {
-      return showToast(data.message || 'Gagal menghapus foto produk.', 'error');
+      return showToast(data.message || t('toast_del_photo_fail'), 'error');
     }
 
     if (product) {
@@ -798,12 +1087,12 @@ async function deleteProductImage() {
 
     updateStats();
     renderTable(false);
-    showToast(data.message || 'Foto produk berhasil dihapus dari Supabase.', 'success');
+    showToast(data.message || t('toast_del_photo_ok'), 'success');
   } catch (err) {
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   } finally {
     btn.disabled = false;
-    btn.innerHTML = origHtml;
+    btn.textContent = t('btn_del_photo');
   }
 }
 
@@ -850,19 +1139,19 @@ function addVariantRow(name = '', price = '', minOrder = '1', stock = '', id = '
   div.dataset.id = id;
   div.innerHTML = `
     <input type="text" placeholder="10x10x5 cm" value="${escHtml(name)}" required class="var-name">
-    <div class="input-rp-wrap" title="Harga per pcs (Rupiah)">
+    <div class="input-rp-wrap" title="${escHtml(t('var_price_title'))}">
       <span>Rp</span>
       <input type="text" inputmode="numeric" placeholder="500" value="${escHtml(formatRupiahDigits(price))}" oninput="handleRupiahInput(this)" required class="var-price">
     </div>
-    <div class="input-pcs-wrap" title="Minimal pembelian (pcs)">
+    <div class="input-pcs-wrap" title="${escHtml(t('var_min_title'))}">
       <input type="number" min="1" placeholder="1" value="${escHtml(minOrder)}" required class="var-min">
       <span>pcs</span>
     </div>
-    <div class="input-pcs-wrap" title="Stok tersedia (pcs)">
+    <div class="input-pcs-wrap" title="${escHtml(t('var_stock_title'))}">
       <input type="number" min="0" placeholder="100" value="${escHtml(stock)}" required class="var-stock">
       <span>pcs</span>
     </div>
-    <button type="button" onclick="removeVariantRowAnimated(this)" class="btn-remove-var" title="Hapus varian">✕</button>
+    <button type="button" onclick="removeVariantRowAnimated(this)" class="btn-remove-var" title="${escHtml(t('var_remove_title'))}">✕</button>
   `;
   container.appendChild(div);
 }
@@ -870,8 +1159,8 @@ function addVariantRow(name = '', price = '', minOrder = '1', stock = '', id = '
 function resetForm() {
   document.getElementById('product-form').reset();
   document.getElementById('edit-product-id').value = '';
-  document.getElementById('form-title').textContent = 'Tambah Produk Baru';
-  document.getElementById('btn-submit').textContent = 'Simpan Produk';
+  document.getElementById('form-title').textContent = t('form_title_add');
+  document.getElementById('btn-submit').textContent = t('btn_save_prod');
   document.getElementById('btn-cancel-edit').style.display = 'none';
   document.getElementById('preview-wrap').classList.remove('show');
   document.getElementById('image-preview').src = '';
@@ -880,7 +1169,7 @@ function resetForm() {
   if (btnDelPhoto) btnDelPhoto.style.display = 'none';
 
   document.getElementById('variants-container').innerHTML = '';
-  addVariantRow('Standar', '', '10', '100');
+  addVariantRow(t('default_var_name'), '', '10', '100');
 }
 
 function startEdit(id) {
@@ -911,11 +1200,11 @@ function startEdit(id) {
   container.innerHTML = '';
   product.variants.forEach(v => addVariantRow(v.name, v.price, v.minOrder || 1, v.stock, v._id));
 
-  document.getElementById('form-title').textContent = 'Edit Produk';
-  document.getElementById('btn-submit').textContent = 'Update Produk';
+  document.getElementById('form-title').textContent = t('form_title_edit');
+  document.getElementById('btn-submit').textContent = t('btn_update_prod');
   document.getElementById('btn-cancel-edit').style.display = 'inline-flex';
   window.scrollTo({ top: 0, behavior: 'smooth' });
-  showToast(`Mode edit: "${product.name}"`, 'info', 2500);
+  showToast(t('toast_edit_mode', { name: product.name }), 'info', 2500);
 }
 
 document.getElementById('product-form').addEventListener('submit', async (e) => {
@@ -933,14 +1222,13 @@ document.getElementById('product-form').addEventListener('submit', async (e) => 
   });
 
   if (variants.length === 0) {
-    return showToast('Minimal tambahkan 1 varian produk!', 'warning');
+    return showToast(t('toast_min_one_var'), 'warning');
   }
 
   const imageFile = document.getElementById('imageFile').files[0];
   const btnSubmit = document.getElementById('btn-submit');
-  const originalText = btnSubmit.textContent;
   btnSubmit.disabled = true;
-  btnSubmit.innerHTML = `<span class="spinner"></span> ${imageFile ? 'Mengupload Foto & Menyimpan...' : 'Menyimpan Produk...'}`;
+  btnSubmit.innerHTML = `<span class="spinner"></span> ${imageFile ? t('saving_with_photo') : t('saving_no_photo')}`;
 
   try {
     const formData = new FormData();
@@ -965,21 +1253,22 @@ document.getElementById('product-form').addEventListener('submit', async (e) => 
 
     const data = await res.json();
     if (res.status === 401) {
-      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      showToast(data.message || t('toast_session_expired_short'), 'warning');
       return showLogin();
     }
     if (!res.ok) {
-      return showToast(data.message || 'Gagal menyimpan produk.', 'error');
+      return showToast(data.message || t('toast_save_prod_fail'), 'error');
     }
 
-    showToast(editId ? 'Produk berhasil diperbarui!' : 'Produk baru berhasil disimpan!', 'success');
+    showToast(editId ? t('toast_prod_updated') : t('toast_prod_created'), 'success');
     resetForm();
     await loadAdminProducts();
   } catch (err) {
-    showToast('Terjadi kesalahan koneksi ke server.', 'error');
+    showToast(t('toast_conn_err'), 'error');
   } finally {
     btnSubmit.disabled = false;
-    btnSubmit.textContent = originalText;
+    const isStillEdit = Boolean(document.getElementById('edit-product-id').value);
+    btnSubmit.textContent = t(isStillEdit ? 'btn_update_prod' : 'btn_save_prod');
   }
 });
 
@@ -1015,7 +1304,7 @@ function renderTable(animateRows = true) {
   });
 
   if (!filtered.length) {
-    tbody.innerHTML = `<tr><td colspan="3" class="empty-state">${keyword ? 'Produk tidak ditemukan untuk kata kunci tersebut.' : 'Belum ada produk di database.'}</td></tr>`;
+    tbody.innerHTML = `<tr><td colspan="3" class="empty-state">${keyword ? t('empty_search') : t('empty_db')}</td></tr>`;
     return;
   }
 
@@ -1023,13 +1312,13 @@ function renderTable(animateRows = true) {
     const cleanId = safeId(p._id);
     const variantsHtml = p.variants.map(v => {
       let stockClass = 'stock-ok';
-      let stockLabel = `Stok: ${v.stock} pcs`;
+      let stockLabel = t('stock_avail', { n: v.stock });
       if (v.stock <= 0) {
         stockClass = 'stock-out';
-        stockLabel = 'Habis (0 pcs)';
+        stockLabel = t('stock_out');
       } else if (v.stock <= 5) {
         stockClass = 'stock-low';
-        stockLabel = `Menipis: ${v.stock} pcs`;
+        stockLabel = t('stock_low', { n: v.stock });
       }
 
       return `
@@ -1047,7 +1336,7 @@ function renderTable(animateRows = true) {
     const rowStyle = animateRows ? `style="transition-delay:${Math.min(idx * 0.04, 0.28)}s"` : '';
     const thumbHtml = hasUploadedPhoto(p.imageUrl)
       ? `<img src="${safeUrl(p.imageUrl)}" alt="${escHtml(p.name)}" class="prod-thumb">`
-      : `<div class="prod-thumb-empty">Tanpa Foto</div>`;
+      : `<div class="prod-thumb-empty">${escHtml(t('no_photo'))}</div>`;
 
     return `
       <tr id="row-prod-${cleanId}" class="${rowClass}" ${rowStyle}>
@@ -1065,8 +1354,8 @@ function renderTable(animateRows = true) {
         </td>
         <td>
           <div class="action-group">
-            <button type="button" onclick="startEdit('${cleanId}')" class="btn btn-edit btn-sm">Edit</button>
-            <button type="button" onclick="deleteProduct('${cleanId}', this)" class="btn btn-del btn-sm">Hapus</button>
+            <button type="button" onclick="startEdit('${cleanId}')" class="btn btn-edit btn-sm">${t('btn_edit')}</button>
+            <button type="button" onclick="deleteProduct('${cleanId}', this)" class="btn btn-del btn-sm">${t('btn_delete')}</button>
           </div>
         </td>
       </tr>
@@ -1080,7 +1369,7 @@ async function loadAdminProducts() {
   const reloadBtn = document.getElementById('btn-reload');
   if (reloadBtn) {
     reloadBtn.disabled = true;
-    reloadBtn.innerHTML = '<span class="spinner dark"></span> Memuat...';
+    reloadBtn.innerHTML = `<span class="spinner dark"></span> ${t('btn_reloading')}`;
   }
   showTableSkeleton();
 
@@ -1091,25 +1380,25 @@ async function loadAdminProducts() {
     renderTable(true);
   } catch (err) {
     document.getElementById('admin-product-list').innerHTML =
-      '<tr><td colspan="3" class="empty-state" style="color:var(--danger)">Gagal memuat data dari server.</td></tr>';
-    showToast('Gagal memuat daftar produk dari server.', 'error');
+      `<tr><td colspan="3" class="empty-state" style="color:var(--danger)">${t('table_load_fail')}</td></tr>`;
+    showToast(t('toast_load_fail'), 'error');
   } finally {
     if (reloadBtn) {
       reloadBtn.disabled = false;
-      reloadBtn.textContent = '↻ Muat Ulang';
+      reloadBtn.textContent = t('btn_reload');
     }
   }
 }
 
 async function deleteProduct(id, btnEl) {
   const product = allProducts.find(p => p._id === id);
-  const name = product ? product.name : 'produk ini';
+  const name = product ? product.name : t('this_product');
 
   const confirmed = await showConfirmModal({
-    title: 'Hapus Produk?',
-    message: `Yakin ingin menghapus "${name}" beserta fotonya? Tindakan ini tidak dapat dibatalkan.`,
-    confirmText: 'Ya, Hapus',
-    cancelText: 'Batal'
+    title: t('confirm_del_prod_title'),
+    message: t('confirm_del_prod_msg', { name }),
+    confirmText: t('btn_yes_delete'),
+    cancelText: t('btn_cancel')
   });
   if (!confirmed) return;
 
@@ -1126,22 +1415,22 @@ async function deleteProduct(id, btnEl) {
 
     const data = await res.json();
     if (res.status === 401) {
-      showToast(data.message || 'Sesi habis, silakan login ulang.', 'warning');
+      showToast(data.message || t('toast_session_expired_short'), 'warning');
       return showLogin();
     }
     if (!res.ok) {
       if (btnEl) {
         btnEl.disabled = false;
-        btnEl.textContent = 'Hapus';
+        btnEl.textContent = t('btn_delete');
       }
-      return showToast(data.message || 'Gagal menghapus produk.', 'error');
+      return showToast(data.message || t('toast_del_prod_fail'), 'error');
     }
 
     if (document.getElementById('edit-product-id').value === id) {
       resetForm();
     }
 
-    showToast(`Produk "${name}" berhasil dihapus.`, 'success');
+    showToast(t('toast_del_prod_ok', { name }), 'success');
 
     const row = document.getElementById(`row-prod-${safeId(id)}`);
     if (row) {
@@ -1157,12 +1446,13 @@ async function deleteProduct(id, btnEl) {
   } catch (err) {
     if (btnEl) {
       btnEl.disabled = false;
-      btnEl.textContent = 'Hapus';
+      btnEl.textContent = t('btn_delete');
     }
-    showToast('Gagal terhubung ke server.', 'error');
+    showToast(t('toast_server_err'), 'error');
   }
 }
 
+setAdminLanguage(currentLang);
 checkAuthOnLoad();
 </script>
 </body>
